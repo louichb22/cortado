@@ -1,0 +1,83 @@
+<!--HTML-->
+<div class="localizationSelector{{ langSelectorIndex }}">
+  {% form 'localization' %}
+    <select name="language_code" onchange="this.form.submit()" style="text-transform: uppercase">
+      {% for language in localization.available_languages %}
+        <option {% if language == localization.language %}selected{% endif %} value="{{ language.iso_code }}" style="text-transform: uppercase;">{{ language.iso_code }}</option>
+      {% endfor %}
+    </select>
+    <i class="mi-chevron-down"></i>
+    <select name="country_code" onchange="this.form.submit()">
+      {% for country in localization.available_countries %}
+        <option {% if country == localization.country %}selected{% endif %} value="{{ country.iso_code }}">{{ country.name }} - {{ country.currency.iso_code }} {{ country.currency.symbol }}</option>
+      {% endfor %}
+    </select>
+  {% endform %}
+</div>
+
+<!--CSS-->
+<style>
+  .localizationSelector{{ langSelectorIndex }} {
+    max-width: 100%;
+  }
+  .localizationSelector{{ langSelectorIndex }} form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  {% case selectorType %}
+  {% when 1 %}
+  .localizationSelector{{ langSelectorIndex }} select {
+    all: unset;
+    appearance: none;
+    padding: 5px 10px 5px 10px;
+    color: white;
+    border: solid 2px rgba(255,255,255,0.2);
+    background: none;
+    font-family: {% if settings.textFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+    font-weight: {{ settings.textWeight }};
+    font-style: normal;
+    font-size: {{ settings.textSize }}px;
+    overflow: hidden;
+    max-width: 150px;
+    min-width: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .localizationSelector{{ langSelectorIndex }} select:hover {
+    border: solid 2px rgba(255,255,255,1);
+  }
+  {% when 2 %}
+  .localizationSelector{{ langSelectorIndex }} select {
+    all: unset;
+    appearance: none;
+    color: white;
+    background: none;
+    font-family: {% if settings.textFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+    font-weight: {{ settings.textWeight }};
+    font-style: normal;
+    font-size: {{ settings.textSize }}px;
+    overflow: hidden;
+    max-width: 120px;
+    min-width: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .localizationSelector{{ langSelectorIndex }} select:hover {
+    opacity: 0.5;
+  }
+  .localizationSelector{{ langSelectorIndex }} i {
+    color: white;
+    margin: -10px;
+  }
+  {% endcase %}
+  .localizationSelector{{ langSelectorIndex }} option {
+    color: black;
+    background: white;
+    border: none;
+  }
+</style>

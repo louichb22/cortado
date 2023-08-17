@@ -1,0 +1,188 @@
+<!--HTML-->
+<section style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
+  <div class="account" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+    <div class="head">
+      <h1>{{ 'account.account' | t }}</h1>
+      <a href="{{ routes.account_logout_url }}" class="btn1">{{ 'account.logout' | t }}</a>
+    </div>
+    <div class="content">
+      <div>
+        <h3>{{ 'account.address' | t }}</h3>
+        {% unless customer.default_address.first_name == blank %}<p>{{ customer.default_address.first_name }} {{ customer.default_address.last_name }}</p>{% endunless %}
+        {% unless customer.default_address.company == blank %}<p>{{ customer.default_address.company }}</p>{% endunless %}
+        {% unless customer.default_address.address1 == blank %}<p>{{ customer.default_address.address1 }}, {% unless customer.default_address.address2 == blank %}{{ customer.default_address.address2 }},{% endunless %}</p>{% endunless %}
+        {% unless customer.default_address.city == blank %}<p>{{ customer.default_address.city }}{% unless customer.default_address.province == blank %}, {{ customer.default_address.province }}{% endunless %}{% unless customer.default_address.zip == blank %}, {{ customer.default_address.zip }}{% endunless %}.</p>{% endunless %}
+        {% unless customer.default_address.country == blank %}<p>{{ customer.default_address.country }}</p>{% endunless %}
+      </div>
+      <div>
+        <h3>{{ 'account.orders.title' | t }}</h3>
+        {% if customer.orders_count < 1 %}
+        <p>{{ 'account.orders.no_orders' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn1">{{ 'general.explore_products' | t }}</a>
+        {% endif %}
+        <div class="orders">
+        {% for order in customer.orders %}
+          <item>
+            <span>{{ order.order_number }}</span>
+            <span>{{ order.created_at | date: '%d-%m-%Y' }}</span>
+            <span>{{ order.total_price | money }}</span>
+            <a href="{{ order.order_status_url }}">{{ 'account.orders.view_order' | t }}</a>
+          </item>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--CSS-->
+<style>
+  .account {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .account > .head {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .account > .content {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+  }
+  .account > .content > div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: start;
+    border-radius: 15px;
+    border: solid 2px #f0f0f0;
+    padding: 25px;
+  }
+  .account > .content > div > .orders {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .account > .content > div > .orders > item {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+  }
+  @media (max-width: 800px) {
+    .account > .content {
+      grid-template-columns: 1fr;
+    }
+    .account > .head {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @media (max-width: 500px) {
+    .account > .content > div > .orders > item > span:nth-child(2){
+      display:none;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Account",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "bgGradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Section's top margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Section's bottom margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "sectionType",
+        "label": "Section type",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "container",
+            "label": "Container"
+          }
+        ],
+        "default": "container"
+      },
+      {
+        "type": "range",
+        "id": "containerWidth",
+        "label": "Container's width",
+        "unit": "px",
+        "min": 600,
+        "max": 1600,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "containerPadding",
+        "label": "Container's inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Container's border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "containerBg",
+        "label": "Container's background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "containerBgGradient",
+        "label": "Container's background gradient"
+      }
+    ]
+  }
+{% endschema %}

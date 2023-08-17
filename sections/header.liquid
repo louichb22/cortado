@@ -1,0 +1,968 @@
+<!--HTML-->
+<section id="headerSection" style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
+  <div class="header" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+    <div class="headerMenu">
+      <nav class="desktop">
+        {% for link in section.settings.menu.links %}
+          {% if link.links.size < 1 %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% else %}
+            <div class="dropDown">
+              <a class="hasChildren" href="{{ link.url }}">{{ link.title }} <i class="mi-chevron-down"></i></a>
+              <div class="dropDownPopup">
+                {% for link in link.links %}
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </nav>
+      <div class="mobile">
+        <i class="mi-menu" onclick="openMobileMenu()"></i>
+        <div id="mobileMenu">
+          <div class="head">
+            <div class="closeHamburgerMenu" onclick="closeMobileMenu()"><i class="mi-close"></i></div>
+          </div>
+          <nav class="mobileMenuContainer">
+            {% for link in section.settings.menu.links %}
+              {% if link.links.size < 1 %}
+                <div class="menuItem">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </div>
+              {% else %}
+                <div class="menuItem hasChildren">
+                  <div class="menuItemTitle" onclick="openDropdownItem({% increment dropDownTitle %})">
+                    <span>{{ link.title }}</span>
+                    <i class="mi-chevron-down" id="dropDownIcon-{% increment dropDownIcon %}"></i>
+                  </div>
+                  <div class="menuItemDropdown" id="dropDownItem-{% increment dropDownItem %}">
+                    {% for link in link.links %}
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </nav>
+          <div class="mobileMenuFooter">
+            {% include "language-currency-selector" %}
+          </div>   
+        </div>
+      </div>
+    </div>
+    <a href="{{ routes.root_url }}"><img class="headerLogo" src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ 'Cortado_logo_white.svg' | asset_url }}{% endif %}" alt="{{ shop.name }} Logo"></a>
+    <div class="headerIcons">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when "languageSelector" %}
+            {% assign selectorType = 2 %}
+            {% include "language-currency-selector" %}
+          {% when "searchWidget" %}
+            <div class="searchWidget">
+              <i class="mi-search"></i>
+              <div class="searchWidgetPopup" style="border-radius: {{ block.settings.borderRadius }}px;">
+                <form action="{{ routes.search_url }}" method="get" role="search">
+                  <input autocomplete="off" type="text" name="q" placeholder="{{ block.settings.placeholder }}">
+                  <button type="submit"><i class="mi-search"></i></button>
+                </form>
+              </div>
+            </div>
+          {% when "cartWidget" %}
+            <div class="cartWidget" data-ajax-cart-section>
+              <i class="mi-shopping-cart">{% if cart.item_count > 0 %}<span class="cartItemNumber" style="color: {{ block.settings.itemNumberColor }}">{{ cart.item_count }}</span>{% endif %}</i>
+              <div class="cartWidgetPopup" style="border-radius: {{ block.settings.borderRadius }}px;">
+                <h5>{{ "cart.title" | t }}</h5>
+                {% if cart.items.size < 1 %}
+                  <span class="empty">{{ "cart.empty" | t }}</span>
+                  <a class="btn{{ block.settings.buttonStyle }}" style="width: 100%; text-align: center;" href="{{ routes.all_products_collection_url }}" title="{{ "general.explore_products" | t }}">{{ "general.explore_products" | t }}</a>
+                {% else %}
+                  <div class="items">
+                    {% for item in cart.items %}
+                      <div class="item">
+                        <span title="{{ item.title }}">{{ item.quantity }} x {{ item.title | truncate: 20 }}</span>
+                        <span>{{ item.price | money }}</span>
+                        <a class="remove mi-close" href="{{routes.cart_change_url}}?line={{ forloop.index }}&amp;quantity=0" title="{{ "cart.remove_item" | t }}" data-ajax-cart-request-button></a>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="total">
+                    <span>{{ "cart.subtotal" | t }}</span>
+                    <span>{{ cart.items_subtotal_price | money }}</span>
+                  </div>
+                  <a class="btn{{ block.settings.buttonStyle }}" style="width: 100%; text-align: center;" href="/checkout" title="{{ "cart.order" | t }}">{{ "cart.order" | t }}</a>
+                {% endif %}
+              </div>
+            </div>
+          {% when "accountWidget" %}
+            <div class="accountWidget">
+              <i class="mi-user"></i>
+              <div class="accountWidgetPopup">
+                <h5>{{ "account.account" | t }}</h5>
+                {% if customer %}
+                  <a class="btn{{ block.settings.buttonStyle1 }}" style="width: 100%; text-align: center;" href="{{ routes.account_url }}">{{ "account.account" | t }}</a>
+                  <a class="btn{{ block.settings.buttonStyle2 }}" style="width: 100%; text-align: center;" href="{{ routes.account_logout_url }}">{{ "account.logout" | t }}</a>
+                {% else %}
+                  <a class="btn{{ block.settings.buttonStyle1 }}" style="width: 100%; text-align: center;" href="{{ routes.account_login_url }}">{{ "account.login" | t }}</a>
+                  <a class="btn{{ block.settings.buttonStyle2 }}" style="width: 100%; text-align: center;" href="{{ routes.account_register_url }}">{{ "account.register" | t }}</a>
+                {% endif %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!--CSS-->
+<style>
+  {% case section.settings.stickyHeader %}
+  {% when 'always' %}
+  {% if section.settings.stickyHeaderCompensation %}
+  header {
+    position: sticky;
+    top: 0px;
+    z-index: 98;
+  }
+  {% else %}
+  #headerSection {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 98;
+  }
+  {% endif %}
+  #headerSection.active {
+    background-color: {% if section.settings.stickyBgGradient != blank %}background:{{ section.settings.stickyBgGradient }};{% else %}background-color:{{ section.settings.stickyBg }};{% endif %} !important;
+  }
+  {% when 'home' %}
+  {% if template == "index" %}
+  {% if section.settings.stickyHeaderCompensation %}
+  header {
+    position: sticky;
+    top: 0px;
+    z-index: 98;
+  }
+  {% else %}
+  #headerSection {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 98;
+  }
+  {% endif %}
+  #headerSection.active {
+    background-color: {{ section.settings.stickyBg }} !important;
+  }
+  {% endif %}
+  {% endcase %}
+  .header {
+    display: grid;
+    grid-template-columns: {% if section.settings.layout == "logoLeft" %}{{ section.settings.logoWidth }}px 1fr 150px{% else %}1fr {{ section.settings.logoWidth }}px 1fr{% endif %};
+    gap: 8px;
+  }
+  .headerMenu {
+    {% if section.settings.layout == "logoLeft" %}grid-column: 2;{% endif %}
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+  }
+  .headerMenu > .desktop {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: {% if section.settings.layout == "logoLeft" %}center{% else %}start{% endif %};
+    gap: 36px;
+  }
+  .headerMenu > .desktop > a, 
+  .headerMenu > .desktop > .dropDown > a{
+    color: {{ section.settings.textColor }};
+    font-family: {% if section.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+    font-size: {{ section.settings.textSize }}px;
+    {% if section.settings.capitalize %}text-transform: uppercase;{% endif %}
+  }
+  .headerMenu > .desktop > a:hover, 
+  .headerMenu > .desktop > .dropDown:hover > a {
+    opacity: 0.5;
+  }
+  .headerMenu > .desktop > .dropDown {
+    margin-bottom: -36px;
+    padding-bottom: 36px;
+    position: relative;
+  }
+  .headerMenu > .desktop > .dropDown > .dropDownPopup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    background: white;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    z-index: 99;
+    animation-name: widgetFadeIn;
+    animation-duration: 0.3s;
+    flex-direction: column;
+    gap: 16px;
+    align-items: start;
+    padding: 24px;
+  }
+  .headerMenu > .desktop > .dropDown:hover > .dropDownPopup {
+    display: flex;
+  }
+  .headerMenu > .desktop > .dropDown:hover > .dropDownPopup > a {
+    white-space: nowrap;
+  }
+  .headerMenu > .desktop > .dropDown:hover > .dropDownPopup > a:hover {
+    opacity: 0.5;
+  }
+  .headerMenu > .mobile {
+    display: none;
+  }
+  .header > a {
+    display: flex;
+    {% if section.settings.layout == "logoLeft" %}grid-column: 1;{% endif %}
+    grid-row: 1;
+  }
+  .header > a > img.headerLogo {
+    width: {{ section.settings.logoWidth }}px;
+  }
+  .headerIcons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 36px;
+    z-index: 99;
+  }
+  .headerIcons > div {
+    position: relative;
+    margin: -15px;
+    padding: 15px;
+  }
+  .headerIcons > div > i, 
+  .headerMenu > .mobile > i {
+    color: {{ section.settings.textColor }};
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .headerIcons > div > i:hover, 
+  .headerMenu > .mobile > i:hover {
+    opacity: 0.5;
+  }
+  @media (max-width: 800px) {
+    .header {
+      grid-template-columns: 1fr {{ section.settings.logoWidthMobile }}px 1fr;
+    }
+    .headerMenu {
+      grid-column: 1;
+    }
+    .headerMenu > .desktop {
+      display: none;
+    }
+    .headerMenu > .mobile {
+      display: flex;
+    }
+    .header > a {
+      grid-column: 2;
+    }
+    .header > a > img.headerLogo {
+      width: {{ section.settings.logoWidthMobile }}px;
+    }
+    .headerIcons {
+      gap: 16px;
+    }
+    .headerIcons > .localizationSelector1 {
+      display: none;
+    }
+  }
+  .headerIcons > div > div {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    z-index: 99;
+    animation-name: widgetFadeIn;
+    animation-duration: 0.3s;
+  }
+  @keyframes widgetFadeIn {
+    0% {opacity:0;margin-top:5px;}
+    100% {opacity:1;margin-top:0px;}
+  }
+  .headerIcons > div:hover > div, 
+  .headerIcons > div:active > div, 
+  .headerIcons > div:focus > div, 
+  .headerIcons > div:target > div {
+    display: flex;
+  }
+  .searchWidgetPopup {
+    padding: 8px 16px;
+  }
+  .searchWidgetPopup > form {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .searchWidgetPopup > form > button, 
+  .searchWidgetPopup > form > input {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  .searchWidgetPopup > form > button > i, 
+  .searchWidgetPopup > form > input {
+    font-size: 14px;
+    color: black;
+  }
+  .cartWidget > i {
+    position: relative;
+  }
+  .cartWidget > i > .cartItemNumber {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    border-radius: 20px;
+    background: {{ section.settings.textColor }};
+    color: {{ section.settings.containerBg }};
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .cartWidget > i > .cartItemNumber.updated {
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    right: -14px;
+    font-size: 14px;
+  }
+  .cartWidgetPopup {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    align-items: start;
+  }
+  .cartWidgetPopup > .items > .item, 
+  .cartWidgetPopup > .total {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .cartWidgetPopup > .items > .item > span:last-child, 
+  .cartWidgetPopup > .total > span {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .cartWidgetPopup > .items > .item {
+    padding: 8px;
+    position: relative;
+  }
+  .cartWidgetPopup > .items > .item:nth-child(2n-1) {
+    background-color: #f7f7f7;
+  }
+  .cartWidgetPopup > .items > .item > span {
+    white-space: nowrap;
+  }
+  .cartWidgetPopup > .items > .item > .remove {
+    display: none;
+    font-family: icons !important;
+    position: absolute;
+    right: 4px;
+    padding: 4px;
+    border-radius: 20px;
+    background: white;
+    align-items: center;
+    jutify-content: center;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+  }
+  .cartWidgetPopup > .items > .item:hover > .remove {
+    display: flex;
+  }
+  .cartWidgetPopup > .items > .item:hover > span {
+    opacity: 0.5;
+  }
+  .accountWidgetPopup {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    align-items: start;
+  }
+  .accountWidgetPopup * {
+    white-space: nowrap;
+  }
+  #mobileMenu {
+    position: fixed;
+    top: 0px;
+    right: 100%;
+    height: -webkit-fill-available;
+    width: 100vw;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    background: {{ section.settings.mobileMenuBg }};
+    z-index: 98;
+  }
+  #mobileMenu.active {
+    right: 0px;
+  }
+  #mobileMenu > .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+  }
+  #mobileMenu > .head > .closeHamburgerMenu {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  #mobileMenu > .head > .closeHamburgerMenu:hover {
+    background: #cccccc;
+  }
+  #mobileMenu > .head > .closeHamburgerMenu > i {
+    font-size: 24px;
+    line-height: 1;
+    opacity: 1;
+    color: black;
+  }
+  #mobileMenu > .head > .closeHamburgerMenu:hover > i {
+    opacity: 0.5;
+  }
+  
+  .mobileMenuContainer {
+    padding: 16px;
+    display:flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+    overflow: scroll;
+    flex-grow: 1;
+  }
+  .mobileMenuContainer > .menuItem {
+    gap: 16px;
+    position: relative;
+    width: 100%;
+  }
+  .mobileMenuContainer > .menuItem > .menuItemTitle {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .mobileMenuContainer > .menuItem > .menuItemTitle > i {
+    font-size: 24px;
+    color: white;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+    transform: rotate(-90deg);
+  }
+  .mobileMenuContainer > .menuItem > .menuItemTitle > i.active {
+    transform: rotate(0deg);
+  }
+  .mobileMenuContainer > .menuItem > .menuItemTitle > a, 
+  .mobileMenuContainer > .menuItem > .menuItemTitle > span, 
+  .mobileMenuContainer > .menuItem > a, 
+  .mobileMenuContainer > .menuItem > span{
+    font-size: 28px;
+    color: white;
+    font-family: {% if section.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  }
+  .mobileMenuContainer > .menuItem > .menuItemDropdown a {
+    color: white;
+    font-size: 20px;
+    white-space: nowrap;
+  }
+  .mobileMenuContainer > .menuItem > .menuItemDropdown {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0px;
+    display: none;
+    animation-name: mobileDropdown;
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+    z-index: 2;
+    width: 100%;
+  }
+  .mobileMenuContainer > .menuItem > .menuItemDropdown.active {
+    display: flex;
+  }
+  @keyframes mobileDropdown {
+    0% { opacity: 0; margin-left: 15px; }
+    100% { opacity: 1; margin-left: 0px; }
+  }
+  
+  #mobileMenu > .mobileMenuFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 24px;
+    gap: 24px;
+  }
+  #mobileMenu > .mobileMenuFooter > .left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: start;
+  }
+  #mobileMenu > .mobileMenuFooter > .right img {
+    width: 48px;
+  }
+</style>
+
+<!--JavaScript-->
+<script>
+  let mobileMenu = document.querySelector("#mobileMenu");
+  function openMobileMenu() {
+    mobileMenu.classList.add("active");
+    document.querySelector("body").classList.add("stop-scrolling");
+  };
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("active");
+    document.querySelector("body").classList.remove("stop-scrolling");
+  };
+  function openDropdownItem(i) {
+    let item = document.querySelector("#dropDownItem-" + i);
+    let icon = document.querySelector("#dropDownIcon-" + i);
+    item.classList.toggle("active");
+    icon.classList.toggle("active");
+  };
+  {% case section.settings.stickyHeader %}
+  {% when 'always' %}
+  function stickyHeader() {
+    if (window.scrollY < 150) {
+      document.querySelector("#headerSection").classList.remove("active");
+    } else {
+      document.querySelector("#headerSection").classList.add("active");
+    }
+  }
+  addEventListener("scroll", (event) => stickyHeader());
+  {% when 'home' %}
+  {% if template == "index" %}
+  function stickyHeader() {
+    if (window.scrollY < 150) {
+      document.querySelector("#headerSection").classList.remove("active");
+    } else {
+      document.querySelector("#headerSection").classList.add("active");
+    }
+  }
+  addEventListener("scroll", (event) => stickyHeader());
+  {% endif %}
+  {% endcase %}
+</script>
+
+<script type="module">
+  import { subscribeToCartSectionsUpdate } from '{{ "liquid-ajax-cart-v1.11.0.js" | asset_url }}'
+  subscribeToCartSectionsUpdate( sections => {
+    document.querySelector(".cartItemNumber").classList.add('updated');
+    setTimeout(function () {
+      document.querySelector(".cartItemNumber").classList.remove('updated');
+    }, 300);
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Header",
+    "tag": "header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background color",
+        "default": "#2D4036",
+        "info": "To make a transparent header, leave the field empty."
+      },
+      {
+        "type": "color_background",
+        "id": "bgGradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Section's top margin",
+        "unit": "px",
+        "min": 0,
+        "max": 128,
+        "step": 4,
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Section's bottom margin",
+        "unit": "px",
+        "min": 0,
+        "max": 128,
+        "step": 4,
+        "default": 16
+      },
+      {
+        "type": "select",
+        "id": "sectionType",
+        "label": "Section type",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "container",
+            "label": "Container"
+          }
+        ],
+        "default": "container"
+      },
+      {
+        "type": "range",
+        "id": "containerWidth",
+        "label": "Container's width",
+        "unit": "px",
+        "min": 600,
+        "max": 1600,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "containerPadding",
+        "label": "Container's inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 128,
+        "step": 4,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Container's border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 64,
+        "step": 4,
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "containerBg",
+        "label": "Container's background color",
+        "info": "To make a transparent header, leave the field empty."
+      },
+      {
+        "type": "color_background",
+        "id": "containerBgGradient",
+        "label": "Container's background gradient"
+      },
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "With Cortado, the header is split in three sections. Left, center and right. The left and center sections can be interchanged to have your logo in the center or on the left. In the right section, use blocks to add hoverable widgets and organize the order. Use the blocks settings to customize your widgets."
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout type",
+        "options": [
+          {
+            "value": "logoLeft",
+            "label": "Logo on the left"
+          },
+          {
+            "value": "logoCenter",
+            "label": "Logo in the center"
+          }
+        ],
+        "default": "logoCenter"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Pick the header menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "color",
+        "id": "textColor",
+        "label": "Text and icons color",
+        "default": "#fff"
+      },
+      {
+        "type": "select",
+        "id": "fontFamily",
+        "label": "Font family used for text in the header",
+        "options": [
+          {
+            "value": "main",
+            "label": "Main font family"
+          },
+          {
+            "value": "second",
+            "label": "Secondary font family"
+          }
+        ],
+        "default": "second"
+      },
+      {
+        "type": "checkbox",
+        "id": "capitalize",
+        "label": "Capitalize the text in the header",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "textSize",
+        "label": "Size of the text in the header",
+        "step": 1,
+        "min": 10,
+        "max": 24,
+        "default": 16,
+        "unit": "px"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Shop logo",
+        "info": "Please upload your logo in SVG or PNG format."
+      },
+      {
+        "type": "range",
+        "id": "logoWidth",
+        "label": "Logo width",
+        "min": 24,
+        "max": 256,
+        "step": 4,
+        "unit": "px",
+        "default": 128
+      },
+      {
+        "type": "range",
+        "id": "logoWidthMobile",
+        "label": "Logo width on mobile",
+        "min": 24,
+        "max": 256,
+        "step": 4,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "paragraph",
+        "content": "Customize settings for search, cart and account widgets using blocks for the header section."
+      },
+      {
+        "type": "header",
+        "content": "Sticky header"
+      },
+      {
+        "type": "radio",
+        "id": "stickyHeader",
+        "label": "Activate sticky header",
+        "options": [
+          {
+            "value": "no",
+            "label": "Never"
+          },
+          {
+            "value": "home",
+            "label": "Only on home page"
+          },
+          {
+            "value": "always",
+            "label": "Always"
+          }
+        ],
+        "default": "no"
+      },
+      {
+        "type": "color",
+        "id": "stickyBg",
+        "label": "Background color on scroll",
+        "info": "To make a transparent header, leave the field empty.",
+        "default": "#2D4036"
+      },
+      {
+        "type": "color_background",
+        "id": "stickyBgGradient",
+        "label": "Background gradient on scroll"
+      },
+      {
+        "type": "checkbox",
+        "id": "stickyHeaderCompensation",
+        "label": "Compensate sticky header position",
+        "info": "Use this option to prevent the first section of the page to hide under the header.",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Mobile menu"
+      },
+      {
+        "type": "color_background",
+        "id": "mobileMenuBg",
+        "label": "Mobile menu background color",
+        "default": "rgba(0,0,0,0.9)"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Search widget",
+        "type": "searchWidget",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Search widget"
+          },
+          {
+            "type": "text",
+            "id": "placeholder",
+            "label": "Search placeholder",
+            "default": "Trouvez ce que vous cherchez"
+          },
+          {
+            "type": "range",
+            "id": "borderRadius",
+            "label": "Searchbar border radius",
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "default": 0,
+            "unit": "px"
+          }
+        ]
+      },
+      {
+        "name": "Cart widget",
+        "type": "cartWidget",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Cart widget"
+          },
+          {
+            "type": "range",
+            "id": "borderRadius",
+            "label": "Cart widget border radius",
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "default": 0,
+            "unit": "px"
+          },
+          {
+            "type": "select",
+            "id": "buttonStyle",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "1",
+                "label": "Style 1"
+              },
+              {
+                "value": "2",
+                "label": "Style 2"
+              }
+            ],
+            "default": "1"
+          },
+          {
+            "type": "color",
+            "id": "itemNumberColor",
+            "label": "Item number color",
+            "default": "#000000"
+          }
+        ]
+      },
+      {
+        "name": "Account widget",
+        "type": "accountWidget",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Account widget"
+          },
+          {
+            "type": "select",
+            "id": "buttonStyle1",
+            "label": "Button 1 style",
+            "options": [
+              {
+                "value": "1",
+                "label": "Style 1"
+              },
+              {
+                "value": "2",
+                "label": "Style 2"
+              }
+            ],
+            "default": "1"
+          },
+          {
+            "type": "select",
+            "id": "buttonStyle2",
+            "label": "Button 2 style",
+            "options": [
+              {
+                "value": "1",
+                "label": "Style 1"
+              },
+              {
+                "value": "2",
+                "label": "Style 2"
+              }
+            ],
+            "default": "2"
+          }
+        ]
+      },
+      {
+        "name": "Language selector",
+        "type": "languageSelector",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Language selector"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "searchWidget"
+        },
+        {
+          "type": "cartWidget"
+        },
+        {
+          "type": "accountWidget"
+        }
+      ]
+    }
+  }
+{% endschema %}

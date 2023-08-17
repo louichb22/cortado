@@ -1,0 +1,501 @@
+{% assign id = section.id | split: '__' | last | truncate: 8, '' | prepend: 'dev_' %}
+{% assign set = section.settings %}
+
+<!--HTML-->
+<section id="{{ id }}">
+  <div id="{{ id }}_container">
+    <div class="content">
+      {% for block in section.blocks %}
+        <style>
+          #{{ id }}_{{ forloop.index0 }} {
+            color: {{ block.settings.color }};
+            {% if block.settings.gap %}margin-top: {{ set.gap }}px;{% endif %}
+            text-align: {{ set.align }};
+          }
+          {% if block.type == 'paragraph' %}
+          #{{ id }}_{{ forloop.index0 }} * {
+            color: {{ block.settings.color }};
+          }
+          {% endif %}
+          @media (max-width: 800px) {
+            #{{ id }}_{{ forloop.index0 }} {
+              {% if block.settings.gap %}margin-top: {{ set.gap | divided_by: 2 }}px;{% endif %}
+            }
+          }
+        </style>
+        {% case block.type %}
+          {% when 'h1' %}<h1 id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.title }}</h1>
+          {% when 'h2' %}<h2 id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.title }}</h2>
+          {% when 'h3' %}<h3 id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.title }}</h3>
+          {% when 'paragraph' %}<div id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.text }}</div>
+          {% when 'button' %}<a id="{{ id }}_{{ forloop.index0 }}" title="{{ block.settings.text }}" href="{{ block.settings.link }}" class="btn{{ block.settings.type }}">{{ block.settings.text }}</a>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    <div class="image">
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          <style>
+            #{{ id }}_container > .image {
+              position: relative;
+              {% if set.inverted %}grid-column: 1;{% endif %}
+              grid-row: 1;
+            }
+            #{{ id }}_image {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              object-fit: cover;
+              z-index: 1;
+              border-radius: {{ set.borderRadius | divided_by: 2 }}px;
+            }
+            #{{ id }}_filter {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 2;
+              pointer-events: none;
+              user-select: none;
+              background-color: {{ block.settings.filterColor }};
+              opacity: {{ block.settings.filterOpacity | divided_by: 100.00 }};
+              border-radius: {{ set.borderRadius | divided_by: 2 }}px;
+            }
+            @media (max-width: 800px) {
+              #{{ id }}_container > .image {
+                order: 1;
+              }
+            }
+          </style>
+          <img id="{{ id }}_image" class="lazyload" data-src="{{ block.settings.image | image_url }}" width="100%" height="100%" alt="{{ block.settings.alt }}">
+          <div id="{{ id }}_filter"></div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style type="text/css">
+  #{{ id }} {
+    background: {% if set.altBg != blank %}{{ set.altBg }}{% else %}{{ set.bg }}{% endif %};
+    padding-top: {{ set.paddingTop }}px;
+    padding-bottom: {{ set.paddingBottom }}px;
+  }
+  #{{ id }}_container {
+    background: {% if set.innerAltBg != blank %}{{ set.innerAltBg }}{% else %}{{ set.innerBg }}{% endif %};
+    {% if set.type %}
+    max-width: {{ set.maxWidth }}px;
+    margin: 0 auto;
+    {% endif %}
+    padding: {{ set.innerPadding }}px;
+    border-radius: {{ set.borderRadius }}px;
+    overfow: hidden;
+    display: grid;
+    grid-template-columns: {{ set.middleLine }}fr {{ 100 | minus: set.middleLine }}fr;
+    gap: {{ set.gap | times: 2 }}px;
+  }
+  #{{ id }}_container > .content {
+    padding-top: {{ set.gap | times: 2 }}px;
+    padding-bottom: {{ set.gap | times: 2 }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ set.align }};
+    gap: {{ set.gap }}px;
+    {% if set.inverted %}grid-column: 2;{% endif %}
+    grid-row: 1;
+  }
+  
+  @media (max-width: 800px) {
+    #{{ id }} {
+      padding-top: {{ set.paddingTop | divided_by: 2 }}px;
+      padding-bottom: {{ set.paddingBottom | divided_by: 2 }}px;
+    }
+    #{{ id }}_container {
+      border-radius: {{ set.borderRadius | divided_by: 2 }}px;
+      padding: {{ set.innerPadding | divided_by: 2 }}px;
+      display: flex;
+      flex-direction: column;
+      gap: {{ set.gap }}px;
+    }
+    #{{ id }}_container > .content {
+      order: 2;
+      gap: {{ set.gap | divided_by: 2 }}px;
+      padding: 0;
+    }
+    #{{ id }}_container > .image {
+      aspect-ratio: 3 / 2;
+    }
+    #{{ id }}_image, 
+    #{{ id }}_filter {
+      border-radius: {{ set.borderRadius | divided_by: 4 }}px;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Text with image",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "altBg",
+        "label": "Alternative background"
+      },
+      {
+        "type": "color",
+        "id": "innerBg",
+        "label": "Inner background"
+      },
+      {
+        "type": "text",
+        "id": "innerAltBg",
+        "label": "Alternative inner background"
+      },
+      {
+        "type": "header",
+        "content": "Padding"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Top padding",
+        "min": 0,
+        "max": 128,
+        "step": 8,
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Bottom padding",
+        "min": 0,
+        "max": 128,
+        "step": 8,
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "innerPadding",
+        "label": "Inner padding",
+        "min": 0,
+        "max": 64,
+        "step": 8,
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Container"
+      },
+      {
+        "type": "checkbox",
+        "id": "type",
+        "label": "Use container",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "maxWidth",
+        "label": "Max-width",
+        "unit": "px",
+        "min": 800,
+        "max": 1400,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Border radius",
+        "min": 0,
+        "max": 64,
+        "step": 8,
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Alignement"
+      },
+      {
+        "type": "radio",
+        "id": "align",
+        "label": "Alignment",
+        "options": [
+          {
+            "label": "Right",
+            "value": "start"
+          },
+          {
+            "label": "Center",
+            "value": "center"
+          },
+          {
+            "label": "Left",
+            "value": "end"
+          }
+        ],
+        "default": "start"
+      },
+      {
+        "type": "range",
+        "id": "gap",
+        "label": "Gap",
+        "min": 0,
+        "max": 32,
+        "step": 4,
+        "default": 16
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "range",
+        "id": "middleLine",
+        "label": "Middle line",
+        "info": "Determines the middle seperation between the text section and the image section",
+        "unit": "%",
+        "step": 5,
+        "min": 10,
+        "max": 90,
+        "default": 50
+      },
+      {
+        "type": "checkbox",
+        "id": "inverted",
+        "label": "Image on the left",
+        "info": "On mobile, the image will always be on top."
+      },
+      {
+        "type": "header",
+        "content": "Any question?",
+        "info": "Cortado has a whole documentation available to help you. [Learn Cortado](https://22agencecreative.dev/cortado)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "h1",
+        "name": "H1",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
+            "type": "header",
+            "content": "First level title",
+            "info": "The H1 generaly is the title of the page. Please use it once on each page."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Content",
+            "default": "First level title"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color"
+          }
+        ]
+      },
+      {
+        "type": "h2",
+        "name": "H2",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
+            "type": "header",
+            "content": "Second level title",
+            "info": "The H2 generaly is for section titles. Please use it once in each section."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Content",
+            "default": "Second level title"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color"
+          }
+        ]
+      },
+      {
+        "type": "h3",
+        "name": "H3",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
+            "type": "header",
+            "content": "Third level title",
+            "info": "H3s generaly are sub-titles within sections."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Content",
+            "default": "Third level title"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "name": "Paragraph",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
+            "type": "header",
+            "content": "Paragraph block",
+            "info": "The paragraph block is limited to 75 characters per line for better readability"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Content",
+            "default": "<p>This is a paragraph where you can <b>style</b> elements at your desire.</p>"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "name": "Button",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap",
+            "default": true
+          },
+          {
+            "type": "header",
+            "content": "Button block"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Call to action"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Url"
+          },
+          {
+            "type": "radio",
+            "id": "type",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "1"
+              },
+              {
+                "value": "2"
+              },
+              {
+                "value": "3"
+              },
+              {
+                "value": "4"
+              }
+            ],
+            "default": "1"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Image block"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Pick an image"
+          },
+          {
+            "type": "text",
+            "id": "alt",
+            "label": "Alternative text",
+            "default": "An image of a coffee mug"
+          },
+          {
+            "type": "color",
+            "id": "filterColor",
+            "label": "Image filter color",
+            "default": "#000000"
+          },
+          {
+            "type": "range",
+            "id": "filterOpacity",
+            "label": "Image filter opacity",
+            "default": 0,
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "%"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Text with image",
+        "blocks": [
+          {
+            "type": "h1"
+          },
+          {
+            "type": "paragraph"
+          },
+          {
+            "type": "button"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

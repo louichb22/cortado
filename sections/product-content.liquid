@@ -1,0 +1,307 @@
+{% assign description = product.description | split: '[main]' | last | split: '[specs]'| first | html %}
+{% if product.description contains "[specs]" %}{% assign specs = product.description | split: '[specs]' | last | html %}{% endif %}
+
+<!--HTML-->
+<section style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
+  <div class="productContent" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+    <div class="head">
+      <h2 id="description-header" class="active" onclick="openTab('description')">{{ "product.description" | t }}</h2>
+      {% if product.description contains "[specs]" %}<h2 id="specs-header" onclick="openTab('specs')">{{ "product.specs" | t }}</h2>{% endif %}
+      {% for block in section.blocks %}{% if block.type == "shipping" %}<h2 id="shipping-header" onclick="openTab('shipping')">{{ "product.shipping_returns" | t }}</h2>{% endif %}{% endfor %}
+    </div>
+    <div class="content">
+      <div id="description" class="active">{{ description }}</div>
+      {% if product.description contains "[specs]" %}<div id="specs">{{ specs }}</div>{% endif %}
+      {% for block in section.blocks %}{% if block.type == "shipping" %}<div id="shipping">{{ block.settings.shippingText }}</div>{% endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!--CSS-->
+<style>
+  .productContent {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .productContent > .head {
+    display: flex;
+    border-bottom: solid 5px {{ section.settings.headersBgColor }};
+  }
+  .productContent > .head > h2 {
+    padding: 1rem 2rem;
+    cursor: pointer;
+    color: {{ section.settings.headersColor }};
+    font-size: 26px;
+  }
+  .productContent > .head > h2.active {
+    background-color: {{ section.settings.headersBgColor }};
+  }
+  .productContent > .content > div {
+    display: none;
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+  }
+  .productContent > .content > div.active {
+    display: block;
+  }
+  @media (max-width: 800px) {
+    .productContent > .head {
+      flex-direction: column;
+      border-bottom: none;
+      border-left: solid 5px {{ section.settings.headersBgColor }};
+    }
+    .productContent > .head > h2 {
+      font-size: 20px;
+    }
+  }
+  .productContent > .content > div * {
+    line-height: 2;
+  }
+  .productContent > .content > div h2 {
+    font-size: {{ section.settings.h2Size }}px !important;
+  }
+  .productContent > .content > div h3 {
+    font-size: {{ section.settings.h3Size }}px !important;
+  }
+  .productContent > .content > div h4 {
+    font-size: {{ section.settings.h4Size }}px !important;
+  }
+  .productContent > .content > div h5 {
+    font-size: {{ section.settings.h5Size }}px !important;
+  }
+  .productContent > .content > div h6 {
+    font-size: {{ section.settings.h6Size }}px !important;
+  }
+  .productContent > .content > div p, 
+  .productContent > .content > div ul, 
+  .productContent > .content > div li, 
+  .productContent > .content > div input, 
+  .productContent > .content > div label, 
+  .productContent > .content > div td, 
+  .productContent > .content > div tr, 
+  .productContent > .content > div a, 
+  .productContent > .content > div span {
+    font-size: {{ section.settings.pSize }}px !important;
+  }
+  .productContent > .content > div a {
+    font-weight : bold;
+    text-decoration: underline;
+  }
+</style>
+
+<!--JavaScript-->
+<script>
+  let tabs = document.querySelectorAll(".productContent>.content>div");
+  let tabHeaders = document.querySelectorAll(".productContent>.head>h2");
+  function openTab(tab) {
+    for (let i = 0; i < tabs.length; i++) {
+      tabs[i].classList.remove("active");
+    };
+    for (let i = 0; i < tabHeaders.length; i++) {
+      tabHeaders[i].classList.remove("active");
+    };
+    document.querySelector("#" + tab).classList.add("active");
+    document.querySelector("#" + tab + "-header").classList.add("active");
+  };
+</script>
+
+{% schema %}
+  {
+    "name": "Product content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "bgGradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Section's top margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Section's bottom margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 75
+      },
+      {
+        "type": "select",
+        "id": "sectionType",
+        "label": "Section type",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "container",
+            "label": "Container"
+          }
+        ],
+        "default": "container"
+      },
+      {
+        "type": "range",
+        "id": "containerWidth",
+        "label": "Container's width",
+        "unit": "px",
+        "min": 600,
+        "max": 1600,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "containerPadding",
+        "label": "Container's inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Container's border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "containerBg",
+        "label": "Container's background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "containerBgGradient",
+        "label": "Container's background gradient"
+      },
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "With Cortado, you have enhanced product pages with content separators. In your product description, you have to include certain tags to separate your text into a short description, a full description and a specs sheet. Start with [short], write your short description, then [main], write your full description, then [specs] and end with your specs."
+      },
+      {
+        "type": "color",
+        "id": "headersColor",
+        "label": "Product content headers color",
+        "default": "#2d4036"
+      },
+      {
+        "type": "color",
+        "id": "headersBgColor",
+        "label": "Product content headers accent color",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "paragraph",
+        "content": "With Cortado, you can set your own sizes for content inside the product content tabs."
+      },
+      {
+        "type": "range",
+        "id": "h2Size",
+        "label": "H2 Size",
+        "step": 2,
+        "min": 8,
+        "max": 200,
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "h3Size",
+        "label": "H3 Size",
+        "step": 2,
+        "min": 8,
+        "max": 200,
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "h4Size",
+        "label": "H4 Size",
+        "step": 2,
+        "min": 8,
+        "max": 200,
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "h5Size",
+        "label": "H5 Size",
+        "step": 2,
+        "min": 8,
+        "max": 200,
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "h6Size",
+        "label": "H6 Size",
+        "step": 2,
+        "min": 8,
+        "max": 200,
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "pSize",
+        "label": "Paragraphs Size",
+        "step": 2,
+        "min": 8,
+        "max": 200,
+        "default": 16
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Shipping & returns",
+        "type": "shipping",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "shippingText",
+            "label": "Shipping & returns text",
+            "default": "<p><strong>Shipping</strong>: Free shipping for orders over 75$ in Canada and USA. Shipping rates calculated at checkout. Cortado is not responsible for any applicable import fees. International Orders are shipped at the risk of the buyer - Cortado will not be responsible for lost/damaged items</p><p><strong>Returns</strong>: Any item you're not completely satisfied with can be returned up to 30 days after you receive it. The cost of the item, minus initial shipping costs will be refunded.</p>"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "shipping"
+        }
+      ]
+    }
+  }
+{% endschema %}

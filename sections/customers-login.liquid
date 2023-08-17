@@ -1,0 +1,173 @@
+<!--HTML-->
+<section style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
+  <div class="login" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+    <h1>{{ 'account.login' | t }}</h1>
+    {% form 'customer_login' %}
+    {{ form.errors | default_errors }}
+    <div class="form">
+      <input type="email" name="customer[email]" id="CustomerEmail" placeholder="{{ 'account.email' | t }}" spellcheck="false" autocomplete="off" autocapitalize="off" autofocus>
+      <input type="password" name="customer[password]" id="CustomerPassword" placeholder="{{ 'account.password' | t }}">
+    </div>
+    <button type="submit" class="btn1">{{ 'account.login' | t }}</button>
+    {% endform %}
+    <a href="{{ routes.account_register_url }}">{{ 'account.register' | t }}</a>
+    <span onclick="forgotPassword()">{{ 'account.forgot_password' | t }}</span>
+    <div id="passwordRecovery" style="display:none;">
+      {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
+        <div class="form">
+          <input type="email" name="email" placeholder="{{ 'account.email' | t }}">
+          <button type="submit" class="btn1">{{ 'account.reset_password' | t }}</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+<!--CSS-->
+<style>
+  .login, 
+  .login > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .form {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+  }
+  .form > input {
+    border: solid 2px #f7f7f7;
+    background: none;
+    padding: 0.6rem 1.2rem;
+    outline: none;
+  }
+  .form > input:hover {
+    border: solid 2px #f0f0f0;
+  }
+  .login > a, 
+  .login > span {
+    cursor: pointer;
+  }
+  .login > a:hover, 
+  .login > span:hover {
+    opacity: 0.5;
+  }
+  .errors * {
+    color: red;
+  }
+  @media (max-width: 800px) {
+    .form {
+      grid-template-columns: 100%;
+    }
+  }
+</style>
+
+<!--JavaScript-->
+<script>
+  function forgotPassword() {
+    document.querySelector("#passwordRecovery").style.display = "flex";
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Login",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "bgGradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Section's top margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Section's bottom margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "sectionType",
+        "label": "Section type",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "container",
+            "label": "Container"
+          }
+        ],
+        "default": "container"
+      },
+      {
+        "type": "range",
+        "id": "containerWidth",
+        "label": "Container's width",
+        "unit": "px",
+        "min": 600,
+        "max": 1600,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "containerPadding",
+        "label": "Container's inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Container's border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "containerBg",
+        "label": "Container's background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "containerBgGradient",
+        "label": "Container's background gradient"
+      }
+    ]
+  }
+{% endschema %}

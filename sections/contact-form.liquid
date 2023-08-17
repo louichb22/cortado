@@ -1,0 +1,389 @@
+<!--HTML-->
+<section id="contact" style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
+  <div class="contactForm" style="align-items: {% case section.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% endcase %} text-align: {% case section.settings.alignment %}{% when "left" %}left;{% when "center" %}center;{% when "right" %}right;{% endcase %}{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when "image" %}<img class="lazyload" style="max-width:{{ block.settings.width }}px" data-src="{{ block.settings.image | image_url }}" alt="{{ block.settings.imageAlt }}">
+        {% when "header" %}<h1 style="color: {{ block.settings.color }}">{{ block.settings.text }}</h1>
+        {% when "title" %}<h2 style="color: {{ block.settings.color }}">{{ block.settings.text }}</h2>
+        {% when "subtitle" %}<h3 style="color: {{ block.settings.color }}">{{ block.settings.text }}</h3>
+        {% when "paragraph" %}<p style="color: {{ block.settings.color }}">{{ block.settings.text }}</p>
+        {% when "form" %}
+          {% form 'contact' %}
+            {{ form.errors | default_errors }}
+            <div class="form">
+              <input type="text" name="contact[first_name]" id="first-name" placeholder="{{ 'account.first_name' | t }}" />
+              <input type="text" name="contact[last_name]" id="last-name" placeholder="{{ 'account.last_name' | t }}" />
+              <input type="tel" name="contact[phone]" id="phone" placeholder="{{ 'account.phone' | t }}" />
+              <input type="email" name="contact[email]" id="email" placeholder="{{ 'account.email' | t }}" />
+              <textarea name="contact[body]" id="message" placeholder="{{ 'account.message' | t }}"></textarea>
+            </div>
+            <input type="submit" class="btn{{ block.settings.buttonStyle }}" value="Send" />
+          {% endform %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+<!--CSS-->
+<style>
+  .contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .contactForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    align-items: center;
+  }
+  .contactForm p {
+    line-height: 2;
+  }
+  {% for block in section.blocks %}{% if block.type == "form" %}
+  .contactForm .form {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+    width: 100%;
+  }
+  .contactForm .form > input, 
+  .contactForm .form > textarea {
+    border: solid 2px {{ block.settings.borderColor }};
+    color: {{ block.settings.textColor }};
+    background: none;
+    padding: 0.6rem 1.2rem;
+    outline: none;
+    opacity: 0.75;
+  }
+  .contactForm .form > input::placeholder, 
+  .contactForm .form > textarea::placeholder {
+    color: {{ block.settings.textColor }};
+  }
+  .contactForm .form > input:hover, 
+  .contactForm .form > textarea:hover {
+    opacity: 1;
+  }
+  .contactForm .form textarea {
+    grid-column: span 2;
+    min-height: 100px;
+    font-size: 16px;
+  }
+  .contactForm .errors * {
+    color: red;
+  }
+  @media (max-width: 800px) {
+    .contactForm .form {
+      grid-template-columns: 100%;
+    }
+    .contactForm .form textarea {
+      grid-column: 1;
+    }
+  }
+  {% endif %}{% endfor %}
+</style>
+
+{% schema %}
+  {
+    "name": "Contact form",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background color"
+      },
+      {
+        "type": "color_background",
+        "id": "bgGradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Section's top margin",
+        "unit": "px",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Section's bottom margin",
+        "unit": "px",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "sectionType",
+        "label": "Section type",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "container",
+            "label": "Container"
+          }
+        ],
+        "default": "container"
+      },
+      {
+        "type": "range",
+        "id": "containerWidth",
+        "label": "Container's width",
+        "unit": "px",
+        "min": 600,
+        "max": 1600,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "containerPadding",
+        "label": "Container's inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Container's border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "containerBg",
+        "label": "Container's background color"
+      },
+      {
+        "type": "color_background",
+        "id": "containerBgGradient",
+        "label": "Container's background gradient"
+      },
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Content alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Image",
+        "type": "image",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Image block"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Choose an image"
+          },
+          {
+            "type": "range",
+            "id": "width",
+            "label": "Image max-width",
+            "min": 50,
+            "max": 1000,
+            "step": 10,
+            "default": 200,
+            "unit": "px"
+          },
+          {
+            "type": "text",
+            "id": "imageAlt",
+            "label": "Image alt text",
+            "info": "Brief description of the image",
+            "default": "An image of a coffe mug"
+          }
+        ]
+      },
+      {
+        "name": "Page title",
+        "type": "header",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Page title block"
+          },
+          {
+            "type": "paragraph",
+            "content": "This block will create a h1 tag. Use ONLY for custom page titles, once per page."
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#2D4036"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Page title"
+          }
+        ]
+      },
+      {
+        "name": "Title",
+        "type": "title",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Title block"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#2D4036"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Title"
+          }
+        ]
+      },
+      {
+        "name": "Sub-title",
+        "type": "subtitle",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Sub-title block"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#2D4036"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Sub-title"
+          }
+        ]
+      },
+      {
+        "name": "Paragraph",
+        "type": "paragraph",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Paragraph block"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#000000"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+          }
+        ]
+      },
+      {
+        "name": "Form",
+        "type": "form",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Form block"
+          },
+          {
+            "type": "color",
+            "id": "textColor",
+            "label": "Input text color",
+            "default": "#000000"
+          },
+          {
+            "type": "color",
+            "id": "borderColor",
+            "label": "Input border color",
+            "default": "#cccccc"
+          },
+          {
+            "type": "select",
+            "id": "buttonStyle",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "1",
+                "label": "Style 1"
+              },
+              {
+                "value": "2",
+                "label": "Style 2"
+              }
+            ],
+            "default": "1"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Contact form",
+        "blocks": [
+          {
+            "type": "title"
+          },
+          {
+            "type": "paragraph"
+          },
+          {
+            "type": "form"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

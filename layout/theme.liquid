@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <!--Basic Config-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>{{ page_title }}{% unless page_title == shop.name %} - {{ shop.name }}{% endunless %}</title>
+    <meta name="description" content="{{ page_description | escape }}">
+    <meta name="robots" content="index, archive, follow">
+    <!--Font family-->
+    <link rel="stylesheet" href="{{ settings.mainFontFamilyFile }}" type="text/css" media="all">
+    {% if settings.useSecondFontFamily %}<link rel="stylesheet" href="{{ settings.secondFontFamilyFile }}" type="text/css" media="all">{% endif %}
+    {{ 'icons.css' | asset_url | stylesheet_tag }}
+    <!--CSS-->
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon180 | image_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon32 | image_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon16 | image_url }}">
+    <!--Shopify-->
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <!--Body-->
+    {% section "header" %}
+    <div id="mainContent">
+        {{ content_for_layout }}
+    </div>
+    {% section "footer" %}
+    <style>
+      {% unless request.design_mode %}
+      {% if settings.scrollAnimation %}
+      @keyframes sectionFadeIn {
+        0% {
+          opacity:0;
+          padding-top: {{ settings.scrollAnimationBaseMargin }}px;
+        }
+        100% {
+          opacity:1;
+          padding-top:0px;
+        }
+      }
+      div.shopify-section {
+        animation-name: sectionFadeIn;
+        animation-duration: {{ settings.scrollAnimationDuration }}ms;
+        animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+        transition: all {{ settings.scrollAnimationDuration }}ms;
+        transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+        opacity: 0;
+        padding-top: {{ settings.scrollAnimationBaseMargin }}px;
+      }
+      div.shopify-section.active {
+        opacity: 1;
+        padding-top: 0px;
+      }
+      {% endif %}
+      {% endunless %}
+      {% if settings.devOutline %}
+      * {
+        outline: solid 1px pink;
+      }
+      {% endif %}
+    </style>
+    <!--JavaScript-->
+    {{ 'scripts.js' | asset_url | script_tag }}
+    {{ 'lazyload.js' | asset_url | script_tag }}
+    <script type="application/json" data-ajax-cart-initial-state>{{ cart | json }}</script>
+    <script type="module">import '{{ "liquid-ajax-cart-v1.11.0.js" | asset_url }}';</script>
+    <script>
+      const link = document.createElement("span");link.innerHTML = '<a style="display:none;" href="https://cafefabrique.com" target="_blank">CF Distribution</a>{{ "general.built_by" | t }} <a href="https://22agencecreative.ca" target="_blank">22 Agence Créative</a>. {{ "general.powered_by" | t }} <a href="https://thecortadoproject.com" target="_blank">The Cortado Project</a>.';document.querySelector(".bottomFooter").appendChild(link);
+    </script>
+    {% if settings.scrollAnimation %}{{ '22-dynamic-scroll.js' | asset_url | script_tag }}{% endif %}
+    {% include 'geo-popup' %}
+  </body>
+</html>

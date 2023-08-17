@@ -1,0 +1,375 @@
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::0000000000:::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::000000000000000000:::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::0000000:::::::00000000::::0000000000:::::::::::::::::::*/
+/*:::::::::::::000000:::::::::::000:::000000000000000000:::::::::::::::*/
+/*:::::::::::::000000:::::::::::00:::::0000:::::::0000000::::::::::::::*/
+/*:::::::::::::::::::::::::::::000::::000:::::::::::000000:::::::::::::*/
+/*:::::::::::::::::::::::::::000000:00000:::::::::::000000:::::::::::::*/
+/*::::::::::::::::::::::::0000000::::::::::::::::::0000000:::::::::::::*/
+/*::::::::::::::::::::0000000::::::::::::::::::::0000000:::::::::::::::*/
+/*::::::::::::::::00000000000000000000::::::::0000000::::::::::::::::::*/
+/*:::::::::::::00000000000000000000000::::0000000::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::::00000000000000000000:::::::::::::*/
+/*:::::::::::::::::::::::::::::::::00000000000000000000000:::::::::::::*/
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+/*     22 Agence Créative inc.      */
+/*     Louis-Charles Blais          */
+/*     info@22agencecreative.ca     */
+
+/*     General stylesheet for aphria. Customize section styling in their own files.     */
+
+
+
+/*-- General body & elements --*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  transition: all 0.2s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: {{ settings.bodyColor }};
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+div#mainContent {
+  background-color: white;
+}
+
+section {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+@media (max-width: 800px) {
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+
+.shopify-challenge__container {
+  padding: 150px 0px;
+}
+
+i {
+  font-style: normal;
+}
+
+/*-- Typography --*/
+
+:root {
+  --paragraphSize: 20px ;
+}
+
+p, span, a, li, input, label, td, tr, textarea {
+  font-family: {% if settings.textFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.textWeight }};
+  font-size: var(--paragraphSize);
+  line-height: 1.6;
+  color: {{ settings.textColor }};
+  max-width: 60ch;
+}
+b, strong {
+  font-weight: {{ settings.strongTextWeight }};
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: {% if settings.headersFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.headersWeight }};
+  color: {{ settings.headersColor }};
+  line-height: 1.2;
+  max-width: 60ch;
+  {% if settings.headersCapitalize %}text-transform: uppercase;{% endif %}
+}
+h1 {
+  font-size: {{ settings.h1Size }}px;
+}
+h2 {
+  font-size: {{ settings.h2Size }}px;
+}
+h3 {
+  font-size: {{ settings.h3Size }}px;
+}
+h4 {
+  font-size: {{ settings.h4Size }}px;
+}
+h5 {
+  font-size: {{ settings.h5Size }}px;
+}
+h6 {
+  font-size: {{ settings.h6Size }}px;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+@media(max-width: 800px) {
+  h1 {
+    font-size: {{ settings.h1SizeMobile }}px;
+  }
+  h2 {
+    font-size: {{ settings.h2SizeMobile }}px;
+  }
+  h3 {
+    font-size: {{ settings.h3SizeMobile }}px;
+  }
+  h4 {
+    font-size: {{ settings.h4SizeMobile }}px;
+  }
+  h5 {
+    font-size: {{ settings.h5SizeMobile }}px;
+  }
+  h6 {
+    font-size: {{ settings.h6SizeMobile }}px;
+  }
+}
+
+
+/*-- Buttons --*/
+
+.btn1, .btn2, .btn3, .btn4 {
+  font-family: {% if settings.btnFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.btnFontWeight }};
+  font-size: {{ settings.btnTextSize }}px;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+}
+@media (max-width: 800px) {
+  .btn1, .btn2, .btn3, .btn4 {
+    font-size: {{ settings.btnTextSizeMobile }}px;
+  }
+}
+
+.btn1 {
+  padding: {{ settings.btn1Padding }};
+  {% if settings.btn1Uppercase %}text-transform: uppercase;{% endif %}
+  {% if settings.btn1Bg %}background: {{ settings.btn1BgColor }};{% endif %}
+  color: {{ settings.btn1TextColor }};
+  border: {% if settings.btn1Border %}solid {{ settings.btn1BorderThickness }}px {{ settings.btn1BorderColor }}{% else %}none{% endif %};
+  border-radius: {{ settings.btn1BorderRadius }}px;
+}
+.btn1:hover {
+  {% if settings.btn1Bg %}background: {{ settings.btn1BgColorHover }};{% endif %}
+  color: {{ settings.btn1TextColorHover }};
+  border: {% if settings.btn1Border %}solid {{ settings.btn1BorderThickness }}px {{ settings.btn1BorderColorHover }}{% else %}none{% endif %};
+}
+{% if settings.btn1Arrow %}
+  .btn1::after {
+    font-family: icons!important;
+    margin-left: 1em;
+    content: "\f109"
+  }
+{% endif %}
+
+.btn2 {
+  padding: {{ settings.btn2Padding }};
+  {% if settings.btn2Uppercase %}text-transform: uppercase;{% endif %}
+  {% if settings.btn2Bg %}background: {{ settings.btn2BgColor }};{% endif %}
+  color: {{ settings.btn2TextColor }};
+  border: {% if settings.btn2Border %}solid {{ settings.btn2BorderThickness }}px {{ settings.btn2BorderColor }}{% else %}none{% endif %};
+  border-radius: {{ settings.btn2BorderRadius }}px;
+}
+.btn2:hover {
+  {% if settings.btn2Bg %}background: {{ settings.btn2BgColorHover }};{% endif %}
+  color: {{ settings.btn2TextColorHover }};
+  border: {% if settings.btn2Border %}solid {{ settings.btn2BorderThickness }}px {{ settings.btn2BorderColorHover }}{% else %}none{% endif %};
+}
+{% if settings.btn2Arrow %}
+  .btn2::after {
+    font-family: icons!important;
+    margin-left: 1em;
+    content: "\f109"
+  }
+{% endif %}
+
+.btn3 {
+  padding: {{ settings.btn3Padding }};
+  {% if settings.btn3Uppercase %}text-transform: uppercase;{% endif %}
+  {% if settings.btn3Bg %}background: {{ settings.btn3BgColor }};{% endif %}
+  color: {{ settings.btn3TextColor }};
+  border: {% if settings.btn3Border %}solid {{ settings.btn3BorderThickness }}px {{ settings.btn3BorderColor }}{% else %}none{% endif %};
+  border-radius: {{ settings.btn3BorderRadius }}px;
+}
+.btn3:hover {
+  {% if settings.btn3Bg %}background: {{ settings.btn3BgColorHover }};{% endif %}
+  color: {{ settings.btn3TextColorHover }};
+  border: {% if settings.btn3Border %}solid {{ settings.btn3BorderThickness }}px {{ settings.btn3BorderColorHover }}{% else %}none{% endif %};
+}
+{% if settings.btn3Arrow %}
+  .btn3::after {
+    font-family: icons!important;
+    margin-left: 1em;
+    content: "\f109"
+  }
+{% endif %}
+
+.btn4 {
+  padding: {{ settings.btn4Padding }};
+  {% if settings.btn4Uppercase %}text-transform: uppercase;{% endif %}
+  {% if settings.btn4Bg %}background: {{ settings.btn4BgColor }};{% endif %}
+  color: {{ settings.btn4TextColor }};
+  border: {% if settings.btn4Border %}solid {{ settings.btn4BorderThickness }}px {{ settings.btn4BorderColor }}{% else %}none{% endif %};
+  border-radius: {{ settings.btn4BorderRadius }}px;
+}
+.btn4:hover {
+  {% if settings.btn4Bg %}background: {{ settings.btn4BgColorHover }};{% endif %}
+  color: {{ settings.btn4TextColorHover }};
+  border: {% if settings.btn4Border %}solid {{ settings.btn4BorderThickness }}px {{ settings.btn4BorderColorHover }}{% else %}none{% endif %};
+}
+{% if settings.btn4Arrow %}
+  .btn4::after {
+    font-family: icons!important;
+    margin-left: 1em;
+    content: "\f109"
+  }
+{% endif %}
+
+
+/*-- Product cards --*/
+
+.productCard {
+  border-radius: {{ settings.productCardBorderRadius }}px;
+  padding: {{ settings.productCardPadding }}px;
+  background: {{ settings.productCardBgColor }};
+  {% if settings.productCardBorderThickness > 0 %}border: solid {{ settings.productCardBorderThickness }}px {{ settings.productCardBorderColor }};{% endif %}
+}
+.productCard:hover {
+  background: {{ settings.productCardBgColorHover }};
+  {% if settings.productCardBorderThickness > 0 %}border: solid {{ settings.productCardBorderThickness }}px {{ settings.productCardBorderColorHover }};{% endif %}
+}
+.productCard > .image {
+  border-radius: {{ settings.productCardBorderRadius | divided_by: 2 }}px;
+  overflow: hidden;
+  background: {{ settings.productCardImageBoxBgColor }};
+  display: grid;
+  margin-bottom: 16px;
+}
+.productCard:hover > .image {
+  transform: scale(101%);
+}
+.productCard > .image:hover {
+  background: {{ settings.productCardImageBoxBgColorHover }};
+}
+.productCard > .image > img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  grid-column: 1;
+  grid-row: 1;
+}
+.productCard > .image > img:last-child {
+  opacity: 0;
+}
+.productCard > .image:hover > img:last-child {
+  opacity: 1;
+}
+.productCard > .info {
+  border-radius: {{ settings.productCardBorderRadius | divided_by: 2 }}px;
+  display: flex;
+  flex-direction: column;
+  align-items: {{ settings.productCardAlignement }};
+  text-align: {{ settings.productCardAlignement }};
+  gap: 16px;
+  padding: {{ settings.productCardInfoPadding }}px;
+  background: {{ settings.productCardInfoBoxBgColor }};
+}
+.productCard > .info:hover {
+  background: {{ settings.productCardInfoBoxBgColorHover }};
+}
+.productCard > .info > .title {
+  color: {{ settings.productCardTitleColor }};
+  font-family: {% if settings.productCardTitleFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.productCardTitleFontWeight }};
+  font-size: {{ settings.productCardTitleFontSize }}px;
+  line-height: 1.2;
+}
+.productCard > .info > .title:hover {
+  opacity: 0.75;
+}
+.productCard > .info > .productMetafields {
+  justify-content: {{ settings.productCardAlignement }};
+}
+.productCard > .info > .productMetafields * {
+  color: {{ settings.productCardCoffeeInfosColor }};
+  font-family: {% if settings.productCardCoffeeInfosFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.productCardCoffeeInfosFontWeight }};
+  font-size: {{ settings.productCardCoffeeInfosFontSize }}px;
+}
+.productCard > .info > .price {
+  color: {{ settings.productCardPriceColor }};
+  font-family: {% if settings.productCardPriceFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.productCardPriceFontWeight }};
+  font-size: {{ settings.productCardPriceFontSize }}px;
+  line-height: 1.2;
+}
+@media (max-width: 800px) {
+  .productCard {
+    border-radius: {{ settings.productCardBorderRadius | divided_by: 2 }}px;
+    padding: {{ settings.productCardPadding | divided_by: 2 }}px;
+  }
+  .productCard > .image {
+    border-radius: {{ settings.productCardBorderRadius | divided_by: 4 }}px;
+  }
+  .productCard > .info {
+    border-radius: {{ settings.productCardBorderRadius | divided_by: 4 }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ settings.productCardAlignement }};
+    text-align: {{ settings.productCardAlignement }};
+    gap: 8px;
+    padding: {{ settings.productCardInfoPadding | divided_by: 2 }}px;
+  }
+  .productCard > .info > .title {
+    font-size: 20px;
+  }
+  .productCard > .info > .productMetafields * {
+    font-size: 14px;
+  }
+  .productCard > .info > .price {
+    font-size: 24px;
+  }
+}
+
+
+/*-- Product metafields --*/
+
+.productMetafields {
+  display: flex;
+  gap: 8px 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.productMetafields > span {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 16px;
+}
+@media (max-width: 800px) {
+  .productMetafields {
+    gap: 4px 8px;
+  }
+  .productMetafields > span {
+    font-size: 14px;
+  }
+}
+

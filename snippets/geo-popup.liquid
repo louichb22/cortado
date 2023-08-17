@@ -1,0 +1,72 @@
+<!--HTML-->
+<div class="geoPopup">
+  <p>You are on the {{ localization.country.iso_code }} website and it seems you are in <span id="newCountry"></span>.</p>
+  {% form 'localization' %}
+    <input type="hidden" name="country_code" id="newCountryOption" value="undefined">
+    <input class="btn1" style="width:100%" type="submit" value="Change country">
+  {% endform %}
+  <i class="mi-close" onclick="closeGeoPopup()"></i>
+</div>
+
+<!--CSS-->
+<style>
+  .geoPopup {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: white;
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    z-index: 99;
+    animation-name: widgetFadeIn;
+    animation-duration: 0.3s;
+    max-width: 300px;
+  }
+  .geoPopup > p, 
+  .geoPopup > p > span {
+    font-size: 16px;
+  }
+  .geoPopup > i {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 16px;
+    color: black;
+    opacity: 0.25;
+    cursor: pointer;
+  }
+  .geoPopup > i:hover {
+    opacity: 0.75;
+  }
+</style>
+
+<!--JavaScript-->
+<script>
+  function updateCountry(countryCode, countryName) {
+    if (countryCode == '{{ localization.country.iso_code }}') {
+      console.log('Local ok');
+    } else {
+      document.querySelector('#newCountry').innerHTML = countryName;
+      document.querySelector('#newCountryOption').value = countryCode;
+      setTimeout(() => {
+        document.querySelector('.geoPopup').style.display = 'flex';
+      }, 1000);
+    }
+  }
+  function getCountry() {
+    fetch("https://api.geoapify.com/v1/ipinfo?&apiKey=c2e459dcb4fe4719bcccec1df44cf8f5")
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      updateCountry(data.country.iso_code, data.country.name);
+    })
+  }
+  getCountry();
+  function closeGeoPopup() {
+    document.querySelector('.geoPopup').style.display = 'none';
+  }
+</script>

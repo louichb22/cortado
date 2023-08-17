@@ -1,0 +1,33 @@
+{% assign productFilters = '' %}
+{% for option in product.options_with_values %}
+    {% for value in option.values %}
+      {% assign item = value | handleize %}
+      {% assign productFilters = productFilters | append: ',' | append: item %}
+    {% endfor %}
+{% endfor %}
+{% if product.metafields.coffee.origin %}{% assign item = product.metafields.coffee.origin | handleize %}{% assign productFilters = productFilters | append: ',' | append: item %}{% endif %}
+{% if product.metafields.coffee.process %}{% assign item = product.metafields.coffee.process | handleize %}{% assign productFilters = productFilters | append: ',' | append: item %}{% endif %}
+{% if product.metafields.coffee.altitude %}{% assign item = product.metafields.coffee.altitude | handleize %}{% assign productFilters = productFilters | append: ',' | append: item %}{% endif %}
+{% if product.metafields.coffee.roast %}{% assign item = product.metafields.coffee.roast | handleize %}{% assign productFilters = productFilters | append: ',' | append: item %}{% endif %}
+{% if product.metafields.coffee.variety %}{% assign item = product.metafields.coffee.variety | handleize %}{% assign productFilters = productFilters | append: ',' | append: item %}{% endif %}
+
+{% assign productFilters = productFilters | remove_first: ',' %}
+
+<!--HTML-->
+<a class="productCardContainer" href="{{ product.url }}" data-filters="{{ productFilters }}">
+  <div class="productCard">
+    {% unless product.images.size < 1 %}
+    <div class="image">
+      <img class="lazyload" data-src="{{ product.images[0] | image_url }}" alt="{{ product.title }}">
+      <img class="lazyload" data-src="{{ product.images[1] | image_url }}" {% if product.images.size == 1 %}style="display:none!important"{% endif %} alt="{{ product.title }} - Image 2">
+    </div>
+    {% endunless %}
+    <div class="info">
+      <span class="title">{{ product.title }}</span>
+      {% if product.metafields.coffee.origin != blank or product.metafields.coffee.process != blank or product.metafields.coffee.altitude != blank %}
+        {% include 'product-metafields' %}
+      {% endif %}
+      <span class="price">{{ product.price_min | money }}</span>
+    </div>
+  </div>
+</a>

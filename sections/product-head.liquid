@@ -1,0 +1,823 @@
+{% assign short = product.description | split: '[main]' | first | split: '[short]'| last | html %}
+
+<!--HTML-->
+<section style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
+  <div class="productHead" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+    <div class="productImages">
+      <div class="thumbnails">
+        {% for image in product.images %}
+          <img class="productImageThumbnail" onclick="changeProductImage(event)" src="{{ image | image_url }}" title="{{ product.title }} - Image {{ forloop.index }}" alt="{{ product.title }} - Image {{ forloop.index }}">
+        {% endfor %}
+      </div>
+      <img id="mainImage" src="{{ product.featured_image | image_url }}" width="100%" title="{{ product.title }}" alt="{{ product.title }}">
+    </div>
+    {% form 'product', product %}
+    <div class="productInfo">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when "title" %}
+            <h1 class="title" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" title="{{ product.title }}">{{ product.title }}</h1>
+          {% when "vendor" %}
+            <span class="vendor" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" title="{{ product.vendor }}">{{ product.vendor }}</span>
+          {% when "coffeeInfos" %}
+            {% if product.metafields.coffee.origin != blank or product.metafields.coffee.process != blank or product.metafields.coffee.altitude != blank %}
+              <div class="coffeeInfos">
+                {% if product.metafields.coffee.origin %}<span class="origin"><i class="mi-location"></i>{{ product.metafields.coffee.origin }}</span>{% endif %}
+                {% if product.metafields.coffee.process %}<span class="process"><i class="mi-sun"></i>{{ product.metafields.coffee.process }}</span>{% endif %}
+                {% if product.metafields.coffee.altitude %}<span class="altitude"><i class="mi-circle-arrow-up"></i>{{ product.metafields.coffee.altitude }}</span>{% endif %}
+              </div>
+            {% endif %}
+          {% when "price" %}
+            {% for variant in product.variants %}
+              <span class="price" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }}; {% if block.settings.bold %}font-weight: bold;{% endif %}{% unless variant == product.selected_or_first_available_variant %}display: none;{% endunless %}" id="price{% increment priceOrder %}">{% if variant.available %}{{ variant.price | money }}{% else %}Out of stock{% endif %}</span>
+            {% endfor %}
+          {% when "shortDescription" %}
+            {% if product.description contains '[short]' %}<p class="shortDescription" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" >{{ short | strip_html }}</p>{% endif %}
+          {% when "options" %}
+            {% if product.has_only_default_variant %}
+              <select style="display:none;" name="id">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" selected="selected"></option>
+                {% endfor %}
+              </select>
+            {% else %}
+              <div class="options">
+                {% for variant in product.variants %}
+                  <input {% if variant == product.selected_or_first_available_variant %}checked{% endif %} type="radio" id="option-{% increment radioOptionOrder %}" name="id" value="{{ variant.id }}">
+                  <label id="{% increment radioLabelsOrder %}" class="{% unless variant.available %}unavailable{% endunless %}" for="option-{% increment radioLabelOrder %}" onclick="changeVariant(event);{% unless variant.image == blank %}changeVariantImage('{{ variant.id }}'){% endunless %}">{{ variant.title }}</label>
+                  {% unless variant.image == blank %}<img id="variantImage-{{ variant.id }}" style="display:none;" src="{{ variant.image | image_url }}">{% endunless %}
+                {% endfor %}
+                <style>
+                  .options > label {
+                    background-color: {{ block.settings.unselectedBgColor }};
+                    color: {{ block.settings.unselectedTextColor }};
+                    {% if block.settings.unselectedBorderThickness > 0 %}border: solid {{ block.settings.unselectedBorderThickness }}px {{ block.settings.unselectedBorderColor }};{% endif %}
+                    {% if block.settings.unselectedBorderRadius > 0 %}border-radius: {{ block.settings.unselectedBorderRadius }}px;{% endif %}
+                  }
+                  .options > input[type="radio"]:checked+label {
+                    background-color: {{ block.settings.selectedBgColor }};
+                    color: {{ block.settings.selectedTextColor }};
+                    {% if block.settings.selectedBorderThickness > 0 %}border: solid {{ block.settings.selectedBorderThickness }}px {{ block.settings.selectedBorderColor }};{% endif %}
+                    {% if block.settings.selectedBorderRadius > 0 %}border-radius: {{ block.settings.selectedBorderRadius }}px;{% endif %}
+                  }
+                </style>
+              </div>
+            {% endif %}
+          {% when "quantity" %}
+            <div class="quantity">
+              <div class="quantitySelector {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}">
+                <i class="mi-remove" onclick="productQtyRemove()"></i>
+                <input id="quantitySelector" type="number" name="quantity" value="1" min="1">
+                <i class="mi-add" onclick="productQtyAdd()"></i>
+              </div>
+              <style>
+                .quantity > .quantitySelector {
+                  background-color: {{ block.settings.bgColor }};
+                  color: {{ block.settings.textColor }};
+                  padding: 0.4rem 1.2rem;
+                  outline: none;
+                  {% if block.settings.borderThickness > 0 %}border: solid {{ block.settings.borderThickness }}px {{ block.settings.borderColor }};{% endif %}
+                  {% if block.settings.borderRadius > 0 %}border-radius: {{ block.settings.borderRadius }}px;{% endif %}
+                }
+              </style>
+            </div>
+          {% when "button" %}
+            <div class="addToCart">
+              <input class="btn{{ block.settings.buttonStyle }} {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}" type="submit" value="{{ "general.add_to_cart" | t }}">
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    {% endform %}
+  </div>
+</section>
+
+<!--CSS-->
+<style>
+  .productHead {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  .productImages {
+    display: grid;
+    grid-template-columns: 75px 1fr;
+    gap: 15px;
+  }
+  .productImages > .thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 600px;
+    overflow: scroll;
+  }
+  .productImages > .thumbnails > img {
+    width: 75px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .productImages > .thumbnails > img:hover {
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+  }
+  #mainImage {
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+  }
+  .productInfo {
+    background-color: {{ section.settings.infoSectionBg }};
+    padding: {{ section.settings.infoSectionPadding }}px;
+    {% if section.settings.infoSectionBorderRadius > 0 %}
+    border-radius: {{ section.settings.infoSectionBorderRadius }}px;
+    overflow: hidden;
+    {% endif %}
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: start;
+  }
+  .productInfo > .title {
+    font-size: 32px;
+  }
+  .productInfo > .vendor {
+    font-size: 20px;
+  }
+  {% for block in section.blocks %}
+  {% if block.type == "coffeeInfos" %}
+  .productInfo > .coffeeInfos {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .productInfo > .coffeeInfos span {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    color: {{ block.settings.color }};
+    font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  }
+  {% endif %}
+  {% endfor %}
+  .productInfo > .price{
+    font-size: 32px;
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+  }
+  .productInfo > .shortDescription {
+    line-height: 2;
+  }
+  .productInfo > .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .productInfo > .options > label {
+    padding: 0.4rem 1.2rem;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .productInfo > .options > label.unavailable {
+    text-decoration: line-through;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .productInfo > .options > input {
+    display: none;
+  }
+  .productInfo > .quantity input::-webkit-outer-spin-button, 
+  .productInfo > .quantity input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .productInfo > .quantity input[type=number] {
+    -moz-appearance: textfield;
+  }
+  .productInfo > .quantity input {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    text-align: center;
+    outline: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 50px;
+  }
+  .productInfo > .quantity i {
+    cursor: pointer;
+    font-size: 10px;
+  }
+  .productInfo > .quantity i:hover {
+    opacity: 0.5;
+  }
+  .productInfo > .quantity > .quantitySelector.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .productInfo > .addToCart > input, 
+  .productInfo > .addToCart {
+    width: 100%;
+    text-align: center;
+  }
+  .productInfo > .addToCart > input.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  body.js-ajax-cart-request-in-progress .productInfo > .addToCart > input {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  @media (max-width: 800px) {
+    .productHead {
+      grid-template-columns: 100%;
+    }
+    .productImages {
+      grid-template-columns: 50px 1fr;
+    }
+    .productImages > .thumbnails {
+      max-height: 300px;
+    }
+    .productImages > .thumbnails > img {
+      width: 50px;
+    }
+    .productInfo {
+      padding: {{ section.settings.infoSectionPadding | divided_by: 2.0 }}px;
+    }
+    .productInfo > .title {
+      font-size: 24px;
+    }
+    .productInfo > .vendor {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<!--JavaScript-->
+<script>
+  let mainImage = document.querySelector("#mainImage");
+  function changeProductImage(e) {
+    mainImage.style.opacity = "0";
+    setTimeout(function () {
+      mainImage.src = e.target.src;
+    }, 100);
+    setTimeout(function () {
+      mainImage.style.opacity = "1";
+    }, 100);
+  };
+  let prices = document.getElementsByClassName("price");
+  var selectedValue;
+  function changeVariant(e) {
+    selectedValue = e.target.id;
+    for(let j = 0; j < prices.length; j++){
+      prices[j].style.display = "none";
+    }
+    let newPrice = document.getElementById("price" + selectedValue );
+    newPrice.style.display = "block";
+  };
+  let quantitySelector = document.querySelector("#quantitySelector");
+  function productQtyAdd() {
+    let value = quantitySelector.value;
+    value++;
+    quantitySelector.value = value;
+  };
+  function productQtyRemove() {
+    let value = quantitySelector.value;
+    if (value > 1) {
+      value--;
+      quantitySelector.value = value;
+    };
+  };
+  function changeVariantImage(variantId) {
+    mainImage.style.opacity = "0";
+    setTimeout(function () {
+      mainImage.src = document.querySelector("#variantImage-" + variantId).src;
+    }, 100);
+    setTimeout(function () {
+      mainImage.style.opacity = "1";
+    }, 100);
+  };
+</script>
+
+{% schema %}
+  {
+    "name": "Product head",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "bgGradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "range",
+        "id": "paddingTop",
+        "label": "Section's top margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 25
+      },
+      {
+        "type": "range",
+        "id": "paddingBottom",
+        "label": "Section's bottom margin",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 25
+      },
+      {
+        "type": "select",
+        "id": "sectionType",
+        "label": "Section type",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "container",
+            "label": "Container"
+          }
+        ],
+        "default": "container"
+      },
+      {
+        "type": "range",
+        "id": "containerWidth",
+        "label": "Container's width",
+        "unit": "px",
+        "min": 600,
+        "max": 1600,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "containerPadding",
+        "label": "Container's inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Container's border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "color",
+        "id": "containerBg",
+        "label": "Container's background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color_background",
+        "id": "containerBgGradient",
+        "label": "Container's background gradient"
+      },
+      {
+        "type": "header",
+        "content": "Product info"
+      },
+      {
+        "type": "paragraph",
+        "content": "Use blocks to arrange the order if items in the product info box and customize their respective settings."
+      },
+      {
+        "type": "color",
+        "id": "infoSectionBg",
+        "label": "Product info section background color",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "range",
+        "id": "infoSectionPadding",
+        "label": "Product info section inner padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "infoSectionBorderRadius",
+        "label": "Product info section border radius",
+        "unit": "px",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Title",
+        "type": "title",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product title"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "select",
+            "id": "fontFamily",
+            "label": "Font family",
+            "options": [
+              {
+                "value": "main",
+                "label": "Main font family"
+              },
+              {
+                "value": "second",
+                "label": "Secondary font family"
+              }
+            ],
+            "default": "second"
+          }
+        ]
+      },
+      {
+        "name": "Vendor",
+        "type": "vendor",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product vendor"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color",
+            "default": "#000000"
+          },
+          {
+            "type": "select",
+            "id": "fontFamily",
+            "label": "Font family",
+            "options": [
+              {
+                "value": "main",
+                "label": "Main font family"
+              },
+              {
+                "value": "second",
+                "label": "Secondary font family"
+              }
+            ],
+            "default": "second"
+          }
+        ]
+      },
+      {
+        "name": "Coffee infos",
+        "type": "coffeeInfos",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Coffee infos"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color",
+            "default": "#000000"
+          },
+          {
+            "type": "select",
+            "id": "fontFamily",
+            "label": "Font family",
+            "options": [
+              {
+                "value": "main",
+                "label": "Main font family"
+              },
+              {
+                "value": "second",
+                "label": "Secondary font family"
+              }
+            ],
+            "default": "main"
+          }
+        ]
+      },
+      {
+        "name": "Price",
+        "type": "price",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product price"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "select",
+            "id": "fontFamily",
+            "label": "Font family",
+            "options": [
+              {
+                "value": "main",
+                "label": "Main font family"
+              },
+              {
+                "value": "second",
+                "label": "Secondary font family"
+              }
+            ],
+            "default": "second"
+          },
+          {
+            "type": "checkbox",
+            "id": "bold",
+            "label": "Bold text",
+            "default": true
+          }
+        ]
+      },
+      {
+        "name": "Short description",
+        "type": "shortDescription",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Short description"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Text color",
+            "default": "#000000"
+          },
+          {
+            "type": "select",
+            "id": "fontFamily",
+            "label": "Font family",
+            "options": [
+              {
+                "value": "main",
+                "label": "Main font family"
+              },
+              {
+                "value": "second",
+                "label": "Secondary font family"
+              }
+            ],
+            "default": "main"
+          }
+        ]
+      },
+      {
+        "name": "Options",
+        "type": "options",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Product options"
+          },
+          {
+            "type": "select",
+            "id": "fontFamily",
+            "label": "Font family for options",
+            "options": [
+              {
+                "value": "main",
+                "label": "Main font family"
+              },
+              {
+                "value": "second",
+                "label": "Secondary font family"
+              }
+            ],
+            "default": "main"
+          },
+          {
+            "type": "paragraph",
+            "content": "Selected option"
+          },
+          {
+            "type": "color",
+            "id": "selectedBgColor",
+            "label": "Background color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "color",
+            "id": "selectedTextColor",
+            "label": "Text color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "selectedBorderColor",
+            "label": "Border's color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "range",
+            "id": "selectedBorderThickness",
+            "label": "Border's thickness",
+            "unit": "px",
+            "min": 0,
+            "max": 10,
+            "step": 0.5,
+            "default": 2
+          },
+          {
+            "type": "range",
+            "id": "selectedBorderRadius",
+            "label": "Border's radius",
+            "unit": "px",
+            "min": 0,
+            "max": 30,
+            "step": 0.5,
+            "default": 0
+          },
+          {
+            "type": "paragraph",
+            "content": "Unselected options"
+          },
+          {
+            "type": "color",
+            "id": "unselectedBgColor",
+            "label": "Background color"
+          },
+          {
+            "type": "color",
+            "id": "unselectedTextColor",
+            "label": "Text color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "color",
+            "id": "unselectedBorderColor",
+            "label": "Border's color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "range",
+            "id": "unselectedBorderThickness",
+            "label": "Border's thickness",
+            "unit": "px",
+            "min": 0,
+            "max": 10,
+            "step": 0.5,
+            "default": 2
+          },
+          {
+            "type": "range",
+            "id": "unselectedBorderRadius",
+            "label": "Border's radius",
+            "unit": "px",
+            "min": 0,
+            "max": 30,
+            "step": 0.5,
+            "default": 0
+          }
+        ]
+      },
+      {
+        "name": "Quantity",
+        "type": "quantity",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Quantity selector"
+          },
+          {
+            "type": "color",
+            "id": "bgColor",
+            "label": "Background color"
+          },
+          {
+            "type": "color",
+            "id": "textColor",
+            "label": "Text color",
+            "default": "#000000"
+          },
+          {
+            "type": "color",
+            "id": "borderColor",
+            "label": "Border's color",
+            "default": "#2d4036"
+          },
+          {
+            "type": "range",
+            "id": "borderThickness",
+            "label": "Border's thickness",
+            "unit": "px",
+            "min": 0,
+            "max": 10,
+            "step": 0.5,
+            "default": 2
+          },
+          {
+            "type": "range",
+            "id": "borderRadius",
+            "label": "Border's radius",
+            "unit": "px",
+            "min": 0,
+            "max": 30,
+            "step": 0.5,
+            "default": 0
+          }
+        ]
+      },
+      {
+        "name": "Button",
+        "type": "button",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Add to cart button"
+          },
+          {
+            "type": "select",
+            "id": "buttonStyle",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "1",
+                "label": "Style 1"
+              },
+              {
+                "value": "2",
+                "label": "Style 2"
+              }
+            ],
+            "default": "1"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "coffeeInfos"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "shortDescription"
+        },
+        {
+          "type": "options"
+        },
+        {
+          "type": "quantity"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  }
+{% endschema %}
