@@ -8,14 +8,23 @@
     {% for block in section.blocks %}
       {% case block.type %}
         {% when "head" %}
-          <div class="head" style="align-items: {% case block.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% endcase %} text-align: {% case block.settings.alignment %}{% when "left" %}left;{% when "center" %}center;{% when "right" %}right;{% endcase %}padding: {{ block.settings.containerPadding }}px; background-color:{{ block.settings.containerBg }}; border-radius: {{ block.settings.borderRadius }}px;">
-            <h1 style="color: {{ block.settings.titleColor }}">{{ collection.title }}</h1>
-            {% if collection.description != blank %}<p>{{ collection.description }}</p>{% endif %}
-            <style>
-              #cortadoCollection_container > .head * {
-                color: {{ block.settings.textColor }};
-              }
-            </style>
+          <style>
+            #cortadoCollection_container > .head {
+              align-items: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoCollection_container > .head > h1 {
+              color: {{ block.settings.titleColor }};
+            }
+            #cortadoCollection_container > .head > div * {
+              color: {{ block.settings.textColor }};
+            }
+          </style>
+          <div class="head">
+            <h1>{{ collection.title }}</h1>
+            {% if collection.description != blank %}<div>{{ collection.description }}</div>{% endif %}
           </div>
         {% when "filters" %}
           <style>
