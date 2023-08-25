@@ -198,11 +198,12 @@
               flex-direction: column;
               gap: 16px;
               align-items: center;
+              width: 100%;
             }
           </style>
           <div class="emptySearch">
             <h2>{{ 'general.search_empty' | t }}</h2>
-            <a href="{{ routes.root_url }}" title="{{ 'general.home' | t }}">{{ 'general.home' | t }}</a>
+            <a class="btn1" href="{{ routes.root_url }}" title="{{ 'general.home' | t }}">{{ 'general.home' | t }}</a>
           </div>
         {% endif %}
       {% endcase %}
