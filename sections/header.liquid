@@ -1,11 +1,11 @@
-{% assign set = section.settings %}
+{% assign set = set %}
 
 <!--HTML-->
 <section id="cortadoHeader">
   <div id="cortadoHeader_container">
     <div class="headerMenu">
       <nav class="desktop">
-        {% for link in section.settings.menu.links %}
+        {% for link in set.menu.links %}
           {% if link.links.size < 1 %}
             <a href="{{ link.url }}">{{ link.title }}</a>
           {% else %}
@@ -29,7 +29,7 @@
             </div>
           </div>
           <nav class="mobileMenuContainer">
-            {% for link in section.settings.menu.links %}
+            {% for link in set.menu.links %}
               {% if link.links.size < 1 %}
                 <div class="menuItem">
                   <a href="{{ link.url }}">{{ link.title }}</a>
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <a href="{{ routes.root_url }}"><img class="headerLogo" src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ 'Cortado_logo_white.svg' | asset_url }}{% endif %}" alt="{{ shop.name }} Logo"></a>
+    <a href="{{ routes.root_url }}"><img class="headerLogo" src="{% if set.logo != blank %}{{ set.logo | image_url }}{% else %}{{ 'Cortado_logo_white.svg' | asset_url }}{% endif %}" alt="{{ shop.name }} Logo"></a>
     <div class="headerIcons">
       {% for block in section.blocks %}
         {% case block.type %}
@@ -180,9 +180,9 @@
       gap: {{ set.gap | divided_by: 2 }}px;
     }
   }
-  {% case section.settings.stickyHeader %}
+  {% case set.stickyHeader %}
     {% when 'always' %}
-    {% if section.settings.stickyHeaderCompensation %}
+    {% if set.stickyHeaderCompensation %}
       header {
         position: sticky;
         top: 0;
@@ -198,15 +198,15 @@
       }
     {% endif %}
     #cortadoHeader.active {
-      {% if section.settings.stickyBgGradient != blank %}
-        background: {{ section.settings.stickyBgGradient }} !important;
+      {% if set.stickyBgGradient != blank %}
+        background: {{ set.stickyBgGradient }} !important;
       {% else %}
-        background-color: {{ section.settings.stickyBg }} !important;
+        background-color: {{ set.stickyBg }} !important;
       {% endif %}
     }
     {% when 'home' %}
     {% if template == "index" %}
-      {% if section.settings.stickyHeaderCompensation %}
+      {% if set.stickyHeaderCompensation %}
         header {
           position: sticky;
           top: 0;
@@ -222,17 +222,17 @@
         }
       {% endif %}
       #cortadoHeader.active {
-        background-color: {{ section.settings.stickyBg }} !important;
+        background-color: {{ set.stickyBg }} !important;
       }
     {% endif %}
   {% endcase %}
   #cortadoHeader_container {
     display: grid;
-    grid-template-columns: {% if section.settings.layout == "logoLeft" %}{{ section.settings.logoWidth }}px 1fr 150px{% else %}1fr {{ section.settings.logoWidth }}px 1fr{% endif %};
+    grid-template-columns: {% if set.layout == "logoLeft" %}{{ set.logoWidth }}px 1fr 150px{% else %}1fr {{ set.logoWidth }}px 1fr{% endif %};
     gap: {{ set.gap }}px;
   }
   .headerMenu {
-    {% if section.settings.layout == "logoLeft" %}
+    {% if set.layout == "logoLeft" %}
       grid-column: 2;
     {% endif %}
     grid-row: 1;
@@ -243,23 +243,23 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: {% if section.settings.layout == "logoLeft" %}
+    justify-content: {% if set.layout == "logoLeft" %}
       center{% else %}
       start{% endif %};
     gap: {{ set.gap }}px;
   }
   .headerMenu > .desktop > a,
   .headerMenu > .desktop > .dropDown > a {
-    color: {{ section.settings.textColor }}
+    color: {{ set.textColor }}
     ;
-    font-family: {% if section.settings.fontFamily == "main" %}
+    font-family: {% if set.fontFamily == "main" %}
       {{ settings.mainFontFamily }}
     {% else %}
       {{ settings.secondFontFamily }}
     {% endif %};
-    font-size: {{ section.settings.textSize }}
+    font-size: {{ set.textSize }}
     px;
-    {% if section.settings.capitalize %}
+    {% if set.capitalize %}
       text-transform: uppercase;
     {% endif %}
   }
@@ -301,11 +301,11 @@
   }
   #cortadoHeader_container > a {
     display: flex;
-    {% if section.settings.layout == "logoLeft" %}grid-column: 1;{% endif %}
+    {% if set.layout == "logoLeft" %}grid-column: 1;{% endif %}
     grid-row: 1;
   }
   #cortadoHeader_container > a > img.headerLogo {
-    width: {{ section.settings.logoWidth }}px;
+    width: {{ set.logoWidth }}px;
   }
   #cortadoHeader_container > a > img.headerLogo:hover {
     opacity: 0.75;
@@ -324,7 +324,7 @@
   }
   .headerIcons > div > i,
   .headerMenu > .mobile > i {
-    color: {{ section.settings.textColor }};
+    color: {{ set.textColor }};
     font-size: 20px;
     cursor: pointer;
   }
@@ -334,7 +334,7 @@
   }
   @media(max-width: 800px) {
     #cortadoHeader_container {
-      grid-template-columns: 1fr {{ section.settings.logoWidthMobile }}px 1fr;
+      grid-template-columns: 1fr {{ set.logoWidthMobile }}px 1fr;
       gap: {{ set.gap | divided_by: 2 }}px;
     }
     .headerMenu {
@@ -350,7 +350,7 @@
       grid-column: 2;
     }
     #cortadoHeader_container > a > img.headerLogo {
-      width: {{ section.settings.logoWidthMobile }}px;
+      width: {{ set.logoWidthMobile }}px;
     }
     .headerIcons {
       gap: {{ set.gap | divided_by: 2 }}px;
@@ -421,8 +421,8 @@
     top: -8px;
     right: -12px;
     border-radius: 20px;
-    background: {{ section.settings.textColor }};
-    color: {{ section.settings.containerBg }};
+    background: {{ set.textColor }};
+    color: {{ set.containerBg }};
     font-size: 12px;
     width: 16px;
     height: 16px;
@@ -506,7 +506,7 @@
     transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    background: {{ section.settings.mobileMenuBg }};
+    background: {{ set.mobileMenuBg }};
     z-index: 98;
   }
   #mobileMenu.active {
@@ -576,7 +576,7 @@
   .mobileMenuContainer > .menuItem > span {
     font-size: 28px;
     color: white;
-    font-family: {% if section.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+    font-family: {% if set.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
   }
   .mobileMenuContainer > .menuItem > .menuItemDropdown a {
     color: white;
@@ -642,7 +642,7 @@
     item.classList.toggle("active");
     icon.classList.toggle("active");
   };
-  {% case section.settings.stickyHeader %}
+  {% case set.stickyHeader %}
     {% when 'always' %}
       function stickyHeader() {
         if (window.scrollY < 150) {
