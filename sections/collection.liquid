@@ -1,8 +1,8 @@
 {% assign sort_by = collection.sort_by | default: "manual" %}
 {% assign set = section.settings %}
 
-{% if search.results_count %}
-  {% assign collection = search.results %}
+{% if template == 'search' %}
+  {{ search }}
 {% endif %}
 
 <!--HTML-->
