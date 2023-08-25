@@ -157,12 +157,6 @@
             {% endfor %}
           </div>
         {% when "products" %}
-          {% paginate collection.products by 24 %}
-          <div class="products">
-            {% for product in collection.products %}
-              {% include 'product-card' %}
-            {% endfor %}
-          </div>
           <style>
             #cortadoCollection_container > .foot {
               justify-content: {{ block.settings.alignment }};
@@ -182,6 +176,12 @@
               }
             }
           </style>
+          {% paginate collection.products by 24 %}
+          <div class="products">
+            {% for product in collection.products %}
+              {% include 'product-card' %}
+            {% endfor %}
+          </div>
           <div class="foot">
             {{ paginate | default_pagination }}
           </div>
