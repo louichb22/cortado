@@ -2,7 +2,7 @@
 {% assign set = section.settings %}
 
 {% if template == 'search' %}
-  {{ search }}
+  {% assign collection.products = search.results %}
 {% endif %}
 
 <!--HTML-->
@@ -161,12 +161,6 @@
             {% endfor %}
           </div>
         {% when "products" %}
-          {% paginate collection.products by 24 %}
-          <div class="products">
-            {% for product in collection.products %}
-              {% include 'product-card' %}
-            {% endfor %}
-          </div>
           <style>
             #cortadoCollection_container > .foot {
               justify-content: {{ block.settings.alignment }};
@@ -186,10 +180,29 @@
               }
             }
           </style>
-          <div class="foot">
-            {{ paginate | default_pagination }}
-          </div>
-          {% endpaginate %}
+          {% if template == 'search' %}
+            {% paginate search.results by 24 %}
+            <div class="products">
+              {% for product in search.results %}
+                {% include 'product-card' %}
+              {% endfor %}
+            </div>
+            <div class="foot">
+              {{ paginate | default_pagination }}
+            </div>
+            {% endpaginate %}
+          {% else %}
+            {% paginate collection.products by 24 %}
+            <div class="products">
+              {% for product in collection.products %}
+                {% include 'product-card' %}
+              {% endfor %}
+            </div>
+            <div class="foot">
+              {{ paginate | default_pagination }}
+            </div>
+            {% endpaginate %}
+          {% endif %}
       {% endcase %}
     {% endfor %}
   </div>
