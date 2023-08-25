@@ -161,12 +161,13 @@
   #cortadoCollection_container > .head {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: {{ set.gap }}px;
+    width: 100%;
   }
   #cortadoCollection_container > .products {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 25px;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 32px;
   }
   #cortadoCollection_container > .products.loading {
     opacity: 0.5;
@@ -176,7 +177,8 @@
   #cortadoCollection_container > .filters {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: {{ set.gap }}px;
+    width: 100%;
   }
   .sortBy {
     cursor: pointer;
@@ -219,7 +221,8 @@
   }
   #cortadoCollection_container > .foot {
     display: flex;
-    gap: 15px;
+    gap: {{ set.gap }}px;
+    width: 100%;
   }
   #cortadoCollection_container > .foot a:hover {
     opacity: 0.5;
