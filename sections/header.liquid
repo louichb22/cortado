@@ -178,11 +178,13 @@
       }
     {% endif %}
     #headerSection.active {
-      background-color: {% if section.settings.stickyBgGradient != blank %}
-        background: {{ section.settings.stickyBgGradient }};
+      {% if section.settings.stickyBgGradient != blank %}
+        background: {{ section.settings.stickyBgGradient }}
+         !important;
       {% else %}
-        background-color: {{ section.settings.stickyBg }};
-      {% endif %}  !important;
+        background-color: {{ section.settings.stickyBg }}
+         !important;
+      {% endif %}
     }
     {% when 'home' %}
     {% if template == "index" %}
@@ -210,9 +212,9 @@
   .header {
     display: grid;
     grid-template-columns: {% if section.settings.layout == "logoLeft" %}
-      {{ section.settings.logoWidth }}px 1fr 150px{% else %}
-      1fr{{ section.settings.logoWidth }}
-      px 1fr{% endif %};
+      {{ section.settings.logoWidth }}
+      px 1fr 150px{% else %}
+      1fr{{ section.settings.logoWidth }}px 1fr{% endif %};
     gap: 8px;
   }
   .headerMenu {
@@ -237,8 +239,10 @@
     color: {{ section.settings.textColor }}
     ;
     font-family: {% if section.settings.fontFamily == "main" %}
-      {{ settings.mainFontFamily }}{% else %}
-      {{ settings.secondFontFamily }}{% endif %};
+      {{ settings.mainFontFamily }}
+    {% else %}
+      {{ settings.secondFontFamily }}
+    {% endif %};
     font-size: {{ section.settings.textSize }}
     px;
     {% if section.settings.capitalize %}
@@ -557,8 +561,10 @@
     font-size: 28px;
     color: white;
     font-family: {% if section.settings.fontFamily == "main" %}
-      {{ settings.mainFontFamily }}{% else %}
-      {{ settings.secondFontFamily }}{% endif %};
+      {{ settings.mainFontFamily }}
+    {% else %}
+      {{ settings.secondFontFamily }}
+    {% endif %};
   }
   .mobileMenuContainer > .menuItem > .menuItemDropdown a {
     color: white;
@@ -643,18 +649,17 @@
           document.querySelector("#headerSection").classList.add("active");
         }
       }
-      addEventListener("scroll", (event) => stickyHeader());{% endif %}
-  {% endcase %}
+      addEventListener("scroll", (event) => stickyHeader());{% endif %}{% endcase %}
 </script>
 
 <script type="module">
   import { subscribeToCartSectionsUpdate } from '{{ "liquid-ajax-cart-v1.11.0.js" | asset_url }}'
   subscribeToCartSectionsUpdate( sections => {
-      document.querySelector(".cartItemNumber").classList.add('updated');
-      setTimeout(function () {
-        document.querySelector(".cartItemNumber").classList.remove('updated');
-      }, 200);
-    });</script>
+        document.querySelector(".cartItemNumber").classList.add('updated');
+        setTimeout(function () {
+          document.querySelector(".cartItemNumber").classList.remove('updated');
+        }, 300);
+      });</script>
 
 {% schema %}
   {
