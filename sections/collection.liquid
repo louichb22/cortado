@@ -18,10 +18,21 @@
             </style>
           </div>
         {% when "filters" %}
-          <div class="filters" style="justify-content: {% case block.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% when "spread" %}space-between;{% endcase %}padding: {{ block.settings.containerPadding }}px; background-color:{{ block.settings.containerBg }}; border-radius: {{ block.settings.borderRadius }}px;">
-            <span style="color: {{ block.settings.textColor }}">{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
+          <style>
+            #cortadoCollection_container > .filters {
+              justify-content: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoCollection_container > .filters span {
+              color: {{ block.settings.textColor }};
+            }
+          </style>
+          <div class="filters">
+            <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
             <div class="sortBy">
-              <span style="color: {{ block.settings.textColor }}">{{ 'collections.sort_by' | t }} : {% case sort_by %}
+              <span>{{ 'collections.sort_by' | t }} : {% case sort_by %}
                 {% when 'manual' %}{{ 'collections.sort_by_options.featured' | t }}
                 {% when'best-selling' %}{{ 'collections.best-selling' | t }}
                 {% when 'title-ascending' %}{{ 'collections.sort_by_options.alphabetically-a-z' | t }}
