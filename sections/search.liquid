@@ -181,9 +181,9 @@
               }
             }
           </style>
-          {% paginate collection.products by 24 %}
+          {% paginate search.results by 24 %}
           <div class="products">
-            {% for product in collection.products %}
+            {% for product in search.results %}
               {% include 'product-card' %}
             {% endfor %}
           </div>
