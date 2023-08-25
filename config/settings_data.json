@@ -114,7 +114,7 @@
           "fontFamily": "main",
           "capitalize": false,
           "logoWidth": 128,
-          "logoWidthMobile": 64,
+          "logoWidthMobile": 96,
           "stickyHeader": "home",
           "stickyBg": "#2d4036",
           "stickyBgGradient": "",
