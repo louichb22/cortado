@@ -355,6 +355,7 @@
       productContainer.classList.add('loading');
       let targetSaveur = saveur;
       event.target.classList.toggle('active');
+      event.target.parentElement.classList.toggle('active');
       setTimeout(() => {
         for (let i = 0; i < productCards.length; i++) {
           if (productCards[i].dataset.filters.includes(targetSaveur)) {
