@@ -35,6 +35,7 @@
             {% if collection.description != blank %}<div>{{ collection.description }}</div>{% endif %}
           </div>
         {% when "sort" %}
+        {% if search.results_count > 0 %}
           <style>
             #cortadoSearch_container > .sort {
               justify-content: {{ block.settings.alignment }};
@@ -53,7 +54,7 @@
             }
           </style>
           <div class="sort">
-            <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
+            <span>{{ 'collections.showing' | t }} {% if search.results_count < productNumber %}{{ search.results_count }}{% else %}24{% endif %} {{ 'collections.of' | t }} {{ search.results_count }} {{ 'collections.result' | t }}{% if search.results_count > 1 %}s{% endif %}</span>
             <div class="sortBy">
               <span>{{ 'collections.sort_by' | t }} : {% case sort_by %}
                 {% when 'manual' %}{{ 'collections.sort_by_options.featured' | t }}
@@ -73,7 +74,9 @@
               </div>
             </div>
           </div>
+          {% endif %}
         {% when "filters" %}
+        {% if search.results_count > 0 %}
           <style>
             #cortadoSearch_container > .filters {
               justify-content: {{ block.settings.alignment }};
@@ -156,7 +159,9 @@
               </div>
             {% endfor %}
           </div>
+          {% endif %}
         {% when "products" %}
+        {% if search.results_count > 0 %}
           <style>
             #cortadoSearch_container > .foot {
               justify-content: {{ block.settings.alignment }};
@@ -186,6 +191,20 @@
             {{ paginate | default_pagination }}
           </div>
           {% endpaginate %}
+        {% else %}
+          <style>
+            .emptySearch {
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+              align-items: center;
+            }
+          </style>
+          <div class="emptySearch">
+            <h2>{{ 'general.search_empty' | t }}</h2>
+            <a href="{{ routes.root_url }}" title="{{ 'general.home' | t }}">{{ 'general.home' | t }}</a>
+          </div>
+        {% endif %}
       {% endcase %}
     {% endfor %}
   </div>
