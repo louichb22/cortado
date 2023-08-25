@@ -108,7 +108,6 @@
           "textColor": "#ffffff",
           "fontFamily": "main",
           "capitalize": false,
-          "textSize": 18,
           "logoWidth": 128,
           "logoWidthMobile": 64,
           "stickyHeader": "home",
@@ -149,16 +148,6 @@
           "footer-2"
         ],
         "settings": {
-          "bg": "#f7f7f7",
-          "bgGradient": "",
-          "paddingTop": 25,
-          "paddingBottom": 25,
-          "sectionType": "container",
-          "containerWidth": 1400,
-          "containerPadding": 0,
-          "borderRadius": 0,
-          "containerBg": "#f7f7f7",
-          "containerBgGradient": "",
           "textColor": "#2d4036",
           "fontFamily": "main"
         }
