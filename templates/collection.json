@@ -54,7 +54,7 @@
         "maxWidth": 1400,
         "borderRadius": 0,
         "align": "start",
-        "gap": 16
+        "gap": 32
       }
     }
   },
