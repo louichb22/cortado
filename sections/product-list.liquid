@@ -68,12 +68,12 @@
     width: 100%;
   }
   @media (max-width: 1000px) {
-    .productList > .products {
+    #{{ id }}_container > .products {
       grid-template-columns: {% if block.settings.products.count == 1 %}100%{% else %}repeat(2,1fr){% endif %};
     }
   }
   @media (max-width: 800px) {
-    .productList > .products {
+    #{{ id }}_container > .products {
       grid-template-columns: 100%;
       gap: {{ set.gap | divided_by: 2 }}px;
     }
