@@ -276,9 +276,7 @@
   }
   .header > a {
     display: flex;
-    {% if section.settings.layout == "logoLeft" %}
-      grid-column: 1;
-    {% endif %}
+    {% if section.settings.layout == "logoLeft" %}grid-column: 1;{% endif %}
     grid-row: 1;
   }
   .header > a > img.headerLogo {
