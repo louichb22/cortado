@@ -611,18 +611,9 @@
     let icon = document.querySelector("#dropDownIcon-" + i);
     item.classList.toggle("active");
     icon.classList.toggle("active");
-  };{% case section.settings.stickyHeader %}
-  {% when 'always' %}
-    function stickyHeader() {
-      if (window.scrollY < 150) {
-        document.querySelector("#headerSection").classList.remove("active");
-      } else {
-        document.querySelector("#headerSection").classList.add("active");
-      }
-    }
-    addEventListener("scroll", (event) => stickyHeader());
-  {% when 'home' %}
-    {% if template == "index" %}
+  };
+  {% case section.settings.stickyHeader %}
+    {% when 'always' %}
       function stickyHeader() {
         if (window.scrollY < 150) {
           document.querySelector("#headerSection").classList.remove("active");
@@ -630,17 +621,30 @@
           document.querySelector("#headerSection").classList.add("active");
         }
       }
-      addEventListener("scroll", (event) => stickyHeader());{% endif %}{% endcase %}
+      addEventListener("scroll", (event) => stickyHeader());
+    {% when 'home' %}
+      {% if template == "index" %}
+        function stickyHeader() {
+          if (window.scrollY < 150) {
+            document.querySelector("#headerSection").classList.remove("active");
+          } else {
+            document.querySelector("#headerSection").classList.add("active");
+          }
+        }
+        addEventListener("scroll", (event) => stickyHeader());
+      {% endif %}
+  {% endcase %}
 </script>
 
 <script type="module">
   import { subscribeToCartSectionsUpdate } from '{{ "liquid-ajax-cart-v1.11.0.js" | asset_url }}'
   subscribeToCartSectionsUpdate( sections => {
-        document.querySelector(".cartItemNumber").classList.add('updated');
-        setTimeout(function () {
-          document.querySelector(".cartItemNumber").classList.remove('updated');
-        }, 300);
-      });</script>
+    document.querySelector(".cartItemNumber").classList.add('updated');
+    setTimeout(function () {
+      document.querySelector(".cartItemNumber").classList.remove('updated');
+    }, 300);
+  });
+</script>
 
 {% schema %}
   {
