@@ -1,7 +1,7 @@
 {
   "sections": {
-    "collection": {
-      "type": "collection",
+    "search": {
+      "type": "search",
       "blocks": {
         "aaa9c3da-ebd9-41c7-a48a-ed664965fba8": {
           "type": "head",
@@ -69,6 +69,6 @@
     }
   },
   "order": [
-    "collection"
+    "search"
   ]
 }
