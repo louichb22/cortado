@@ -5,13 +5,52 @@
 <section id="{{ id }}">
   <div id="{{ id }}_container">
     {% for block in section.blocks %}
+      {% if block.type == 'products' %}
+        <style>
+          #{{ id }}_{{ forloop.index0 }} {
+            {% if block.settings.gap %}margin-top: {{ set.gap }}px;{% endif %}
+            text-align: {{ set.align }};
+          }
+          {% if block.type == 'paragraph' %}
+          #{{ id }}_{{ forloop.index0 }} * {
+            color: {{ block.settings.color }};
+          }
+          {% endif %}
+          @media (max-width: 800px) {
+            #{{ id }}_{{ forloop.index0 }} {
+              {% if block.settings.gap %}margin-top: {{ set.gap | divided_by: 2 }}px;{% endif %}
+            }
+          }
+        </style>
+      {% else %}
+        <style>
+          #{{ id }}_{{ forloop.index0 }} {
+            display: grid;
+            grid-template-columns: repeat({% if block.settings.products == blank %}4{% else %}{% if block.settings.products.count <= 2 %}2{% else %}{{ block.settings.products.count }}{% endif %}{% endif %},1fr);
+            gap: {{ set.gap }}px;
+            width: 100%;
+          }
+          @media (max-width: 1000px) {
+            #{{ id }}_{{ forloop.index0 }} {
+              grid-template-columns: {% if block.settings.products.count == 1 %}100%{% else %}repeat(2,1fr){% endif %};
+            }
+          }
+          @media (max-width: 800px) {
+            #{{ id }}_{{ forloop.index0 }} {
+              grid-template-columns: 100%;
+              gap: {{ set.gap | divided_by: 2 }}px;
+            }
+          }
+        </style>
+      {% endif %}
       {% case block.type %}
-        {% when "title" %}<h2 style="color: {{ block.settings.color }}">{{ block.settings.text }}</h2>
-        {% when "subtitle" %}<h3 style="color: {{ block.settings.color }}">{{ block.settings.text }}</h3>
-        {% when "paragraph" %}<p style="color: {{ block.settings.color }}">{{ block.settings.text }}</p>
-        {% when "button" %}<a href="{{ block.settings.link }}" class="btn{{ block.settings.buttonStyle }}">{{ block.settings.text }}</a>
+        {% when 'h1' %}<h1 id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.title }}</h1>
+        {% when 'h2' %}<h2 id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.title }}</h2>
+        {% when 'h3' %}<h3 id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.title }}</h3>
+        {% when 'paragraph' %}<div id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.text }}</div>
+        {% when 'button' %}<a id="{{ id }}_{{ forloop.index0 }}" title="{{ block.settings.text }}" href="{{ block.settings.link }}" class="btn{{ block.settings.type }}">{{ block.settings.text }}</a>
         {% when "products" %}
-        <div class="products">
+        <div id="{{ id }}_{{ forloop.index0 }}">
           {% if block.settings.products == blank %}
             <img width="100%" src="{{ 'Cortado_empty.svg' | asset_url }}">
             <img width="100%" src="{{ 'Cortado_empty.svg' | asset_url }}">
@@ -59,27 +98,6 @@
       gap: {{ set.gap | divided_by: 2 }}px;
     }
   }
-  {% for block in section.blocks %}
-  {% if block.type == "products" %}
-  #{{ id }}_container > .products {
-    display: grid;
-    grid-template-columns: repeat({% if block.settings.products == blank %}4{% else %}{% if block.settings.products.count <= 2 %}2{% else %}{{ block.settings.products.count }}{% endif %}{% endif %},1fr);
-    gap: {{ set.gap }}px;
-    width: 100%;
-  }
-  @media (max-width: 1000px) {
-    #{{ id }}_container > .products {
-      grid-template-columns: {% if block.settings.products.count == 1 %}100%{% else %}repeat(2,1fr){% endif %};
-    }
-  }
-  @media (max-width: 800px) {
-    #{{ id }}_container > .products {
-      grid-template-columns: 100%;
-      gap: {{ set.gap | divided_by: 2 }}px;
-    }
-  }
-  {% endif %}
-  {% endfor %}
 </style>
 
 {% schema %}
