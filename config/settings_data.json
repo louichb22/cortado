@@ -16,6 +16,10 @@
     "btn1Padding": "1em 2em",
     "btn1Uppercase": false,
     "btn1Arrow": false,
+    "btn2Border": true,
+    "btn2BorderColor": "#6e6c6c",
+    "btn2BorderColorHover": "#6e6c6c",
+    "btn2BorderThickness": 2,
     "btn2Padding": "1em 2em",
     "btn3BgColorHover": "#28362f",
     "btn3BorderRadius": 8,
@@ -131,7 +135,8 @@
           "footer-1": {
             "type": "logo",
             "settings": {
-              "alignment": "center"
+              "alignment": "center",
+              "logoWidth": 128
             }
           },
           "footer-2": {
