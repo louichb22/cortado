@@ -103,6 +103,7 @@
           "type": true,
           "maxWidth": 1400,
           "borderRadius": 0,
+          "gap": 32,
           "layout": "logoCenter",
           "menu": "main-menu",
           "textColor": "#ffffff",
@@ -148,6 +149,17 @@
           "footer-2"
         ],
         "settings": {
+          "bg": "#f5f5f5",
+          "altBg": "",
+          "innerBg": "",
+          "innerAltBg": "",
+          "paddingTop": 32,
+          "paddingBottom": 32,
+          "innerPadding": 0,
+          "type": true,
+          "maxWidth": 1400,
+          "borderRadius": 0,
+          "gap": 32,
           "textColor": "#2d4036",
           "fontFamily": "main"
         }
