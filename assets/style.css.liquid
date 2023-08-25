@@ -76,14 +76,10 @@ i {
 
 /*-- Typography --*/
 
-:root {
-  --paragraphSize: clamp(16px 4vw 20px);
-}
-
 p, span, a, li, input, label, td, tr, textarea {
   font-family: {% if settings.textFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
   font-weight: {{ settings.textWeight }};
-  font-size: var(--paragraphSize);
+  font-size: clamp(16px 2vw 20px);
   line-height: 1.6;
   color: {{ settings.textColor }};
   max-width: 60ch;
