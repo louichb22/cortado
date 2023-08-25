@@ -250,7 +250,7 @@
     justify-content: {% if section.settings.layout == "logoLeft" %}
       center{% else %}
       start{% endif %};
-    gap: 36px;
+    gap: {{ set.gap }}px;
   }
   .headerMenu > .desktop > a,
   .headerMenu > .desktop > .dropDown > a {
