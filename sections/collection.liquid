@@ -2,7 +2,9 @@
 {% assign set = section.settings %}
 
 {% if template == 'search' %}
-  {% assign collection.products = search.results %}
+  {% assign targetProducts = search.results %}
+{% else %}
+  {% assign targetProducts = collection.products %}
 {% endif %}
 
 <!--HTML-->
@@ -57,7 +59,7 @@
             }
           </style>
           <div class="sort">
-            <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
+            <span>{{ 'collections.showing' | t }} {% if targetProducts.size < 24 %}{{ targetProducts.size }}{% else %}24{% endif %} {{ 'collections.of' | t }} {{ targetProducts.size }} {{ 'collections.result' | t }}{% if targetProducts.size > 1 %}s{% endif %}</span>
             <div class="sortBy">
               <span>{{ 'collections.sort_by' | t }} : {% case sort_by %}
                 {% when 'manual' %}{{ 'collections.sort_by_options.featured' | t }}
@@ -100,7 +102,7 @@
             {% for filter in filters %}
               <div class="filter">
                 <span>{{ 'collections.filter_by' | t }} {{ filter }}</span>
-                {% for product in collection.products %}
+                {% for product in targetProducts %}
                   {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
                   {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
                   {% if product.metafields.coffee.altitude %}{% if filter == 'Altitude' %}{% assign altitude = true %}{% endif %}{% endif %}
@@ -111,7 +113,7 @@
                   {% assign usingMetafields = true %}
                 {% endif %}
                 {% assign conditions = '' %}
-                {% for product in collection.products %}
+                {% for product in targetProducts %}
                   {% if usingMetafields %}
                     {% case filter %}
                       {% when 'Origin' %}
@@ -180,29 +182,16 @@
               }
             }
           </style>
-          {% if template == 'search' %}
-            {% paginate search.results by 24 %}
-            <div class="products">
-              {% for product in search.results %}
-                {% include 'product-card' %}
-              {% endfor %}
-            </div>
-            <div class="foot">
-              {{ paginate | default_pagination }}
-            </div>
-            {% endpaginate %}
-          {% else %}
-            {% paginate collection.products by 24 %}
-            <div class="products">
-              {% for product in collection.products %}
-                {% include 'product-card' %}
-              {% endfor %}
-            </div>
-            <div class="foot">
-              {{ paginate | default_pagination }}
-            </div>
-            {% endpaginate %}
-          {% endif %}
+          {% paginate targetProducts by 24 %}
+          <div class="products">
+            {% for product in targetProducts %}
+              {% include 'product-card' %}
+            {% endfor %}
+          </div>
+          <div class="foot">
+            {{ paginate | default_pagination }}
+          </div>
+          {% endpaginate %}
       {% endcase %}
     {% endfor %}
   </div>
