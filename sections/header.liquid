@@ -60,27 +60,27 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when "languageSelector" %}
-          {% assign selectorType = 2 %}
-          {% include "language-currency-selector" %}
+            {% assign selectorType = 2 %}
+            {% include "language-currency-selector" %}
           {% when "searchWidget" %}
-          <div class="searchWidget">
-            <i class="mi-search"></i>
-            <div class="searchWidgetPopup" style="border-radius: {{ block.settings.borderRadius }}px;">
-              <form
-                action="{{ routes.search_url }}"
-                method="get"
-                role="search">
-                <input
-                  autocomplete="off"
-                  type="text"
-                  name="q"
-                  placeholder="{{ block.settings.placeholder }}">
-                <button type="submit">
-                  <i class="mi-search"></i>
-                </button>
-              </form>
+            <div class="searchWidget">
+              <i class="mi-search"></i>
+              <div class="searchWidgetPopup" style="border-radius: {{ block.settings.borderRadius }}px;">
+                <form
+                  action="{{ routes.search_url }}"
+                  method="get"
+                  role="search">
+                  <input
+                    autocomplete="off"
+                    type="text"
+                    name="q"
+                    placeholder="{{ block.settings.placeholder }}">
+                  <button type="submit">
+                    <i class="mi-search"></i>
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
           {% when "cartWidget" %}
           <div class="cartWidget" data-ajax-cart-section>
             <i class="mi-shopping-cart">
@@ -404,8 +404,13 @@
   }
   .searchWidgetPopup > form > button > i,
   .searchWidgetPopup > form > input {
-    font-size: 14px;
     color: black;
+  }
+  .searchWidgetPopup > form > button > i {
+    cursor: pointer;
+  }
+  .searchWidgetPopup > form > button > i:hover {
+    opacity: 0.75;
   }
   .cartWidget > i {
     position: relative;
@@ -920,12 +925,14 @@
           {
             "type": "header",
             "content": "Search widget"
-          }, {
+          },
+          {
             "type": "text",
             "id": "placeholder",
             "label": "Search placeholder",
-            "default": "Trouvez ce que vous cherchez"
-          }, {
+            "default": "Find what you're looking for"
+          },
+          {
             "type": "range",
             "id": "borderRadius",
             "label": "Searchbar border radius",
@@ -936,7 +943,8 @@
             "unit": "px"
           }
         ]
-      }, {
+      },
+      {
         "name": "Cart widget",
         "type": "cartWidget",
         "limit": 1,
@@ -944,7 +952,8 @@
           {
             "type": "header",
             "content": "Cart widget"
-          }, {
+          },
+          {
             "type": "range",
             "id": "borderRadius",
             "label": "Cart widget border radius",
@@ -953,7 +962,8 @@
             "step": 4,
             "default": 0,
             "unit": "px"
-          }, {
+          },
+          {
             "type": "select",
             "id": "buttonStyle",
             "label": "Button style",
@@ -961,20 +971,31 @@
               {
                 "value": "1",
                 "label": "Style 1"
-              }, {
+              },
+              {
                 "value": "2",
                 "label": "Style 2"
+              },
+              {
+                "value": "3",
+                "label": "Style 3"
+              },
+              {
+                "value": "4",
+                "label": "Style 4"
               }
             ],
             "default": "1"
-          }, {
+          },
+          {
             "type": "color",
             "id": "itemNumberColor",
             "label": "Item number color",
             "default": "#000000"
           }
         ]
-      }, {
+      },
+      {
         "name": "Account widget",
         "type": "accountWidget",
         "limit": 1,
@@ -982,7 +1003,8 @@
           {
             "type": "header",
             "content": "Account widget"
-          }, {
+          },
+          {
             "type": "select",
             "id": "buttonStyle1",
             "label": "Button 1 style",
@@ -990,13 +1012,23 @@
               {
                 "value": "1",
                 "label": "Style 1"
-              }, {
+              },
+              {
                 "value": "2",
                 "label": "Style 2"
+              },
+              {
+                "value": "3",
+                "label": "Style 3"
+              },
+              {
+                "value": "4",
+                "label": "Style 4"
               }
             ],
             "default": "1"
-          }, {
+          },
+          {
             "type": "select",
             "id": "buttonStyle2",
             "label": "Button 2 style",
@@ -1004,15 +1036,25 @@
               {
                 "value": "1",
                 "label": "Style 1"
-              }, {
+              },
+              {
                 "value": "2",
                 "label": "Style 2"
+              },
+              {
+                "value": "3",
+                "label": "Style 3"
+              },
+              {
+                "value": "4",
+                "label": "Style 4"
               }
             ],
             "default": "2"
           }
         ]
-      }, {
+      },
+      {
         "name": "Language selector",
         "type": "languageSelector",
         "limit": 1,
