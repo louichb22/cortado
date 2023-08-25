@@ -208,7 +208,7 @@
   #cortadoCollection_container > .head {
     display: flex;
     flex-direction: column;
-    gap: {{ set.gap }}px;
+    gap: {{ set.gap | divided_by: 2 }}px;
     width: 100%;
   }
   #cortadoCollection_container > .products {
