@@ -27,12 +27,12 @@
         "e9edd13c-6db6-467c-a2f3-49f2e6881f60": {
           "type": "filters",
           "settings": {
-            "filters": "",
+            "filters": "Process",
             "textColor": "#000000",
             "containerPadding": 16,
             "borderRadius": 0,
             "containerBg": "#f7f7f7",
-            "alignment": "space-between"
+            "alignment": "start"
           }
         },
         "7564a465-36ed-4788-843c-9d235d9c25d2": {
