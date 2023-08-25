@@ -1,5 +1,22 @@
 {
   "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 16,
+        "paddingBottom": 16,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "align": "start",
+        "gap": 16
+      }
+    },
     "collection": {
       "type": "collection",
       "blocks": {
@@ -46,7 +63,7 @@
       "settings": {
         "bg": "#ffffff",
         "bgGradient": "",
-        "paddingTop": 25,
+        "paddingTop": 0,
         "paddingBottom": 75,
         "sectionType": "container",
         "containerWidth": 1400,
@@ -58,6 +75,7 @@
     }
   },
   "order": [
+    "breadcrumb",
     "collection"
   ]
 }
