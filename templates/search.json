@@ -1,1 +1,74 @@
-{"sections":{"breadcrumb":{"type":"breadcrumb","settings":{"bg":"#ffffff","paddingTop":15,"paddingBottom":15,"sectionType":"container","containerWidth":1400,"containerPadding":0,"borderRadius":0,"containerBg":"#ffffff"}},"search":{"type":"search","blocks":{"05c7dccd-769f-4038-9170-946d176d45dc":{"type":"head","settings":{"containerPadding":25,"borderRadius":0,"containerBg":"#2d4036","alignment":"center","titleColor":"#ffffff","textColor":"#ffffff"}},"375cfcca-e285-47c5-a856-b62401454460":{"type":"filters","settings":{"textColor":"#000000","containerPadding":25,"borderRadius":0,"containerBg":"#f7f7f7","alignment":"spread"}},"315290a1-9956-418d-a0ab-c3a08c0e04a4":{"type":"products","settings":{"productNumber":24,"textColor":"#000000","containerPadding":25,"borderRadius":0,"containerBg":"#f7f7f7","alignment":"center"}}},"block_order":["05c7dccd-769f-4038-9170-946d176d45dc","375cfcca-e285-47c5-a856-b62401454460","315290a1-9956-418d-a0ab-c3a08c0e04a4"],"settings":{"bg":"#ffffff","paddingTop":0,"paddingBottom":75,"sectionType":"container","containerWidth":1400,"containerPadding":0,"borderRadius":0,"containerBg":"#ffffff"}}},"order":["breadcrumb","search"]}
+{
+  "sections": {
+    "collection": {
+      "type": "collection",
+      "blocks": {
+        "aaa9c3da-ebd9-41c7-a48a-ed664965fba8": {
+          "type": "head",
+          "settings": {
+            "containerPadding": 32,
+            "borderRadius": 0,
+            "containerBg": "#2d4036",
+            "alignment": "center",
+            "titleColor": "#ffffff",
+            "textColor": "#ffffff"
+          }
+        },
+        "d9d0f2e9-92f6-42fa-a677-04c645affe2c": {
+          "type": "sort",
+          "settings": {
+            "textColor": "#000000",
+            "containerPadding": 16,
+            "borderRadius": 0,
+            "containerBg": "#f7f7f7",
+            "alignment": "space-between"
+          }
+        },
+        "e9edd13c-6db6-467c-a2f3-49f2e6881f60": {
+          "type": "filters",
+          "settings": {
+            "filters": "Process",
+            "textColor": "#000000",
+            "containerPadding": 16,
+            "borderRadius": 0,
+            "containerBg": "#f7f7f7",
+            "alignment": "start"
+          }
+        },
+        "7564a465-36ed-4788-843c-9d235d9c25d2": {
+          "type": "products",
+          "settings": {
+            "textColor": "#000000",
+            "containerPadding": 32,
+            "borderRadius": 0,
+            "containerBg": "#f7f7f7",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "aaa9c3da-ebd9-41c7-a48a-ed664965fba8",
+        "d9d0f2e9-92f6-42fa-a677-04c645affe2c",
+        "e9edd13c-6db6-467c-a2f3-49f2e6881f60",
+        "7564a465-36ed-4788-843c-9d235d9c25d2"
+      ],
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 32,
+        "paddingBottom": 32,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "align": "start",
+        "gap": 32
+      }
+    }
+  },
+  "order": [
+    "collection"
+  ]
+}
