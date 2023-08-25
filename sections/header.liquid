@@ -681,89 +681,90 @@
     "settings": [
       {
         "type": "header",
-        "content": "General settings"
+        "content": "Background"
       },
       {
         "type": "color",
         "id": "bg",
-        "label": "Background color",
-        "default": "#2D4036",
-        "info": "To make a transparent header, leave the field empty."
+        "label": "Background",
+        "default": "#ffffff"
       },
       {
-        "type": "color_background",
-        "id": "bgGradient",
-        "label": "Background gradient"
+        "type": "text",
+        "id": "altBg",
+        "label": "Alternative background"
+      },
+      {
+        "type": "color",
+        "id": "innerBg",
+        "label": "Inner background"
+      },
+      {
+        "type": "text",
+        "id": "innerAltBg",
+        "label": "Alternative inner background"
+      },
+      {
+        "type": "header",
+        "content": "Padding"
       },
       {
         "type": "range",
         "id": "paddingTop",
-        "label": "Section's top margin",
-        "unit": "px",
+        "label": "Top padding",
         "min": 0,
         "max": 128,
-        "step": 4,
-        "default": 16
-      }, {
+        "step": 8,
+        "default": 32
+      },
+      {
         "type": "range",
         "id": "paddingBottom",
-        "label": "Section's bottom margin",
-        "unit": "px",
+        "label": "Bottom padding",
         "min": 0,
         "max": 128,
-        "step": 4,
-        "default": 16
-      }, {
-        "type": "select",
-        "id": "sectionType",
-        "label": "Section type",
-        "options": [
-          {
-            "value": "full",
-            "label": "Full width"
-          }, {
-            "value": "container",
-            "label": "Container"
-          }
-        ],
-        "default": "container"
-      }, {
+        "step": 8,
+        "default": 32
+      },
+      {
         "type": "range",
-        "id": "containerWidth",
-        "label": "Container's width",
-        "unit": "px",
-        "min": 600,
-        "max": 1600,
-        "step": 50,
-        "default": 1400
-      }, {
-        "type": "range",
-        "id": "containerPadding",
-        "label": "Container's inner padding",
-        "unit": "px",
-        "min": 0,
-        "max": 128,
-        "step": 4,
-        "default": 0
-      }, {
-        "type": "range",
-        "id": "borderRadius",
-        "label": "Container's border radius",
-        "unit": "px",
+        "id": "innerPadding",
+        "label": "Inner padding",
         "min": 0,
         "max": 64,
-        "step": 4,
+        "step": 8,
         "default": 0
-      }, {
-        "type": "color",
-        "id": "containerBg",
-        "label": "Container's background color",
-        "info": "To make a transparent header, leave the field empty."
-      }, {
-        "type": "color_background",
-        "id": "containerBgGradient",
-        "label": "Container's background gradient"
-      }, {
+      },
+      {
+        "type": "header",
+        "content": "Container"
+      },
+      {
+        "type": "checkbox",
+        "id": "type",
+        "label": "Use container",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "maxWidth",
+        "label": "Max-width",
+        "unit": "px",
+        "min": 800,
+        "max": 1400,
+        "step": 50,
+        "default": 1400
+      },
+      {
+        "type": "range",
+        "id": "borderRadius",
+        "label": "Border radius",
+        "min": 0,
+        "max": 64,
+        "step": 8,
+        "default": 0
+      },
+      {
         "type": "header",
         "content": "Section settings"
       }, {
