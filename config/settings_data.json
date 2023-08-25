@@ -2,7 +2,6 @@
   "current": {
     "mainFontFamilyFile": "https:\/\/fonts.googleapis.com\/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap",
     "headersWeight": 700,
-    "textSize": 20,
     "btnFontFamily": "second",
     "btnFontWeight": 700,
     "btnTextSize": 17,
@@ -53,6 +52,7 @@
     "favicon32": "shopify:\/\/shop_images\/Cortado_favicon_favicon32.png",
     "favicon180": "shopify:\/\/shop_images\/Cortado_favicon_favicon180.png",
     "devOutline": false,
+    "textSize": 20,
     "sections": {
       "header": {
         "type": "header",
@@ -93,16 +93,16 @@
           "header-2"
         ],
         "settings": {
-          "bg": "#2d4036",
-          "bgGradient": "",
+          "bg": "rgba(0,0,0,0)",
+          "altBg": "",
+          "innerBg": "#2d4036",
+          "innerAltBg": "",
           "paddingTop": 16,
           "paddingBottom": 16,
-          "sectionType": "container",
-          "containerWidth": 1400,
-          "containerPadding": 0,
+          "innerPadding": 0,
+          "type": true,
+          "maxWidth": 1400,
           "borderRadius": 0,
-          "containerBg": "rgba(0,0,0,0)",
-          "containerBgGradient": "",
           "layout": "logoCenter",
           "menu": "main-menu",
           "textColor": "#ffffff",
@@ -111,10 +111,10 @@
           "textSize": 18,
           "logoWidth": 128,
           "logoWidthMobile": 68,
-          "stickyHeader": "home",
+          "stickyHeader": "no",
           "stickyBg": "#2d4036",
           "stickyBgGradient": "",
-          "stickyHeaderCompensation": true,
+          "stickyHeaderCompensation": false,
           "mobileMenuBg": "linear-gradient(180deg, rgba(33, 37, 34, 1), rgba(45, 64, 54, 1) 100%)"
         }
       },
