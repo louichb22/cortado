@@ -12,6 +12,7 @@
             grid-template-columns: repeat({% if block.settings.products == blank %}4{% else %}{% if block.settings.products.count <= 2 %}2{% else %}{{ block.settings.products.count }}{% endif %}{% endif %},1fr);
             gap: {{ set.gap }}px;
             width: 100%;
+            {% if block.settings.gap %}margin-top: {{ set.gap }}px;{% endif %}
           }
           @media (max-width: 1000px) {
             #{{ id }}_{{ forloop.index0 }} {
@@ -22,6 +23,7 @@
             #{{ id }}_{{ forloop.index0 }} {
               grid-template-columns: 100%;
               gap: {{ set.gap | divided_by: 2 }}px;
+              {% if block.settings.gap %}margin-top: {{ set.gap | divided_by: 2 }}px;{% endif %}
             }
           }
         </style>
@@ -384,6 +386,12 @@
         "name": "Products",
         "type": "products",
         "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap",
+            "default": true
+          },
           {
             "type": "header",
             "content": "Products block"
