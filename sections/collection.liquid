@@ -95,7 +95,7 @@
             {% assign filters = block.settings.filters | remove: ' ' | split: ',' %}
             {% for filter in filters %}
               <div class="filter">
-                <span style="font-weight: bold; text-transform: uppercase;">{{ 'collections.filter_by' | t }} {{ filter }}</span>
+                <span>{{ 'collections.filter_by' | t }} {{ filter }}</span>
                 {% for product in collection.products %}
                   {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
                   {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
@@ -325,10 +325,10 @@
     align-items: center;
     gap: {{ set.gap }}px;
   }
-  #cortadoCollection_container > .filters > .filter > span {
+  #cortadoCollection_container > .filters > .filter > span:not(:first-child) {
     cursor: pointer;
   }
-  #cortadoCollection_container > .filters > .filter > span:hover {
+  #cortadoCollection_container > .filters > .filter > span:hover:not(:first-child) {
     opacity: 0.75;
   }
   #cortadoCollection_container > .filters > .filter > span.active {
