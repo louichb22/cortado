@@ -99,7 +99,7 @@
             {% for filter in filters %}
               <div class="filter">
                 <span>{{ 'collections.filter_by' | t }} {{ filter }}</span>
-                {% for product in collection.products %}
+                {% for product in search.results %}
                   {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
                   {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
                   {% if product.metafields.coffee.altitude %}{% if filter == 'Altitude' %}{% assign altitude = true %}{% endif %}{% endif %}
@@ -110,7 +110,7 @@
                   {% assign usingMetafields = true %}
                 {% endif %}
                 {% assign conditions = '' %}
-                {% for product in collection.products %}
+                {% for product in search.results %}
                   {% if usingMetafields %}
                     {% case filter %}
                       {% when 'Origin' %}
