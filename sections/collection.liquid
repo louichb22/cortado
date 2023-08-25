@@ -182,9 +182,9 @@
               }
             }
           </style>
-          {% paginate targetProducts by 24 %}
+          {% paginate targetProducts.products by 24 %}
           <div class="products">
-            {% for product in targetProducts %}
+            {% for product in targetProducts.products %}
               {% include 'product-card' %}
             {% endfor %}
           </div>
