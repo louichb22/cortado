@@ -1,47 +1,191 @@
-{% for block in section.blocks %}{% if block.type == "products" %}{% assign productNumber = block.settings.productNumber %}{% endif %}{% endfor %}
+{% assign sort_by = collection.sort_by | default: "manual" %}
+{% assign set = section.settings %}
 
 <!--HTML-->
-<section style="background-color:{{ section.settings.bg }}; padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
-  <div class="collection" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+<section id="cortadoSearch">
+  <div id="cortadoSearch_container">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when "head" %}
-          <div class="head" style="align-items: {% case block.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% endcase %} text-align: {% case block.settings.alignment %}{% when "left" %}left;{% when "center" %}center;{% when "right" %}right;{% endcase %}padding: {{ block.settings.containerPadding }}px; background-color:{{ block.settings.containerBg }}; border-radius: {{ block.settings.borderRadius }}px;">
-            <h2 style="color: {{ block.settings.titleColor }}">{{ 'general.search' | t }} "{{ search.terms }}"</h2>
-            {% if collection.description != blank %}<p>{{ collection.description }}</p>{% endif %}
-            <style>
-              .collection > .head * {
-                color: {{ block.settings.textColor }};
+          <style>
+            #cortadoSearch_container > .head {
+              align-items: {{ block.settings.alignment }};
+              text-align: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoSearch_container > .head > h1 {
+              color: {{ block.settings.titleColor }};
+              text-align: {{ block.settings.alignment }};
+            }
+            #cortadoSearch_container > .head > div * {
+              color: {{ block.settings.textColor }};
+              text-align: {{ block.settings.alignment }};
+            }
+            @media (max-width: 800px) {
+              #cortadoSearch_container > .head {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
               }
-            </style>
+            }
+          </style>
+          <div class="head">
+            <h1>{{ 'general.search' | t }} "{{ search.terms }}"</h1>
+            {% if collection.description != blank %}<div>{{ collection.description }}</div>{% endif %}
+          </div>
+        {% when "sort" %}
+          <style>
+            #cortadoSearch_container > .sort {
+              justify-content: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoSearch_container > .sort span {
+              color: {{ block.settings.textColor }};
+            }
+            @media (max-width: 800px) {
+              #cortadoSearch_container > .sort {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              }
+            }
+          </style>
+          <div class="sort">
+            <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
+            <div class="sortBy">
+              <span>{{ 'collections.sort_by' | t }} : {% case sort_by %}
+                {% when 'manual' %}{{ 'collections.sort_by_options.featured' | t }}
+                {% when'best-selling' %}{{ 'collections.best-selling' | t }}
+                {% when 'title-ascending' %}{{ 'collections.sort_by_options.alphabetically-a-z' | t }}
+                {% when 'title-descending' %}{{ 'collections.sort_by_options.alphabetically-z-a' | t }}
+                {% when 'price-ascending' %}{{ 'collections.sort_by_options.price-low-to-high' | t }}
+                {% when 'price-descending' %}{{ 'collections.sort_by_options.price-high-to-low' | t }}
+                {% when 'created-descending' %}{{ 'collections.sort_by_options.date-new-to-old' | t }}
+                {% when 'created-ascending' %}{{ 'collections.sort_by_options.date-old-to-new' | t }}
+              {% endcase %}
+              </span>
+              <div>
+                {% for option in collection.sort_options %}
+                  <a href="{{ collection.url | sort_by: option.value }}">{{ option.name }}</a>
+                {% endfor %}
+              </div>
+            </div>
           </div>
         {% when "filters" %}
-          <div class="filters" style="justify-content: {% case block.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% when "spread" %}space-between;{% endcase %}padding: {{ block.settings.containerPadding }}px; background-color:{{ block.settings.containerBg }}; border-radius: {{ block.settings.borderRadius }}px;">
-            <span style="color: {{ block.settings.textColor }}">{{ 'collections.showing' | t }} {% if search.results_count < productNumber %}{{ search.results_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ search.results_count }} {{ 'collections.result' | t }}{% if search.results_count > 1 %}s{% endif %}</span>
+          <style>
+            #cortadoSearch_container > .filters {
+              justify-content: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoSearch_container > .filters span {
+              color: {{ block.settings.textColor }};
+            }
+            @media (max-width: 800px) {
+              #cortadoSearch_container > .filters {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              }
+            }
+          </style>
+          <div class="filters">
+            {% assign filters = block.settings.filters | remove: ' ' | split: ',' %}
+            {% for filter in filters %}
+              <div class="filter">
+                <span>{{ 'collections.filter_by' | t }} {{ filter }}</span>
+                {% for product in collection.products %}
+                  {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
+                  {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
+                  {% if product.metafields.coffee.altitude %}{% if filter == 'Altitude' %}{% assign altitude = true %}{% endif %}{% endif %}
+                  {% if product.metafields.coffee.roast %}{% if filter == 'Roast' %}{% assign roast = true %}{% endif %}{% endif %}
+                  {% if product.metafields.coffee.variety %}{% if filter == 'Variety' %}{% assign variety = true %}{% endif %}{% endif %}
+                {% endfor %}
+                {% if origin == true or process == true or altitude == true or roast == true or variety == true %}
+                  {% assign usingMetafields = true %}
+                {% endif %}
+                {% assign conditions = '' %}
+                {% for product in collection.products %}
+                  {% if usingMetafields %}
+                    {% case filter %}
+                      {% when 'Origin' %}
+                        {% assign targetMetafield = product.metafields.coffee.origin %}
+                      {% when 'Process' %}
+                        {% assign targetMetafield = product.metafields.coffee.process %}
+                      {% when 'Altitude' %}
+                        {% assign targetMetafield = product.metafields.coffee.altitude %}
+                      {% when 'Roast' %}
+                        {% assign targetMetafield = product.metafields.coffee.roast %}
+                      {% when 'Variety' %}
+                        {% assign targetMetafield = product.metafields.coffee.variety %}
+                    {% endcase %}
+                    {% if conditions == '' %}
+                      {% assign conditions = targetMetafield %}
+                    {% else %}
+                      {% assign conditions = conditions | append: ',' | append: targetMetafield %}
+                    {% endif %}
+                  {% else %}
+                    {% for option in product.options_with_values %}
+                      {% if option.name == filter %}
+                        {% for value in option.values %}
+                          {% unless conditions contains value %}
+                            {% if conditions == '' %}
+                              {% assign conditions = value %}
+                            {% else %}
+                              {% assign conditions = conditions | append: ',' | append: value %}
+                            {% endif %}
+                          {% endunless %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+                {% assign conditions = conditions | split: ',' %}
+                {% for condition in conditions %}
+                  <span class="item" onclick="filter('{{ condition | handleize }}')">{{ condition }}</span>
+                {% endfor %}
+                <style>
+                  {% for condition in conditions %}
+                    .filter_{{ condition | handleize }} {
+                      display: none;
+                    }
+                  {% endfor %}
+                </style>
+              </div>
+            {% endfor %}
           </div>
         {% when "products" %}
-        {% if search.results_count > 0 %}
-          {% paginate search.results by 24 %}
+          <style>
+            #cortadoSearch_container > .foot {
+              justify-content: {{ block.settings.alignment }};
+              text-align: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoSearch_container > .foot span, 
+            #cortadoSearch_container > .foot a {
+              color: {{ block.settings.textColor }};
+            }
+            @media (max-width: 800px) {
+              #cortadoSearch_container > .foot {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              }
+            }
+          </style>
+          {% paginate collection.products by 24 %}
           <div class="products">
-            {% for product in search.results %}
+            {% for product in collection.products %}
               {% include 'product-card' %}
             {% endfor %}
           </div>
-          <div class="foot" style="justify-content: {% case block.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% endcase %} text-align: {% case block.settings.alignment %}{% when "left" %}left;{% when "center" %}center;{% when "right" %}right;{% endcase %}padding: {{ block.settings.containerPadding }}px; background-color:{{ block.settings.containerBg }}; border-radius: {{ block.settings.borderRadius }}px;">
+          <div class="foot">
             {{ paginate | default_pagination }}
-            <style>
-              .collection > .foot span, 
-              .collection > .foot a {
-                color: {{ block.settings.textColor }};
-              }
-            </style>
           </div>
           {% endpaginate %}
-        {% else %}
-          <div class="noResults">
-            <h3>{{ 'general.search_empty' | t }}</h3>
-          </div>
-        {% endif %}
       {% endcase %}
     {% endfor %}
   </div>
@@ -49,25 +193,78 @@
 
 <!--CSS-->
 <style>
-  .collection {
+  #cortadoSearch {
+    background: {% if set.altBg != blank %}{{ set.altBg }}{% else %}{{ set.bg }}{% endif %};
+    padding-top: {{ set.paddingTop }}px;
+    padding-bottom: {{ set.paddingBottom }}px;
+  }
+  #cortadoSearch_container {
+    background: {% if set.innerAltBg != blank %}{{ set.innerAltBg }}{% else %}{{ set.innerBg }}{% endif %};
+    {% if set.type %}
+    max-width: {{ set.maxWidth }}px;
+    margin: 0 auto;
+    {% endif %}
+    border-radius: {{ set.borderRadius }}px;
+    overfow: hidden;
+    padding: {{ set.innerPadding }}px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    align-items: {{ set.align }};
+    gap: {{ set.gap }}px;
   }
-  .collection > .head {
+  @media (max-width: 800px) {
+    #cortadoSearch {
+      padding-top: {{ set.paddingTop | divided_by: 2 }}px;
+      padding-bottom: {{ set.paddingBottom | divided_by: 2 }}px;
+    }
+    #cortadoSearch_container {
+      border-radius: {{ set.borderRadius | divided_by: 2 }}px;
+      padding: {{ set.innerPadding | divided_by: 2 }}px;
+      gap: {{ set.gap | divided_by: 2 }}px;
+    }
+  }
+  #cortadoSearch_container > .head {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: {{ set.gap | divided_by: 2 }}px;
+    width: 100%;
   }
-  .collection > .products {
+  #cortadoSearch_container > .products {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 25px;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 32px;
   }
-  .collection > .filters {
+  @media (max-width: 1200px) {
+    #cortadoSearch_container > .products {
+      grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+  }
+  @media (max-width: 900px) {
+    #cortadoSearch_container > .products {
+      grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+  }
+  @media (max-width: 800px) {
+    #cortadoSearch_container > .products {
+      gap: 16px;
+    }
+  }
+  @media (max-width: 600px) {
+    #cortadoSearch_container > .products {
+      grid-template-columns: 100%;
+    }
+  }
+  #cortadoSearch_container > .products.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
+  #cortadoSearch_container > .sort, 
+  #cortadoSearch_container > .filters {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: {{ set.gap }}px;
+    width: 100%;
   }
   .sortBy {
     cursor: pointer;
@@ -108,31 +305,79 @@
   .sortBy > div > a:hover {
     background-color: #f0f0f0;
   }
-  .collection > .foot {
+  #cortadoSearch_container > .foot {
     display: flex;
-    gap: 15px;
+    gap: {{ set.gap }}px;
+    width: 100%;
   }
-  .collection > .foot a:hover {
+  #cortadoSearch_container > .foot a:hover {
     opacity: 0.5;
   }
-  .collection > .foot .current {
+  #cortadoSearch_container > .foot .current {
     font-weight: bold;
   }
-  @media (max-width: 1200px) {
-    .collection > .products {
-      grid-template-columns: repeat(3,1fr);
-    }
+   #cortadoSearch_container > .filters > .filter {
+    display: flex;
+    align-items: center;
+    gap: {{ set.gap | divided_by: 2 }}px;
+  }
+  #cortadoSearch_container > .filters > .filter > .item {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0.4em 0.8em;
+    background-color: white;
+  }
+  #cortadoSearch_container > .filters > .filter > .item:hover {
+    opacity: 0.75;
+  }
+  #cortadoSearch_container > .filters > .filter > .item.active {
+    font-weight: bold;
+  }
+  #cortadoSearch_container > .filters > .filter.active > .item:not(.active) {
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .productCardContainer.disabled {
+    display: none;
   }
   @media (max-width: 800px) {
-    .collection > .products {
-      grid-template-columns: repeat(2,1fr);
-    }
-    .collection > .filters {
+    #cortadoSearch_container > .filters, 
+    #cortadoSearch_container > .sort {
       flex-direction: column;
-      gap: 10px;
+      gap: 16px;
     }
   }
 </style>
+
+<!--JavaScript-->
+<script>
+  {% for block in section.blocks %}
+  {% if block.type == 'filters' %}
+    let productCards = document.querySelectorAll('.productCardContainer');
+    let productContainer = document.querySelector('#cortadoSearch_container > .products');
+    function filter(saveur) {
+      productContainer.classList.add('loading');
+      let targetSaveur = saveur;
+      event.target.classList.toggle('active');
+      event.target.parentElement.classList.toggle('active');
+      setTimeout(() => {
+        for (let i = 0; i < productCards.length; i++) {
+          if (productCards[i].dataset.filters.includes(targetSaveur)) {
+          } else {
+            if (productCards[i].classList.contains('filter_' + targetSaveur)) {
+              productCards[i].classList.remove('filter_' + targetSaveur);
+            } else {
+              productCards[i].classList.add('filter_' + targetSaveur);
+            }
+          }
+        }
+        productContainer.classList.remove('loading');
+      }, 150);
+    }
+  {% endif %}
+  {% endfor %}
+</script>
 
 {% schema %}
   {
@@ -140,101 +385,128 @@
     "settings": [
       {
         "type": "header",
-        "content": "General settings"
+        "content": "Background"
       },
       {
         "type": "color",
         "id": "bg",
-        "label": "Background color",
+        "label": "Background",
         "default": "#ffffff"
       },
       {
-        "type": "color_background",
-        "id": "bgGradient",
-        "label": "Background gradient"
+        "type": "text",
+        "id": "altBg",
+        "label": "Alternative background"
+      },
+      {
+        "type": "color",
+        "id": "innerBg",
+        "label": "Inner background"
+      },
+      {
+        "type": "text",
+        "id": "innerAltBg",
+        "label": "Alternative inner background"
+      },
+      {
+        "type": "header",
+        "content": "Padding"
       },
       {
         "type": "range",
         "id": "paddingTop",
-        "label": "Section's top margin",
-        "unit": "px",
+        "label": "Top padding",
         "min": 0,
-        "max": 100,
-        "step": 5,
-        "default": 0
+        "max": 128,
+        "step": 8,
+        "default": 32
       },
       {
         "type": "range",
         "id": "paddingBottom",
-        "label": "Section's bottom margin",
-        "unit": "px",
+        "label": "Bottom padding",
         "min": 0,
-        "max": 100,
-        "step": 5,
-        "default": 75
-      },
-      {
-        "type": "select",
-        "id": "sectionType",
-        "label": "Section type",
-        "options": [
-          {
-            "value": "full",
-            "label": "Full width"
-          },
-          {
-            "value": "container",
-            "label": "Container"
-          }
-        ],
-        "default": "container"
+        "max": 128,
+        "step": 8,
+        "default": 32
       },
       {
         "type": "range",
-        "id": "containerWidth",
-        "label": "Container's width",
+        "id": "innerPadding",
+        "label": "Inner padding",
+        "min": 0,
+        "max": 64,
+        "step": 8,
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Container"
+      },
+      {
+        "type": "checkbox",
+        "id": "type",
+        "label": "Use container",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "maxWidth",
+        "label": "Max-width",
         "unit": "px",
-        "min": 600,
-        "max": 1600,
+        "min": 800,
+        "max": 1400,
         "step": 50,
         "default": 1400
       },
       {
         "type": "range",
-        "id": "containerPadding",
-        "label": "Container's inner padding",
-        "unit": "px",
+        "id": "borderRadius",
+        "label": "Border radius",
         "min": 0,
-        "max": 100,
-        "step": 1,
+        "max": 64,
+        "step": 8,
         "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Alignement"
+      },
+      {
+        "type": "radio",
+        "id": "align",
+        "label": "Alignment",
+        "options": [
+          {
+            "label": "Right",
+            "value": "start"
+          },
+          {
+            "label": "Center",
+            "value": "center"
+          },
+          {
+            "label": "Left",
+            "value": "end"
+          }
+        ],
+        "default": "start"
       },
       {
         "type": "range",
-        "id": "borderRadius",
-        "label": "Container's border radius",
-        "unit": "px",
+        "id": "gap",
+        "label": "Gap",
         "min": 0,
-        "max": 30,
-        "step": 1,
-        "default": 0
-      },
-      {
-        "type": "color",
-        "id": "containerBg",
-        "label": "Container's background color",
-        "default": "#ffffff"
-      },
-      {
-        "type": "color_background",
-        "id": "containerBgGradient",
-        "label": "Container's background gradient"
+        "max": 64,
+        "step": 4,
+        "default": 32
       }
     ],
     "blocks": [
       {
         "name": "Head",
         "type": "head",
+        "limit": 1,
         "settings": [
           {
             "type": "header",
@@ -244,20 +516,18 @@
             "type": "range",
             "id": "containerPadding",
             "label": "Container's inner padding",
-            "unit": "px",
             "min": 0,
-            "max": 100,
-            "step": 1,
-            "default": 25
+            "max": 64,
+            "step": 4,
+            "default": 32
           },
           {
             "type": "range",
             "id": "borderRadius",
             "label": "Container's border radius",
-            "unit": "px",
             "min": 0,
-            "max": 30,
-            "step": 1,
+            "max": 64,
+            "step": 4,
             "default": 0
           },
           {
@@ -272,7 +542,7 @@
             "label": "Content alignment",
             "options": [
               {
-                "value": "left",
+                "value": "start",
                 "label": "Left"
               },
               {
@@ -280,7 +550,7 @@
                 "label": "Center"
               },
               {
-                "value": "right",
+                "value": "end",
                 "label": "Right"
               }
             ],
@@ -301,12 +571,13 @@
         ]
       },
       {
-        "name": "Filters",
-        "type": "filters",
+        "name": "Sort by",
+        "type": "sort",
+        "limit": 1,
         "settings": [
           {
             "type": "header",
-            "content": "Filters block"
+            "content": "Sort block"
           },
           {
             "type": "color",
@@ -318,20 +589,18 @@
             "type": "range",
             "id": "containerPadding",
             "label": "Container's inner padding",
-            "unit": "px",
             "min": 0,
-            "max": 100,
-            "step": 1,
-            "default": 25
+            "max": 64,
+            "step": 4,
+            "default": 16
           },
           {
             "type": "range",
             "id": "borderRadius",
             "label": "Container's border radius",
-            "unit": "px",
             "min": 0,
-            "max": 30,
-            "step": 1,
+            "max": 64,
+            "step": 4,
             "default": 0
           },
           {
@@ -346,7 +615,7 @@
             "label": "Content alignment",
             "options": [
               {
-                "value": "left",
+                "value": "start",
                 "label": "Left"
               },
               {
@@ -354,15 +623,90 @@
                 "label": "Center"
               },
               {
-                "value": "right",
+                "value": "end",
                 "label": "Right"
               },
               {
-                "value": "spread",
+                "value": "space-between",
                 "label": "Spread"
               }
             ],
-            "default": "spread"
+            "default": "space-between"
+          }
+        ]
+      },
+      {
+        "name": "Filters",
+        "type": "filters",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Filters block"
+          },
+          {
+            "type": "header",
+            "content": "Custom filters"
+          },
+          {
+            "type": "text",
+            "id": "filters",
+            "label": "Custom filters",
+            "info": "Enter the filters you want to use seperated by a comma."
+          },
+          {
+            "type": "color",
+            "id": "textColor",
+            "label": "Text color",
+            "default": "#000000"
+          },
+          {
+            "type": "range",
+            "id": "containerPadding",
+            "label": "Container's inner padding",
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "default": 16
+          },
+          {
+            "type": "range",
+            "id": "borderRadius",
+            "label": "Container's border radius",
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "default": 0
+          },
+          {
+            "type": "color",
+            "id": "containerBg",
+            "label": "Container's background color",
+            "default": "#f7f7f7"
+          },
+          {
+            "type": "select",
+            "id": "alignment",
+            "label": "Content alignment",
+            "options": [
+              {
+                "value": "start",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "end",
+                "label": "Right"
+              },
+              {
+                "value": "space-between",
+                "label": "Spread"
+              }
+            ],
+            "default": "start"
           }
         ]
       },
@@ -374,15 +718,6 @@
           {
             "type": "header",
             "content": "Products block"
-          },
-          {
-            "type": "range",
-            "id": "productNumber",
-            "label": "Number of products per page",
-            "step": 1,
-            "min": 6,
-            "max": 48,
-            "default": 24
           },
           {
             "type": "header",
@@ -398,20 +733,18 @@
             "type": "range",
             "id": "containerPadding",
             "label": "Container's inner padding",
-            "unit": "px",
             "min": 0,
-            "max": 100,
-            "step": 1,
-            "default": 25
+            "max": 64,
+            "step": 4,
+            "default": 32
           },
           {
             "type": "range",
             "id": "borderRadius",
             "label": "Container's border radius",
-            "unit": "px",
             "min": 0,
-            "max": 30,
-            "step": 1,
+            "max": 64,
+            "step": 4,
             "default": 0
           },
           {
@@ -426,7 +759,7 @@
             "label": "Content alignment",
             "options": [
               {
-                "value": "left",
+                "value": "start",
                 "label": "Left"
               },
               {
@@ -434,7 +767,7 @@
                 "label": "Center"
               },
               {
-                "value": "right",
+                "value": "end",
                 "label": "Right"
               }
             ],
@@ -447,6 +780,9 @@
       "blocks": [
         {
           "type": "head"
+        },
+        {
+          "type": "sort"
         },
         {
           "type": "filters"
