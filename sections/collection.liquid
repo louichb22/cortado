@@ -53,7 +53,7 @@
             }
           </style>
           <div class="sort">
-            <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
+            <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < 24 %}{{ collection.all_products_count }}{% else %}24{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
             <div class="sortBy">
               <span>{{ 'collections.sort_by' | t }} : {% case sort_by %}
                 {% when 'manual' %}{{ 'collections.sort_by_options.featured' | t }}
