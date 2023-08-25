@@ -14,18 +14,6 @@
             "textColor": "#ffffff"
           }
         },
-        "375cfcca-e285-47c5-a856-b62401454460": {
-          "type": "filters",
-          "settings": {
-            "textColor": "#000000",
-            "containerPadding": 20,
-            "borderRadius": 0,
-            "containerBg": "#f7f7f7",
-            "alignment": "space-between",
-            "customFilters": true,
-            "filters": "Process"
-          }
-        },
         "315290a1-9956-418d-a0ab-c3a08c0e04a4": {
           "type": "products",
           "settings": {
@@ -39,7 +27,6 @@
       },
       "block_order": [
         "05c7dccd-769f-4038-9170-946d176d45dc",
-        "375cfcca-e285-47c5-a856-b62401454460",
         "315290a1-9956-418d-a0ab-c3a08c0e04a4"
       ],
       "settings": {
