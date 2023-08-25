@@ -223,75 +223,124 @@
     ],
     "blocks": [
       {
-        "name": "Title",
-        "type": "title",
+        "type": "h1",
+        "name": "H1",
+        "limit": 1,
         "settings": [
           {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
             "type": "header",
-            "content": "Title block"
+            "content": "First level title",
+            "info": "The H1 generaly is the title of the page. Please use it once on each page."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Content",
+            "default": "First level title"
           },
           {
             "type": "color",
             "id": "color",
-            "label": "Color",
-            "default": "#2d4036"
-          },
-          {
-            "type": "text",
-            "id": "text",
-            "label": "Text",
-            "default": "Title"
+            "label": "Color"
           }
         ]
       },
       {
-        "name": "Sub-title",
-        "type": "subtitle",
+        "type": "h2",
+        "name": "H2",
         "settings": [
           {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
             "type": "header",
-            "content": "Sub-title block"
+            "content": "Second level title",
+            "info": "The H2 generaly is for section titles. Please use it once in each section."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Content",
+            "default": "Second level title"
           },
           {
             "type": "color",
             "id": "color",
-            "label": "Color",
-            "default": "#2d4036"
-          },
-          {
-            "type": "text",
-            "id": "text",
-            "label": "Text",
-            "default": "Sub-title"
+            "label": "Color"
           }
         ]
       },
       {
-        "name": "Paragraph",
+        "type": "h3",
+        "name": "H3",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
+            "type": "header",
+            "content": "Third level title",
+            "info": "H3s generaly are sub-titles within sections."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Content",
+            "default": "Third level title"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
+        "name": "Paragraph",
         "settings": [
           {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap"
+          },
+          {
             "type": "header",
-            "content": "Paragraph block"
+            "content": "Paragraph block",
+            "info": "The paragraph block is limited to 75 characters per line for better readability"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Content",
+            "default": "<p>This is a paragraph where you can <b>style</b> elements at your desire.</p>"
           },
           {
             "type": "color",
             "id": "color",
-            "label": "Color",
-            "default": "#2d4036"
-          },
-          {
-            "type": "textarea",
-            "id": "text",
-            "label": "Text",
-            "default": "Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            "label": "Color"
           }
         ]
       },
       {
-        "name": "Button",
         "type": "button",
+        "name": "Button",
         "settings": [
+          {
+            "type": "checkbox",
+            "id": "gap",
+            "label": "Double top gap",
+            "default": true
+          },
           {
             "type": "header",
             "content": "Button block"
@@ -299,26 +348,30 @@
           {
             "type": "text",
             "id": "text",
-            "label": "Button text",
-            "default": "Button"
+            "label": "Text",
+            "default": "Call to action"
           },
           {
             "type": "url",
             "id": "link",
-            "label": "Button link"
+            "label": "Url"
           },
           {
-            "type": "select",
-            "id": "buttonStyle",
+            "type": "radio",
+            "id": "type",
             "label": "Button style",
             "options": [
               {
-                "value": "1",
-                "label": "Style 1"
+                "value": "1"
               },
               {
-                "value": "2",
-                "label": "Style 2"
+                "value": "2"
+              },
+              {
+                "value": "3"
+              },
+              {
+                "value": "4"
               }
             ],
             "default": "1"
@@ -347,7 +400,7 @@
         "name": "Product list",
         "blocks": [
           {
-            "type": "title"
+            "type": "h2"
           },
           {
             "type": "paragraph"
