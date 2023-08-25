@@ -1,29 +1,12 @@
 {
   "sections": {
-    "breadcrumb": {
-      "type": "breadcrumb",
-      "settings": {
-        "bg": "#ffffff",
-        "altBg": "",
-        "innerBg": "",
-        "innerAltBg": "",
-        "paddingTop": 16,
-        "paddingBottom": 16,
-        "innerPadding": 0,
-        "type": true,
-        "maxWidth": 1400,
-        "borderRadius": 0,
-        "align": "start",
-        "gap": 16
-      }
-    },
     "collection": {
       "type": "collection",
       "blocks": {
         "05c7dccd-769f-4038-9170-946d176d45dc": {
           "type": "head",
           "settings": {
-            "containerPadding": 25,
+            "containerPadding": 20,
             "borderRadius": 0,
             "containerBg": "#2d4036",
             "alignment": "center",
@@ -35,7 +18,7 @@
           "type": "filters",
           "settings": {
             "textColor": "#000000",
-            "containerPadding": 25,
+            "containerPadding": 20,
             "borderRadius": 0,
             "containerBg": "#f7f7f7",
             "alignment": "spread",
@@ -46,9 +29,8 @@
         "315290a1-9956-418d-a0ab-c3a08c0e04a4": {
           "type": "products",
           "settings": {
-            "productNumber": 24,
             "textColor": "#000000",
-            "containerPadding": 25,
+            "containerPadding": 20,
             "borderRadius": 0,
             "containerBg": "#f7f7f7",
             "alignment": "center"
@@ -62,20 +44,21 @@
       ],
       "settings": {
         "bg": "#ffffff",
-        "bgGradient": "",
-        "paddingTop": 0,
-        "paddingBottom": 75,
-        "sectionType": "container",
-        "containerWidth": 1400,
-        "containerPadding": 0,
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 32,
+        "paddingBottom": 32,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
         "borderRadius": 0,
-        "containerBg": "#ffffff",
-        "containerBgGradient": ""
+        "align": "start",
+        "gap": 16
       }
     }
   },
   "order": [
-    "breadcrumb",
     "collection"
   ]
 }
