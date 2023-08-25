@@ -339,6 +339,7 @@
   @media(max-width: 800px) {
     #cortadoHeader_container {
       grid-template-columns: 1fr {{ section.settings.logoWidthMobile }}px 1fr;
+      gap: {{ set.gap | divided_by: 2 }}px;
     }
     .headerMenu {
       grid-column: 1;
@@ -356,7 +357,7 @@
       width: {{ section.settings.logoWidthMobile }}px;
     }
     .headerIcons {
-      gap: 16px;
+      gap: {{ set.gap | divided_by: 2 }}px;
     }
     .headerIcons > .localizationSelector1 {
       display: none;
