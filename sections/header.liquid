@@ -233,7 +233,7 @@
   #cortadoHeader_container {
     display: grid;
     grid-template-columns: {% if section.settings.layout == "logoLeft" %}{{ section.settings.logoWidth }}px 1fr 150px{% else %}1fr {{ section.settings.logoWidth }}px 1fr{% endif %};
-    gap: 8px;
+    gap: {{ set.gap }}px;
   }
   .headerMenu {
     {% if section.settings.layout == "logoLeft" %}
