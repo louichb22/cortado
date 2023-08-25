@@ -333,6 +333,10 @@
   #cortadoCollection_container > .filters > .filter > .item.active {
     font-weight: bold;
   }
+  #cortadoCollection_container > .filters > .filter.active > .item:not(.active) {
+    user-select: none;
+    pointer-events: none;
+  }
   .productCardContainer.disabled {
     display: none;
   }
