@@ -68,7 +68,7 @@
               {% endcase %}
               </span>
               <div>
-                {% for option in collection.sort_options %}
+                {% for option in search.sort_options %}
                   <a href="{{ collection.url | sort_by: option.value }}">{{ option.name }}</a>
                 {% endfor %}
               </div>
