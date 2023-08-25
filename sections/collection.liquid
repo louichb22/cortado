@@ -4,7 +4,7 @@
 {% if template == 'search' %}
   {% assign targetProducts = search.results %}
 {% else %}
-  {% assign targetProducts = collection %}
+  {% assign targetProducts = collection.products %}
 {% endif %}
 
 <!--HTML-->
