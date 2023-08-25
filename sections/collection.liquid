@@ -328,7 +328,7 @@
   {% if block.type == 'filters' %}
   {% if block.settings.customFilters %}
     let productCards = document.querySelectorAll('.productCardContainer');
-    let productContainer = document.querySelector('.collection > .products');
+    let productContainer = document.querySelector('#cortadoCollection_container > .products');
     function filter(saveur) {
       productContainer.classList.add('loading');
       let targetSaveur = saveur;
