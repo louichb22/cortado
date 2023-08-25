@@ -1,3 +1,9 @@
+{% assign set = section.settings %}
+
+<!--HTML-->
+<section id="cortadoFooter">
+  <div id="cortadoFooter_container">
+
 <!--HTML-->
 <section style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
   <div class="footer" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
@@ -21,62 +27,62 @@
     {% endfor %}
   </div>
 </section>
-<section class="bottomFooter">
+<section id="cortadoBottomFooter">
   <span>© {{ "now" | date: "%Y" }} <a href="{{ routes.root_url }}">{{ shop.name }}</a>. {{ "general.copyright_text" | t }}.</span>
 </section>
 
 <!--CSS-->
 <style>
-  .footer {
+  #cortadoFooter_container {
     display: grid;
     grid-template-columns: repeat({{ section.blocks.size }},1fr);
     gap: 25px;
   }
-  .footer > div {
+  #cortadoFooter_container > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .footer > .menu {
+  #cortadoFooter_container > .menu {
     gap: 10px;
   }
-  .footer > .menu > a {
+  #cortadoFooter_container > .menu > a {
     font-family: {% if section.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
     color: {{ section.settings.textColor }};
   }
-  .footer > .menu > a:hover {
+  #cortadoFooter_container > .menu > a:hover {
     opacity: 0.5;
   }
-  .bottomFooter {
+  #cortadoBottomFooter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 25px;
     background-color: white;
   }
-  .bottomFooter * {
+  #cortadoBottomFooter * {
     font-size: 14px;
   }
-  .bottomFooter > span > a {
+  #cortadoBottomFooter > span > a {
     font-weight: bold;
   }
-  .bottomFooter > span > a:hover {
+  #cortadoBottomFooter > span > a:hover {
     opacity: 0.5;
   }
   @media (max-width: 800px) {
-    .footer {
+    #cortadoFooter_container {
       grid-template-columns: 100%;
     }
-    .footer > div {
+    #cortadoFooter_container > div {
       align-items: center !important;
     }
-    .bottomFooter {
+    #cortadoBottomFooter {
       flex-direction: column;
       gap: 10px;
       align-items: start;
     }
-    .bottomFooter > span, 
-    .bottomFooter > span > a {
+    #cortadoBottomFooter > span, 
+    #cortadoBottomFooter > span > a {
       font-size: 10px;
     }
   }
