@@ -25,9 +25,9 @@
   <body>
     <!--Body-->
     {% section "header" %}
-    <div id="mainContent">
+    <main>
         {{ content_for_layout }}
-    </div>
+    </main>
     {% section "footer" %}
     <style>
       {% unless request.design_mode %}
