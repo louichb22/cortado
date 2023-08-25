@@ -34,25 +34,25 @@
             <h1>{{ collection.title }}</h1>
             {% if collection.description != blank %}<div>{{ collection.description }}</div>{% endif %}
           </div>
-        {% when "filters" %}
+        {% when "sort" %}
           <style>
-            #cortadoCollection_container > .filters {
+            #cortadoCollection_container > .sort {
               justify-content: {{ block.settings.alignment }};
               padding: {{ block.settings.containerPadding }}px;
               background-color:{{ block.settings.containerBg }};
               border-radius: {{ block.settings.borderRadius }}px;
             }
-            #cortadoCollection_container > .filters span {
+            #cortadoCollection_container > .sort span {
               color: {{ block.settings.textColor }};
             }
             @media (max-width: 800px) {
-              #cortadoCollection_container > .filters {
+              #cortadoCollection_container > .sort {
                 padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
                 border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
               }
             }
           </style>
-          <div class="filters">
+          <div class="sort">
             <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
             <div class="sortBy">
               <span>{{ 'collections.sort_by' | t }} : {% case sort_by %}
@@ -73,71 +73,70 @@
               </div>
             </div>
           </div>
-          {% if block.settings.customFilters %}
-            {% assign filters = block.settings.filters | remove: ' ' | split: ',' %}
-            {% for filter in filters %}
-              <div class="filter">
-                <span>{{ filter }}</span>
-                {% for product in collection.products %}
-                  {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
-                  {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
-                  {% if product.metafields.coffee.altitude %}{% if filter == 'Altitude' %}{% assign altitude = true %}{% endif %}{% endif %}
-                  {% if product.metafields.coffee.roast %}{% if filter == 'Roast' %}{% assign roast = true %}{% endif %}{% endif %}
-                  {% if product.metafields.coffee.variety %}{% if filter == 'Variety' %}{% assign variety = true %}{% endif %}{% endif %}
-                {% endfor %}
-                {% if origin == true or process == true or altitude == true or roast == true or variety == true %}
-                  {% assign usingMetafields = true %}
-                {% endif %}
-                {% assign conditions = '' %}
-                {% for product in collection.products %}
-                  {% if usingMetafields %}
-                    {% case filter %}
-                      {% when 'Origin' %}
-                        {% assign targetMetafield = product.metafields.coffee.origin %}
-                      {% when 'Process' %}
-                        {% assign targetMetafield = product.metafields.coffee.process %}
-                      {% when 'Altitude' %}
-                        {% assign targetMetafield = product.metafields.coffee.altitude %}
-                      {% when 'Roast' %}
-                        {% assign targetMetafield = product.metafields.coffee.roast %}
-                      {% when 'Variety' %}
-                        {% assign targetMetafield = product.metafields.coffee.variety %}
-                    {% endcase %}
-                    {% if conditions == '' %}
-                      {% assign conditions = targetMetafield %}
-                    {% else %}
-                      {% assign conditions = conditions | append: ',' | append: targetMetafield %}
-                    {% endif %}
+        {% when "filters" %}
+          {% assign filters = block.settings.filters | remove: ' ' | split: ',' %}
+          {% for filter in filters %}
+            <div class="filter">
+              <span>{{ filter }}</span>
+              {% for product in collection.products %}
+                {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
+                {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
+                {% if product.metafields.coffee.altitude %}{% if filter == 'Altitude' %}{% assign altitude = true %}{% endif %}{% endif %}
+                {% if product.metafields.coffee.roast %}{% if filter == 'Roast' %}{% assign roast = true %}{% endif %}{% endif %}
+                {% if product.metafields.coffee.variety %}{% if filter == 'Variety' %}{% assign variety = true %}{% endif %}{% endif %}
+              {% endfor %}
+              {% if origin == true or process == true or altitude == true or roast == true or variety == true %}
+                {% assign usingMetafields = true %}
+              {% endif %}
+              {% assign conditions = '' %}
+              {% for product in collection.products %}
+                {% if usingMetafields %}
+                  {% case filter %}
+                    {% when 'Origin' %}
+                      {% assign targetMetafield = product.metafields.coffee.origin %}
+                    {% when 'Process' %}
+                      {% assign targetMetafield = product.metafields.coffee.process %}
+                    {% when 'Altitude' %}
+                      {% assign targetMetafield = product.metafields.coffee.altitude %}
+                    {% when 'Roast' %}
+                      {% assign targetMetafield = product.metafields.coffee.roast %}
+                    {% when 'Variety' %}
+                      {% assign targetMetafield = product.metafields.coffee.variety %}
+                  {% endcase %}
+                  {% if conditions == '' %}
+                    {% assign conditions = targetMetafield %}
                   {% else %}
-                    {% for option in product.options_with_values %}
-                      {% if option.name == filter %}
-                        {% for value in option.values %}
-                          {% unless conditions contains value %}
-                            {% if conditions == '' %}
-                              {% assign conditions = value %}
-                            {% else %}
-                              {% assign conditions = conditions | append: ',' | append: value %}
-                            {% endif %}
-                          {% endunless %}
-                        {% endfor %}
-                      {% endif %}
-                    {% endfor %}
+                    {% assign conditions = conditions | append: ',' | append: targetMetafield %}
                   {% endif %}
-                {% endfor %}
-                {% assign conditions = conditions | split: ',' %}
-                {% for condition in conditions %}
-                  <span onclick="filter('{{ condition | handleize }}')">{{ condition }}</span>
-                {% endfor %}
-                <style>
-                  {% for condition in conditions %}
-                    .filter_{{ condition | handleize }} {
-                      display: none;
-                    }
+                {% else %}
+                  {% for option in product.options_with_values %}
+                    {% if option.name == filter %}
+                      {% for value in option.values %}
+                        {% unless conditions contains value %}
+                          {% if conditions == '' %}
+                            {% assign conditions = value %}
+                          {% else %}
+                            {% assign conditions = conditions | append: ',' | append: value %}
+                          {% endif %}
+                        {% endunless %}
+                      {% endfor %}
+                    {% endif %}
                   {% endfor %}
-                </style>
-              </div>
-            {% endfor %}
-          {% endif %}
+                {% endif %}
+              {% endfor %}
+              {% assign conditions = conditions | split: ',' %}
+              {% for condition in conditions %}
+                <span onclick="filter('{{ condition | handleize }}')">{{ condition }}</span>
+              {% endfor %}
+              <style>
+                {% for condition in conditions %}
+                  .filter_{{ condition | handleize }} {
+                    display: none;
+                  }
+                {% endfor %}
+              </style>
+            </div>
+          {% endfor %}
         {% when "products" %}
           {% paginate collection.products by 24 %}
           <div class="products">
@@ -241,7 +240,7 @@
     pointer-events: none;
     user-select: none;
   }
-  #cortadoCollection_container > .filters {
+  #cortadoCollection_container > .sort {
     display: flex;
     align-items: center;
     gap: {{ set.gap }}px;
@@ -543,8 +542,8 @@
         ]
       },
       {
-        "name": "Filters",
-        "type": "filters",
+        "name": "Sort by",
+        "type": "sort",
         "settings": [
           {
             "type": "header",
@@ -603,22 +602,80 @@
               }
             ],
             "default": "space-between"
+          }
+        ]
+      },
+      {
+        "name": "Filters",
+        "type": "filters",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Filters block"
           },
           {
             "type": "header",
             "content": "Custom filters"
           },
           {
-            "type": "checkbox",
-            "id": "customFilters",
-            "label": "Use custom filters",
-            "default": false
-          },
-          {
             "type": "text",
             "id": "filters",
             "label": "Custom filters",
             "info": "Enter the filters you want to use seperated by a comma."
+          },
+          {
+            "type": "color",
+            "id": "textColor",
+            "label": "Text color",
+            "default": "#000000"
+          },
+          {
+            "type": "range",
+            "id": "containerPadding",
+            "label": "Container's inner padding",
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "default": 16
+          },
+          {
+            "type": "range",
+            "id": "borderRadius",
+            "label": "Container's border radius",
+            "min": 0,
+            "max": 64,
+            "step": 4,
+            "default": 0
+          },
+          {
+            "type": "color",
+            "id": "containerBg",
+            "label": "Container's background color",
+            "default": "#f7f7f7"
+          },
+          {
+            "type": "select",
+            "id": "alignment",
+            "label": "Content alignment",
+            "options": [
+              {
+                "value": "start",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "end",
+                "label": "Right"
+              },
+              {
+                "value": "space-between",
+                "label": "Spread"
+              }
+            ],
+            "default": "space-between"
           }
         ]
       },
@@ -692,6 +749,9 @@
       "blocks": [
         {
           "type": "head"
+        },
+        {
+          "type": "sort"
         },
         {
           "type": "filters"
