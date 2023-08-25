@@ -300,8 +300,7 @@
   }
   .headerIcons > div > i,
   .headerMenu > .mobile > i {
-    color: {{ section.settings.textColor }}
-    ;
+    color: {{ section.settings.textColor }};
     font-size: 20px;
     cursor: pointer;
   }
@@ -326,8 +325,7 @@
       grid-column: 2;
     }
     .header > a > img.headerLogo {
-      width: {{ section.settings.logoWidthMobile }}
-      px;
+      width: {{ section.settings.logoWidthMobile }}px;
     }
     .headerIcons {
       gap: 16px;
@@ -392,10 +390,8 @@
     top: -8px;
     right: -12px;
     border-radius: 20px;
-    background: {{ section.settings.textColor }}
-    ;
-    color: {{ section.settings.containerBg }}
-    ;
+    background: {{ section.settings.textColor }};
+    color: {{ section.settings.containerBg }};
     font-size: 12px;
     width: 16px;
     height: 16px;
@@ -479,8 +475,7 @@
     transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    background: {{ section.settings.mobileMenuBg }}
-    ;
+    background: {{ section.settings.mobileMenuBg }};
     z-index: 98;
   }
   #mobileMenu.active {
@@ -550,11 +545,7 @@
   .mobileMenuContainer > .menuItem > span {
     font-size: 28px;
     color: white;
-    font-family: {% if section.settings.fontFamily == "main" %}
-      {{ settings.mainFontFamily }}
-    {% else %}
-      {{ settings.secondFontFamily }}
-    {% endif %};
+    font-family: {% if section.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
   }
   .mobileMenuContainer > .menuItem > .menuItemDropdown a {
     color: white;
