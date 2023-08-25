@@ -11,15 +11,24 @@
           <style>
             #cortadoCollection_container > .head {
               align-items: {{ block.settings.alignment }};
+              text-align: {{ block.settings.alignment }};
               padding: {{ block.settings.containerPadding }}px;
               background-color:{{ block.settings.containerBg }};
               border-radius: {{ block.settings.borderRadius }}px;
             }
             #cortadoCollection_container > .head > h1 {
               color: {{ block.settings.titleColor }};
+              text-align: {{ block.settings.alignment }};
             }
             #cortadoCollection_container > .head > div * {
               color: {{ block.settings.textColor }};
+              text-align: {{ block.settings.alignment }};
+            }
+            @media (max-width: 800px) {
+              #cortadoCollection_container > .head {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              }
             }
           </style>
           <div class="head">
