@@ -131,8 +131,7 @@
           "footer-1": {
             "type": "logo",
             "settings": {
-              "alignment": "center",
-              "logoWidth": 150
+              "alignment": "center"
             }
           },
           "footer-2": {
