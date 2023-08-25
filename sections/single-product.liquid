@@ -81,7 +81,7 @@
               }
             }
           </style>
-          <img id="{{ id }}_image" class="lazyload" data-src="{% if block.settings.image %}{{ block.settings.image | image_url }}{% else %}{{ product.featured_image | image_url }}{% endif %}" width="100%" height="100%" alt="{{ product.title }}">
+          <a href="{{ product.type }}" title="{{ product.title }}"><img id="{{ id }}_image" class="lazyload" data-src="{% if block.settings.image %}{{ block.settings.image | image_url }}{% else %}{{ product.featured_image | image_url }}{% endif %}" width="100%" height="100%" alt="{{ product.title }}"></a>
           <div id="{{ id }}_filter"></div>
         {% endif %}
       {% endfor %}
