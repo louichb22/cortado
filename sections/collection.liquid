@@ -37,6 +37,12 @@
             #cortadoCollection_container > .filters span {
               color: {{ block.settings.textColor }};
             }
+            @media (max-width: 800px) {
+              #cortadoCollection_container > .filters {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              }
+            }
           </style>
           <div class="filters">
             <span>{{ 'collections.showing' | t }} {% if collection.all_products_count < productNumber %}{{ collection.all_products_count }}{% else %}{{ productNumber }}{% endif %} {{ 'collections.of' | t }} {{ collection.all_products_count }} {{ 'collections.result' | t }}{% if collection.all_products_count > 1 %}s{% endif %}</span>
@@ -144,8 +150,10 @@
               color: {{ block.settings.textColor }};
             }
             @media (max-width: 800px) {
-              padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
-              border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              #cortadoCollection_container > .foot {
+                padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+                border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+              }
             }
           </style>
           <div class="foot">
