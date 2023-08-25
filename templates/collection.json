@@ -6,7 +6,7 @@
         "05c7dccd-769f-4038-9170-946d176d45dc": {
           "type": "head",
           "settings": {
-            "containerPadding": 20,
+            "containerPadding": 64,
             "borderRadius": 0,
             "containerBg": "#2d4036",
             "alignment": "center",
