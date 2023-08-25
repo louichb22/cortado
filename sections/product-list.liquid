@@ -21,9 +21,13 @@
           }
           @media (max-width: 800px) {
             #{{ id }}_{{ forloop.index0 }} {
-              grid-template-columns: 100%;
               gap: {{ set.gap | divided_by: 2 }}px;
               {% if block.settings.gap %}margin-top: {{ set.gap | divided_by: 2 }}px;{% endif %}
+            }
+          }
+          @media (max-width: 600px) {
+            #{{ id }}_{{ forloop.index0 }} {
+              grid-template-columns: 100%;
             }
           }
         </style>
