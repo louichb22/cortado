@@ -25,6 +25,8 @@
 
 // Typography sizes calculator
 
+/*
+
 function setTypography() {
   let paragraphSize = 20;
   if (window.innerWidth > 1200) {
@@ -41,3 +43,5 @@ function setTypography() {
 window.addEventListener('resize', function(event) {
   setTypography();
 }, true);
+
+*/
