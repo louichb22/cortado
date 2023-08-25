@@ -21,7 +21,7 @@
             "containerPadding": 20,
             "borderRadius": 0,
             "containerBg": "#f7f7f7",
-            "alignment": "spread",
+            "alignment": "space-between",
             "customFilters": true,
             "filters": "Process"
           }
