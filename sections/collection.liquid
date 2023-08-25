@@ -319,7 +319,7 @@
    #cortadoCollection_container > .filters > .filter {
     display: flex;
     align-items: center;
-    gap: {{ set.gap }}px;
+    gap: {{ set.gap | divided_by: 2 }}px;
   }
   #cortadoCollection_container > .filters > .filter > .item {
     cursor: pointer;
