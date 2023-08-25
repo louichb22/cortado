@@ -1,6 +1,8 @@
+{% assign set = section.settings %}
+
 <!--HTML-->
-<section id="headerSection" style="{% if section.settings.bgGradient != blank %}background:{{ section.settings.bgGradient }};{% else %}background-color:{{ section.settings.bg }};{% endif %} padding-top: {{ section.settings.paddingTop }}px; padding-bottom: {{ section.settings.paddingBottom }}px">
-  <div class="header" style="{% if section.settings.sectionType == "container" %}padding: {{ section.settings.containerPadding }}px; {% if section.settings.containerBgGradient != blank %}background:{{ section.settings.containerBgGradient }};{% else %}background-color:{{ section.settings.containerBg }};{% endif %} max-width: {{ section.settings.containerWidth }}px; margin-left: auto; margin-right: auto; border-radius: {{ section.settings.borderRadius }}px;{% endif %}">
+<section id="cortadoHeader">
+  <div id="cortadoHeader_container">
     <div class="headerMenu">
       <nav class="desktop">
         {% for link in section.settings.menu.links %}
@@ -155,6 +157,33 @@
 
 <!--CSS-->
 <style>
+  #cortadoHeader {
+    background: {% if set.altBg != blank %}{{ set.altBg }}{% else %}{{ set.bg }}{% endif %};
+    padding-top: {{ set.paddingTop }}px;
+    padding-bottom: {{ set.paddingBottom }}px;
+  }
+  #cortadoHeader_container {
+    background: {% if set.innerAltBg != blank %}{{ set.innerAltBg }}{% else %}{{ set.innerBg }}{% endif %};
+    {% if set.type %}
+    max-width: {{ set.maxWidth }}px;
+    margin: 0 auto;
+    {% endif %}
+    border-radius: {{ set.borderRadius }}px;
+    padding: {{ set.innerPadding }}px;
+    align-items: {{ set.align }};
+    gap: {{ set.gap }}px;
+  }
+  @media (max-width: 800px) {
+    #cortadoHeader {
+      padding-top: {{ set.paddingTop | divided_by: 2 }}px;
+      padding-bottom: {{ set.paddingBottom | divided_by: 2 }}px;
+    }
+    #cortadoHeader_container {
+      border-radius: {{ set.borderRadius | divided_by: 2 }}px;
+      padding: {{ set.innerPadding | divided_by: 2 }}px;
+      gap: {{ set.gap | divided_by: 2 }}px;
+    }
+  }
   {% case section.settings.stickyHeader %}
     {% when 'always' %}
     {% if section.settings.stickyHeaderCompensation %}
@@ -164,7 +193,7 @@
         z-index: 98;
       }
     {% else %}
-      #headerSection {
+      #cortadoHeader {
         position: fixed;
         top: 0;
         left: 0;
@@ -172,7 +201,7 @@
         z-index: 98;
       }
     {% endif %}
-    #headerSection.active {
+    #cortadoHeader.active {
       {% if section.settings.stickyBgGradient != blank %}
         background: {{ section.settings.stickyBgGradient }} !important;
       {% else %}
@@ -188,7 +217,7 @@
           z-index: 98;
         }
       {% else %}
-        #headerSection {
+        #cortadoHeader {
           position: fixed;
           top: 0;
           left: 0;
@@ -196,12 +225,12 @@
           z-index: 98;
         }
       {% endif %}
-      #headerSection.active {
+      #cortadoHeader.active {
         background-color: {{ section.settings.stickyBg }} !important;
       }
     {% endif %}
   {% endcase %}
-  .header {
+  #cortadoHeader_container {
     display: grid;
     grid-template-columns: {% if section.settings.layout == "logoLeft" %}{{ section.settings.logoWidth }}px 1fr 150px{% else %}1fr {{ section.settings.logoWidth }}px 1fr{% endif %};
     gap: 8px;
@@ -274,15 +303,15 @@
   .headerMenu > .mobile {
     display: none;
   }
-  .header > a {
+  #cortadoHeader_container > a {
     display: flex;
     {% if section.settings.layout == "logoLeft" %}grid-column: 1;{% endif %}
     grid-row: 1;
   }
-  .header > a > img.headerLogo {
+  #cortadoHeader_container > a > img.headerLogo {
     width: {{ section.settings.logoWidth }}px;
   }
-  .header > a > img.headerLogo:hover {
+  #cortadoHeader_container > a > img.headerLogo:hover {
     opacity: 0.75;
   }
   .headerIcons {
@@ -308,8 +337,8 @@
     opacity: 0.5;
   }
   @media(max-width: 800px) {
-    .header {
-      grid-template-columns: 1fr{{ section.settings.logoWidthMobile }}px 1fr;
+    #cortadoHeader_container {
+      grid-template-columns: 1fr {{ section.settings.logoWidthMobile }}px 1fr;
     }
     .headerMenu {
       grid-column: 1;
@@ -320,10 +349,10 @@
     .headerMenu > .mobile {
       display: flex;
     }
-    .header > a {
+    #cortadoHeader_container > a {
       grid-column: 2;
     }
-    .header > a > img.headerLogo {
+    #cortadoHeader_container > a > img.headerLogo {
       width: {{ section.settings.logoWidthMobile }}px;
     }
     .headerIcons {
@@ -615,9 +644,9 @@
     {% when 'always' %}
       function stickyHeader() {
         if (window.scrollY < 150) {
-          document.querySelector("#headerSection").classList.remove("active");
+          document.querySelector("#cortadoHeader").classList.remove("active");
         } else {
-          document.querySelector("#headerSection").classList.add("active");
+          document.querySelector("#cortadoHeader").classList.add("active");
         }
       }
       addEventListener("scroll", (event) => stickyHeader());
@@ -625,9 +654,9 @@
       {% if template == "index" %}
         function stickyHeader() {
           if (window.scrollY < 150) {
-            document.querySelector("#headerSection").classList.remove("active");
+            document.querySelector("#cortadoHeader").classList.remove("active");
           } else {
-            document.querySelector("#headerSection").classList.add("active");
+            document.querySelector("#cortadoHeader").classList.add("active");
           }
         }
         addEventListener("scroll", (event) => stickyHeader());
