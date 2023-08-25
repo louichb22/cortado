@@ -2,6 +2,56 @@
   "sections": {
     "collection": {
       "type": "collection",
+      "blocks": {
+        "aaa9c3da-ebd9-41c7-a48a-ed664965fba8": {
+          "type": "head",
+          "settings": {
+            "containerPadding": 32,
+            "borderRadius": 0,
+            "containerBg": "#2d4036",
+            "alignment": "center",
+            "titleColor": "#ffffff",
+            "textColor": "#ffffff"
+          }
+        },
+        "d9d0f2e9-92f6-42fa-a677-04c645affe2c": {
+          "type": "sort",
+          "settings": {
+            "textColor": "#000000",
+            "containerPadding": 16,
+            "borderRadius": 0,
+            "containerBg": "#f7f7f7",
+            "alignment": "space-between"
+          }
+        },
+        "e9edd13c-6db6-467c-a2f3-49f2e6881f60": {
+          "type": "filters",
+          "settings": {
+            "filters": "",
+            "textColor": "#000000",
+            "containerPadding": 16,
+            "borderRadius": 0,
+            "containerBg": "#f7f7f7",
+            "alignment": "space-between"
+          }
+        },
+        "7564a465-36ed-4788-843c-9d235d9c25d2": {
+          "type": "products",
+          "settings": {
+            "textColor": "#000000",
+            "containerPadding": 32,
+            "borderRadius": 0,
+            "containerBg": "#f7f7f7",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "aaa9c3da-ebd9-41c7-a48a-ed664965fba8",
+        "d9d0f2e9-92f6-42fa-a677-04c645affe2c",
+        "e9edd13c-6db6-467c-a2f3-49f2e6881f60",
+        "7564a465-36ed-4788-843c-9d235d9c25d2"
+      ],
       "settings": {
         "bg": "#ffffff",
         "altBg": "",
