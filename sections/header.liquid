@@ -320,8 +320,8 @@
   }
   .headerIcons > div {
     position: relative;
-    margin: -15px;
-    padding: 15px;
+    margin: -{{ set.gap | divided_by: 2 }}px;
+    padding: {{ set.gap | divided_by: 2 }}px;
   }
   .headerIcons > div > i,
   .headerMenu > .mobile > i {
@@ -355,6 +355,10 @@
     }
     .headerIcons {
       gap: {{ set.gap | divided_by: 2 }}px;
+    }
+    .headerIcons > div {
+      margin: -{{ set.gap | divided_by: 4 }}px;
+      padding: {{ set.gap | divided_by: 4 }}px;
     }
     .headerIcons > .localizationSelector1 {
       display: none;
