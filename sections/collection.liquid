@@ -95,7 +95,7 @@
             {% assign filters = block.settings.filters | remove: ' ' | split: ',' %}
             {% for filter in filters %}
               <div class="filter">
-                <span>{{ filter }}</span>
+                <span style="font-weight: bold; text-transform: uppercase;">{{ 'collection.filter_by' | t }}{{ filter }} : </span>
                 {% for product in collection.products %}
                   {% if product.metafields.coffee.origin %}{% if filter == 'Origin' %}{% assign origin = true %}{% endif %}{% endif %}
                   {% if product.metafields.coffee.process %}{% if filter == 'Process' %}{% assign process = true %}{% endif %}{% endif %}
