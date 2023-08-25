@@ -72,6 +72,6 @@
       const link = document.createElement("span");link.innerHTML = '{{ "general.built_by" | t }} <a href="https://22agencecreative.ca" target="_blank">{{ "general.22_title" | t }}</a>. {{ "general.powered_by" | t }} <a href="{{ "general.cortado_website" | t }}" target="_blank">{{ "general.cortado_title" | t }}</a>.';document.querySelector(".bottomFooter").appendChild(link);
     </script>
     {% if settings.scrollAnimation %}{{ '22-dynamic-scroll.js' | asset_url | script_tag }}{% endif %}
-    {% include 'geo-popup' %}
+    {% if settings.useGeoPopup %}{% include 'geo-popup' %}{% endif %}
   </body>
 </html>
