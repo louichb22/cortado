@@ -1,1 +1,383 @@
-{"sections":{"fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f":{"type":"slideshow","blocks":{"template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-1":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/FLO20617.jpg","filterColor":"#000000","filterOpacity":30,"type":true,"maxWidth":1200,"alignment":"start","color":"#ffffff","title":"It all starts with a bloom","text":"","buttonText":"Discover our coffees","link":"shopify:\/\/collections\/all","buttonStyle":"2"}},"template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-2":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/CafeFabriqueWholesale_Images_Slideshow_2.jpg","filterColor":"#000000","filterOpacity":30,"type":true,"maxWidth":1200,"alignment":"start","color":"#ffffff","title":"Achieve the perfect shot","text":"<p>Learn how our <strong>professional barista equipment<\/strong> can help you achieve the perfect shot of espresso you're looking for.<\/p>","buttonText":"Discover our equipment","link":"shopify:\/\/collections\/all","buttonStyle":"1"}}},"block_order":["template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-1","template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-2"],"settings":{"bg":"#ffffff","altBg":"","innerBg":"","innerAltBg":"","paddingTop":32,"paddingBottom":32,"innerPadding":0,"noMargin":false,"type":true,"maxWidth":1400,"borderRadius":0,"gap":16,"height":420,"heightMobile":340,"useTimer":true,"timer":6,"buttonColor":"#ffffff"}},"3b4a2f1e-4d55-4102-a8a1-8f2af21778cc":{"type":"text-with-image","blocks":{"b0ecc632-245b-4f58-a96f-574c81a7f577":{"type":"h2","settings":{"gap":false,"title":"We are the community","color":""}},"a6d2fe42-ee6f-45d4-a010-d1475b13fb44":{"type":"paragraph","settings":{"gap":false,"text":"<p>Coffee is about emotions. Coffee is about bringing people together. Coffee is every first-thing-in-the-morning. Coffee is about the people you share it with. Coffee is about community. We are proud to bring you a specialty coffee roasted with love by the people of your community.<\/p>","color":"#000000"}},"5403ed95-29b4-4818-be81-a769314bb8e3":{"type":"button","settings":{"gap":true,"text":"Discover our story","link":"#","type":"1"}},"template--18620814491967__3b4a2f1e-4d55-4102-a8a1-8f2af21778cc-1682004393c6edacbd-1":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Team_Photos-5_8ff5d0df-b111-4d8a-986e-e8184da64744.jpg","alt":"An image of a coffee mug","filterColor":"#2d4036","filterOpacity":15}}},"block_order":["b0ecc632-245b-4f58-a96f-574c81a7f577","a6d2fe42-ee6f-45d4-a010-d1475b13fb44","5403ed95-29b4-4818-be81-a769314bb8e3","template--18620814491967__3b4a2f1e-4d55-4102-a8a1-8f2af21778cc-1682004393c6edacbd-1"],"settings":{"bg":"#ffffff","altBg":"","innerBg":"rgba(0,0,0,0)","innerAltBg":"","paddingTop":0,"paddingBottom":32,"innerPadding":0,"type":true,"maxWidth":1400,"borderRadius":0,"align":"start","gap":24,"middleLine":55,"inverted":false}},"ffe7e26b-a064-4bad-ae7c-d9fbf1eecd17":{"type":"video","blocks":{"d2cfd638-b1cd-49b4-9899-26c46212d427":{"type":"image","settings":{"gap":false,"image":"shopify:\/\/shop_images\/Cortado_logo_white.svg","width":128,"imageAlt":"Cortado logo"}},"61c9df43-eb89-43d1-b609-3f6ecc9633a3":{"type":"paragraph","settings":{"gap":true,"text":"<p>Our coffees are always roasted one day before they ship. When you'll receive the package at your door, the  coffee will be right about to hit the perfect time for maximum aromas with your favorite extraction method.<\/p>","color":"#ffffff"}},"928917e2-d6e1-4dea-a31b-35314f98acdf":{"type":"button","settings":{"gap":true,"text":"Ok you've convinced me","link":"shopify:\/\/collections\/all","type":"1"}}},"block_order":["d2cfd638-b1cd-49b4-9899-26c46212d427","61c9df43-eb89-43d1-b609-3f6ecc9633a3","928917e2-d6e1-4dea-a31b-35314f98acdf"],"settings":{"bg":"#000000","altBg":"","innerBg":"","innerAltBg":"","paddingTop":128,"paddingBottom":128,"innerPadding":0,"type":true,"maxWidth":1400,"borderRadius":0,"align":"center","gap":16,"video":"shopify:\/\/files\/videos\/coffee_being_cooled.mp4","filterColor":"#000000","filterOpacity":50,"minHeight":0,"fullHeight":true}},"6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c":{"type":"single-product","blocks":{"template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-h2-1":{"type":"h2","settings":{"gap":false,"title":"Our newest roast","color":""}},"222e90bb-26dd-47ad-85d6-155b49d0c8ee":{"type":"h3","settings":{"gap":false,"title":"The Bad Boy Espresso","color":""}},"template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-coffeeInfo-1":{"type":"coffeeInfo","settings":{"gap":true,"color":"#6e6c6c"}},"template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-paragraph-1":{"type":"paragraph","settings":{"gap":false,"text":"","color":""}},"template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-button-1":{"type":"button","settings":{"gap":true,"text":"Add to my cart","link":"","type":"1"}},"template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-image-1":{"type":"image","settings":{"contain":true,"filterColor":"#000000","filterOpacity":0}}},"block_order":["template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-h2-1","222e90bb-26dd-47ad-85d6-155b49d0c8ee","template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-coffeeInfo-1","template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-paragraph-1","template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-button-1","template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-image-1"],"settings":{"bg":"#ffffff","altBg":"","innerBg":"","innerAltBg":"","paddingTop":64,"paddingBottom":64,"innerPadding":0,"type":true,"maxWidth":1400,"borderRadius":0,"align":"start","gap":16,"product":"brulerie-du-quai-bad-boy-espresso","middleLine":50,"inverted":false}},"ab363fad-2755-4d62-ae7f-ddde204018dd":{"type":"hero","blocks":{"template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-h2-1":{"type":"h2","settings":{"gap":true,"title":"You own a coffee shop?","color":"#ffffff"}},"template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-paragraph-1":{"type":"paragraph","settings":{"gap":false,"text":"<p>Our coffees are available in bigger formats for coffee shops and offered with a discount. Get in touch to know more about our wholesale offer.<\/p>","color":"#ffffff"}},"template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-button-1":{"type":"button","settings":{"gap":true,"text":"Email us","link":"mailto:info@22agencecreative.ca","type":"2"}}},"block_order":["template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-h2-1","template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-paragraph-1","template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-button-1"],"settings":{"bg":"#ffffff","altBg":"","innerBg":"","innerAltBg":"","paddingTop":128,"paddingBottom":128,"innerPadding":0,"type":true,"maxWidth":1000,"borderRadius":0,"align":"start","gap":16,"bgImage":"shopify:\/\/shop_images\/bar-1869656_1920_1024x_jpg.webp","filterColor":"#161616","filterOpacity":75,"minHeight":0,"fullHeight":false}},"98437a91-08ad-417f-97aa-06855ba7e536":{"type":"product-list","blocks":{"template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-0":{"type":"title","settings":{"color":"#2d4036","text":"Today's selection"}},"template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-1":{"type":"paragraph","settings":{"color":"#2d4036","text":"Here are our top picks for this season. These coffees will absolutely bring you up in the morning and stimulate your taste buds."}},"template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-2":{"type":"products","settings":{"products":["brulerie-du-quai-bad-boy-espresso","brulerie-du-quai-brazil-coffee-cerrado","brulerie-du-quai-ethiopia-coffee-yirgacheffe","timbertrain-curious"]}},"template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-3":{"type":"button","settings":{"text":"View all coffees","link":"shopify:\/\/collections\/all","buttonStyle":"1"}}},"block_order":["template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-0","template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-1","template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-2","template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-3"],"settings":{"bg":"#ffffff","bgGradient":"","paddingTop":65,"paddingBottom":65,"sectionType":"container","containerWidth":1400,"containerPadding":0,"borderRadius":0,"containerBg":"#ffffff","containerBgGradient":"","alignment":"center"}}},"order":["fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f","3b4a2f1e-4d55-4102-a8a1-8f2af21778cc","ffe7e26b-a064-4bad-ae7c-d9fbf1eecd17","6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c","ab363fad-2755-4d62-ae7f-ddde204018dd","98437a91-08ad-417f-97aa-06855ba7e536"]}
+{
+  "sections": {
+    "fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f": {
+      "type": "slideshow",
+      "blocks": {
+        "template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FLO20617.jpg",
+            "filterColor": "#000000",
+            "filterOpacity": 30,
+            "type": true,
+            "maxWidth": 1200,
+            "alignment": "start",
+            "color": "#ffffff",
+            "title": "It all starts with a bloom",
+            "text": "",
+            "buttonText": "Discover our coffees",
+            "link": "shopify:\/\/collections\/all",
+            "buttonStyle": "2"
+          }
+        },
+        "template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/CafeFabriqueWholesale_Images_Slideshow_2.jpg",
+            "filterColor": "#000000",
+            "filterOpacity": 30,
+            "type": true,
+            "maxWidth": 1200,
+            "alignment": "start",
+            "color": "#ffffff",
+            "title": "Achieve the perfect shot",
+            "text": "<p>Learn how our <strong>professional barista equipment<\/strong> can help you achieve the perfect shot of espresso you're looking for.<\/p>",
+            "buttonText": "Discover our equipment",
+            "link": "shopify:\/\/collections\/all",
+            "buttonStyle": "1"
+          }
+        }
+      },
+      "block_order": [
+        "template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-1",
+        "template--18900773830939__fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f-slide-2"
+      ],
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 32,
+        "paddingBottom": 32,
+        "innerPadding": 0,
+        "noMargin": false,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "gap": 16,
+        "height": 420,
+        "heightMobile": 340,
+        "useTimer": true,
+        "timer": 6,
+        "buttonColor": "#ffffff"
+      }
+    },
+    "3b4a2f1e-4d55-4102-a8a1-8f2af21778cc": {
+      "type": "text-with-image",
+      "blocks": {
+        "b0ecc632-245b-4f58-a96f-574c81a7f577": {
+          "type": "h2",
+          "settings": {
+            "gap": false,
+            "title": "We are the community",
+            "color": ""
+          }
+        },
+        "a6d2fe42-ee6f-45d4-a010-d1475b13fb44": {
+          "type": "paragraph",
+          "settings": {
+            "gap": false,
+            "text": "<p>Coffee is about emotions. Coffee is about bringing people together. Coffee is every first-thing-in-the-morning. Coffee is about the people you share it with. Coffee is about community. We are proud to bring you a specialty coffee roasted with love by the people of your community.<\/p>",
+            "color": "#000000"
+          }
+        },
+        "5403ed95-29b4-4818-be81-a769314bb8e3": {
+          "type": "button",
+          "settings": {
+            "gap": true,
+            "text": "Discover our story",
+            "link": "#",
+            "type": "1"
+          }
+        },
+        "template--18620814491967__3b4a2f1e-4d55-4102-a8a1-8f2af21778cc-1682004393c6edacbd-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Team_Photos-5_8ff5d0df-b111-4d8a-986e-e8184da64744.jpg",
+            "alt": "An image of a coffee mug",
+            "filterColor": "#2d4036",
+            "filterOpacity": 15
+          }
+        }
+      },
+      "block_order": [
+        "b0ecc632-245b-4f58-a96f-574c81a7f577",
+        "a6d2fe42-ee6f-45d4-a010-d1475b13fb44",
+        "5403ed95-29b4-4818-be81-a769314bb8e3",
+        "template--18620814491967__3b4a2f1e-4d55-4102-a8a1-8f2af21778cc-1682004393c6edacbd-1"
+      ],
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "rgba(0,0,0,0)",
+        "innerAltBg": "",
+        "paddingTop": 0,
+        "paddingBottom": 32,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "align": "start",
+        "gap": 24,
+        "middleLine": 55,
+        "inverted": false
+      }
+    },
+    "ffe7e26b-a064-4bad-ae7c-d9fbf1eecd17": {
+      "type": "video",
+      "blocks": {
+        "d2cfd638-b1cd-49b4-9899-26c46212d427": {
+          "type": "image",
+          "settings": {
+            "gap": false,
+            "image": "shopify:\/\/shop_images\/Cortado_logo_white.svg",
+            "width": 128,
+            "imageAlt": "Cortado logo"
+          }
+        },
+        "61c9df43-eb89-43d1-b609-3f6ecc9633a3": {
+          "type": "paragraph",
+          "settings": {
+            "gap": true,
+            "text": "<p>Our coffees are always roasted one day before they ship. When you'll receive the package at your door, the  coffee will be right about to hit the perfect time for maximum aromas with your favorite extraction method.<\/p>",
+            "color": "#ffffff"
+          }
+        },
+        "928917e2-d6e1-4dea-a31b-35314f98acdf": {
+          "type": "button",
+          "settings": {
+            "gap": true,
+            "text": "Ok you've convinced me",
+            "link": "shopify:\/\/collections\/all",
+            "type": "1"
+          }
+        }
+      },
+      "block_order": [
+        "d2cfd638-b1cd-49b4-9899-26c46212d427",
+        "61c9df43-eb89-43d1-b609-3f6ecc9633a3",
+        "928917e2-d6e1-4dea-a31b-35314f98acdf"
+      ],
+      "settings": {
+        "bg": "#000000",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 128,
+        "paddingBottom": 128,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "align": "center",
+        "gap": 16,
+        "video": "shopify:\/\/files\/videos\/coffee_being_cooled.mp4",
+        "filterColor": "#000000",
+        "filterOpacity": 50,
+        "minHeight": 0,
+        "fullHeight": true
+      }
+    },
+    "6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c": {
+      "type": "single-product",
+      "blocks": {
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-h2-1": {
+          "type": "h2",
+          "settings": {
+            "gap": false,
+            "title": "Our newest roast",
+            "color": ""
+          }
+        },
+        "222e90bb-26dd-47ad-85d6-155b49d0c8ee": {
+          "type": "h3",
+          "settings": {
+            "gap": false,
+            "title": "The Bad Boy Espresso",
+            "color": ""
+          }
+        },
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-coffeeInfo-1": {
+          "type": "coffeeInfo",
+          "settings": {
+            "gap": true,
+            "color": "#6e6c6c"
+          }
+        },
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "gap": false,
+            "text": "",
+            "color": ""
+          }
+        },
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-button-1": {
+          "type": "button",
+          "settings": {
+            "gap": true,
+            "text": "Add to my cart",
+            "link": "",
+            "type": "1"
+          }
+        },
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-image-1": {
+          "type": "image",
+          "settings": {
+            "contain": true,
+            "filterColor": "#000000",
+            "filterOpacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-h2-1",
+        "222e90bb-26dd-47ad-85d6-155b49d0c8ee",
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-coffeeInfo-1",
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-paragraph-1",
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-button-1",
+        "template--18900773830939__6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c-image-1"
+      ],
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 64,
+        "paddingBottom": 64,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "align": "start",
+        "gap": 16,
+        "product": "brulerie-du-quai-bad-boy-espresso",
+        "middleLine": 50,
+        "inverted": false
+      }
+    },
+    "ab363fad-2755-4d62-ae7f-ddde204018dd": {
+      "type": "hero",
+      "blocks": {
+        "template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-h2-1": {
+          "type": "h2",
+          "settings": {
+            "gap": true,
+            "title": "You own a coffee shop?",
+            "color": "#ffffff"
+          }
+        },
+        "template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "gap": false,
+            "text": "<p>Our coffees are available in bigger formats for coffee shops and offered with a discount. Get in touch to know more about our wholesale offer.<\/p>",
+            "color": "#ffffff"
+          }
+        },
+        "template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-button-1": {
+          "type": "button",
+          "settings": {
+            "gap": true,
+            "text": "Email us",
+            "link": "mailto:info@22agencecreative.ca",
+            "type": "2"
+          }
+        }
+      },
+      "block_order": [
+        "template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-h2-1",
+        "template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-paragraph-1",
+        "template--18900773830939__ab363fad-2755-4d62-ae7f-ddde204018dd-button-1"
+      ],
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 128,
+        "paddingBottom": 128,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1000,
+        "borderRadius": 0,
+        "align": "start",
+        "gap": 16,
+        "bgImage": "shopify:\/\/shop_images\/bar-1869656_1920_1024x_jpg.webp",
+        "filterColor": "#161616",
+        "filterOpacity": 75,
+        "minHeight": 0,
+        "fullHeight": false
+      }
+    },
+    "98437a91-08ad-417f-97aa-06855ba7e536": {
+      "type": "product-list",
+      "blocks": {
+        "6774ed04-4fa9-4129-8a82-0299e7d88fc7": {
+          "type": "h2",
+          "settings": {
+            "gap": false,
+            "title": "Second level title",
+            "color": ""
+          }
+        },
+        "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-1": {
+          "type": "paragraph",
+          "settings": {
+            "gap": false,
+            "text": "<p>Here are our top picks for this season. These coffees will absolutely bring you up in the morning and stimulate your taste buds.<\/p>",
+            "color": "#2d4036"
+          }
+        },
+        "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-2": {
+          "type": "products",
+          "settings": {
+            "products": [
+              "brulerie-du-quai-bad-boy-espresso",
+              "brulerie-du-quai-brazil-coffee-cerrado",
+              "brulerie-du-quai-ethiopia-coffee-yirgacheffe",
+              "timbertrain-curious"
+            ]
+          }
+        },
+        "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-3": {
+          "type": "button",
+          "settings": {
+            "gap": true,
+            "text": "View all coffees",
+            "link": "shopify:\/\/collections\/all",
+            "type": "1"
+          }
+        }
+      },
+      "block_order": [
+        "6774ed04-4fa9-4129-8a82-0299e7d88fc7",
+        "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-1",
+        "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-2",
+        "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-3"
+      ],
+      "settings": {
+        "bg": "#ffffff",
+        "altBg": "",
+        "innerBg": "",
+        "innerAltBg": "",
+        "paddingTop": 64,
+        "paddingBottom": 64,
+        "innerPadding": 0,
+        "type": true,
+        "maxWidth": 1400,
+        "borderRadius": 0,
+        "align": "center",
+        "gap": 16
+      }
+    }
+  },
+  "order": [
+    "fc9ebc8b-f7ef-4958-b19d-e0d3e9e24a9f",
+    "3b4a2f1e-4d55-4102-a8a1-8f2af21778cc",
+    "ffe7e26b-a064-4bad-ae7c-d9fbf1eecd17",
+    "6a3fb9e1-0242-40e8-adba-c3dc8f7f4e2c",
+    "ab363fad-2755-4d62-ae7f-ddde204018dd",
+    "98437a91-08ad-417f-97aa-06855ba7e536"
+  ]
+}
