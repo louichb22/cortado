@@ -8,9 +8,7 @@
             <a href="{{ link.url }}">{{ link.title }}</a>
           {% else %}
             <div class="dropDown">
-              <a class="hasChildren" href="{{ link.url }}">{{ link.title }}
-                <i class="mi-chevron-down"></i>
-              </a>
+              <a class="hasChildren" href="{{ link.url }}">{{ link.title }}<i class="mi-chevron-down"></i></a>
               <div class="dropDownPopup">
                 {% for link in link.links %}
                   <a href="{{ link.url }}">{{ link.title }}</a>
