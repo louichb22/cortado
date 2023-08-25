@@ -29,5 +29,3 @@ window.onresize = function() {
 
 // Execute on load
 lazyloader();
-
-console.log('Updated');

@@ -1,1 +1,72 @@
-{"general":{"home":"Accueil","products":"Produits","explore_products":"Explorer nos produits","add_to_cart":"Ajouter au panier","freq_bought":"Fréquemment achetés ensemble","copyright_text":"Tous droits réservés","built_by":"Conception de","powered_by":"Propulsé par","origin":"Origine","process":"Procédé","our_coffees":"Nos cafés","search":"Vous avez recherché","search_empty":"Oups, nous n'avez rien trouvé..."},"cart":{"title":"Votre panier d'achat","subtotal":"Sous-total","order":"Commander","remove_item":"Retirer","empty":"Votre panier est vide"},"account":{"account":"Votre compte","login":"Se connecter","logout":"Déconnexion","register":"Créer un compte","orders":{"title":"Vos commandes","view_order":"Voir la commande","no_orders":"Vous n'avez aucune commande"},"forgot_password":"Oublié votre mot de passe?","reset_password":"Réinitialiser votre mot de passe","activate_account":"Activez votre compte","address":"Votre adresse d'expédition","email":"Adresse courriel","password":"Mot de passe","new_password":"Nouveau mot de passe","password_confirm":"Confirmer le mot de passe","first_name":"Prénom","last_name":"Nom","phone":"Téléphone","message":"Votre message"},"product":{"description":"Description","specs":"Spécifications","shipping_returns":"Expédition & retours"},"collections":{"sort_by":"Trier par","sort_by_options":{"featured":"Mis de l'avant","best-selling":"Meilleurs vendeurs","alphabetically-a-z":"Alphabétiquement, A-Z","alphabetically-z-a":"Alphabétiquement, Z-A","price-low-to-high":"Prix, petit à grand","price-high-to-low":"Prix, grand à petit","date-new-to-old":"Date, nouveau à ancien","date-old-to-new":"Date, ancien à nouveau"},"showing":"Affiche","of":"de","result":"resultat"}}
+{
+  "general": {
+    "home": "Accueil",
+    "products": "Produits",
+    "explore_products": "Explorer nos produits",
+    "add_to_cart": "Ajouter au panier",
+    "freq_bought": "Fréquemment achetés ensemble",
+    "copyright_text": "Tous droits réservés",
+    "built_by": "Conception de",
+    "powered_by": "Propulsé par",
+    "origin": "Origine",
+    "process": "Procédé",
+    "our_coffees": "Nos cafés",
+    "search": "Vous avez recherché",
+    "search_empty": "Oups, nous n'avez rien trouvé...",
+    "cortado_title": "Le Projet Cortado",
+    "cortado_website": "https://projetcortado.ca",
+    "22_title": "22 Agence Créative",
+    "22_website": "https://22agencecreative.ca"
+  },
+  "cart": {
+    "title": "Votre panier d'achat",
+    "subtotal": "Sous-total",
+    "order": "Commander",
+    "remove_item": "Retirer",
+    "empty": "Votre panier est vide"
+  },
+  "account": {
+    "account": "Votre compte",
+    "login": "Se connecter",
+    "logout": "Déconnexion",
+    "register": "Créer un compte",
+    "orders": {
+      "title": "Vos commandes",
+      "view_order": "Voir la commande",
+      "no_orders": "Vous n'avez aucune commande"
+    },
+    "forgot_password": "Oublié votre mot de passe?",
+    "reset_password": "Réinitialiser votre mot de passe",
+    "activate_account": "Activez votre compte",
+    "address": "Votre adresse d'expédition",
+    "email": "Adresse courriel",
+    "password": "Mot de passe",
+    "new_password": "Nouveau mot de passe",
+    "password_confirm": "Confirmer le mot de passe",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "phone": "Téléphone",
+    "message": "Votre message"
+  },
+  "product": {
+    "description": "Description",
+    "specs": "Spécifications",
+    "shipping_returns": "Expédition & retours"
+  },
+  "collections": {
+    "sort_by": "Trier par",
+    "sort_by_options": {
+      "featured": "Mis de l'avant",
+      "best-selling": "Meilleurs vendeurs",
+      "alphabetically-a-z": "Alphabétiquement, A-Z",
+      "alphabetically-z-a": "Alphabétiquement, Z-A",
+      "price-low-to-high": "Prix, petit à grand",
+      "price-high-to-low": "Prix, grand à petit",
+      "date-new-to-old": "Date, nouveau à ancien",
+      "date-old-to-new": "Date, ancien à nouveau"
+    },
+    "showing": "Affiche",
+    "of": "de",
+    "result": "resultat"
+  }
+}
