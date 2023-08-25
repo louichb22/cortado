@@ -1,6 +1,10 @@
 {% assign sort_by = collection.sort_by | default: "manual" %}
 {% assign set = section.settings %}
 
+{% if search.results_count %}
+  {% assign collection = search.results %}
+{% endif %}
+
 <!--HTML-->
 <section id="cortadoCollection">
   <div id="cortadoCollection_container">
@@ -336,6 +340,7 @@
   #cortadoCollection_container > .filters > .filter.active > .item:not(.active) {
     user-select: none;
     pointer-events: none;
+    opacity: 0.5;
   }
   .productCardContainer.disabled {
     display: none;
