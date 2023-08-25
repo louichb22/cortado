@@ -64,7 +64,6 @@
       {% endif %}
     </style>
     <!--JavaScript-->
-    {{ 'scripts.js' | asset_url | script_tag }}
     {{ 'lazyload.js' | asset_url | script_tag }}
     <script type="application/json" data-ajax-cart-initial-state>{{ cart | json }}</script>
     <script type="module">import '{{ "liquid-ajax-cart-v1.11.0.js" | asset_url }}';</script>
