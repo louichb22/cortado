@@ -179,7 +179,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Here, you can specify the default size for every header type. Please specify sizes for desktop and for mobile."
+        "content": "Here, you can specify the default size for every heading type. Please specify sizes for desktop and for mobile."
       },
       {
         "type": "paragraph",
@@ -303,7 +303,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Settings in this section will affect every <p>, <span>, <a>, and <ul>."
+        "content": "Settings in this section will affect everything except headings."
       },
       {
         "type": "select",
@@ -340,13 +340,8 @@
         "default": 700
       },
       {
-        "type": "range",
-        "id": "textSize",
-        "label": "Default Text Size",
-        "step": 2,
-        "min": 8,
-        "max": 200,
-        "default": 16
+        "type": "paragraph",
+        "content": "Every regular text size is automatically calculated based on the user's device. The font size will vary from 16px to 20px."
       }
     ]
   },
