@@ -118,6 +118,9 @@
     {% if set.inverted %}grid-column: 2;{% endif %}
     grid-row: 1;
   }
+  #{{ id }}_container > .image img:hover {
+    transform: scale(101%);
+  }
   
   @media (max-width: 800px) {
     #{{ id }} {
