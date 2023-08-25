@@ -259,7 +259,8 @@
     pointer-events: none;
     user-select: none;
   }
-  #cortadoCollection_container > .sort {
+  #cortadoCollection_container > .sort, 
+  #cortadoCollection_container > .filters {
     display: flex;
     align-items: center;
     gap: {{ set.gap }}px;
@@ -314,11 +315,6 @@
   }
   #cortadoCollection_container > .foot .current {
     font-weight: bold;
-  }
-  #cortadoCollection_container > .filters {
-    display: flex;
-    align-items: center;
-    gap: {{ set.gap }}px;
   }
    #cortadoCollection_container > .filters > .filter {
     display: flex;
