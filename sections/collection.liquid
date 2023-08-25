@@ -144,7 +144,7 @@
                 {% endfor %}
                 {% assign conditions = conditions | split: ',' %}
                 {% for condition in conditions %}
-                  <span onclick="filter('{{ condition | handleize }}')">{{ condition }}</span>
+                  <span class="item" onclick="filter('{{ condition | handleize }}')">{{ condition }}</span>
                 {% endfor %}
                 <style>
                   {% for condition in conditions %}
@@ -325,13 +325,13 @@
     align-items: center;
     gap: {{ set.gap }}px;
   }
-  #cortadoCollection_container > .filters > .filter > span:not(:first-child) {
+  #cortadoCollection_container > .filters > .filter > .item {
     cursor: pointer;
   }
-  #cortadoCollection_container > .filters > .filter > span:hover:not(:first-child) {
+  #cortadoCollection_container > .filters > .filter > .item:hover {
     opacity: 0.75;
   }
-  #cortadoCollection_container > .filters > .filter > span.active {
+  #cortadoCollection_container > .filters > .filter > .item.active {
     font-weight: bold;
   }
   .productCardContainer.disabled {
