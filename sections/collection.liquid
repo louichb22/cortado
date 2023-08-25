@@ -131,14 +131,25 @@
               {% include 'product-card' %}
             {% endfor %}
           </div>
-          <div class="foot" style="justify-content: {% case block.settings.alignment %}{% when "left" %}start;{% when "center" %}center;{% when "right" %}end;{% endcase %} text-align: {% case block.settings.alignment %}{% when "left" %}left;{% when "center" %}center;{% when "right" %}right;{% endcase %}padding: {{ block.settings.containerPadding }}px; background-color:{{ block.settings.containerBg }}; border-radius: {{ block.settings.borderRadius }}px;">
+          <style>
+            #cortadoCollection_container > .foot {
+              justify-content: {{ block.settings.alignment }};
+              text-align: {{ block.settings.alignment }};
+              padding: {{ block.settings.containerPadding }}px;
+              background-color:{{ block.settings.containerBg }};
+              border-radius: {{ block.settings.borderRadius }}px;
+            }
+            #cortadoCollection_container > .foot span, 
+            #cortadoCollection_container > .foot a {
+              color: {{ block.settings.textColor }};
+            }
+            @media (max-width: 800px) {
+              padding: {{ block.settings.containerPadding | divided_by: 2 }}px;
+              border-radius: {{ block.settings.borderRadius | divided_by: 2 }}px;
+            }
+          </style>
+          <div class="foot">
             {{ paginate | default_pagination }}
-            <style>
-              #cortadoCollection_container > .foot span, 
-              #cortadoCollection_container > .foot a {
-                color: {{ block.settings.textColor }};
-              }
-            </style>
           </div>
           {% endpaginate %}
       {% endcase %}
@@ -449,20 +460,18 @@
             "type": "range",
             "id": "containerPadding",
             "label": "Container's inner padding",
-            "unit": "px",
             "min": 0,
-            "max": 100,
-            "step": 1,
-            "default": 25
+            "max": 64,
+            "step": 4,
+            "default": 32
           },
           {
             "type": "range",
             "id": "borderRadius",
             "label": "Container's border radius",
-            "unit": "px",
             "min": 0,
-            "max": 30,
-            "step": 1,
+            "max": 64,
+            "step": 4,
             "default": 0
           },
           {
@@ -477,7 +486,7 @@
             "label": "Content alignment",
             "options": [
               {
-                "value": "left",
+                "value": "start",
                 "label": "Left"
               },
               {
@@ -485,7 +494,7 @@
                 "label": "Center"
               },
               {
-                "value": "right",
+                "value": "end",
                 "label": "Right"
               }
             ],
@@ -523,20 +532,18 @@
             "type": "range",
             "id": "containerPadding",
             "label": "Container's inner padding",
-            "unit": "px",
             "min": 0,
-            "max": 100,
-            "step": 1,
-            "default": 25
+            "max": 64,
+            "step": 4,
+            "default": 16
           },
           {
             "type": "range",
             "id": "borderRadius",
             "label": "Container's border radius",
-            "unit": "px",
             "min": 0,
-            "max": 30,
-            "step": 1,
+            "max": 64,
+            "step": 4,
             "default": 0
           },
           {
@@ -610,7 +617,6 @@
             "type": "range",
             "id": "containerPadding",
             "label": "Container's inner padding",
-            "unit": "px",
             "min": 0,
             "max": 64,
             "step": 4,
@@ -620,7 +626,6 @@
             "type": "range",
             "id": "borderRadius",
             "label": "Container's border radius",
-            "unit": "px",
             "min": 0,
             "max": 64,
             "step": 4,
@@ -638,7 +643,7 @@
             "label": "Content alignment",
             "options": [
               {
-                "value": "left",
+                "value": "start",
                 "label": "Left"
               },
               {
@@ -646,7 +651,7 @@
                 "label": "Center"
               },
               {
-                "value": "right",
+                "value": "end",
                 "label": "Right"
               }
             ],
