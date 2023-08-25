@@ -1,1 +1,176 @@
-{"current":{"mainFontFamilyFile":"https:\/\/fonts.googleapis.com\/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap","headersWeight":700,"textSize":20,"btnFontFamily":"second","btnFontWeight":700,"btnTextSize":17,"btnTextSizeMobile":15,"btn1BgColor":"#2d4036","btn1BgColorHover":"#28362f","btn1Border":false,"btn1BorderColor":"rgba(0,0,0,0)","btn1BorderColorHover":"rgba(0,0,0,0)","btn1BorderThickness":0,"btn1BorderRadius":0,"btn1Padding":"1em 2em","btn1Uppercase":false,"btn1Arrow":false,"btn2Padding":"1em 2em","btn3BgColorHover":"#28362f","btn3BorderRadius":8,"btn3Padding":"0.5em 1em","btn3Arrow":true,"btn4BorderThickness":0,"btn4BorderRadius":8,"btn4Padding":"0.5em 1em","btn4Arrow":true,"productCardBgColor":"rgba(0,0,0,0)","productCardBgColorHover":"rgba(0,0,0,0)","productCardImageBoxBgColor":"#2d4036","productCardImageBoxBgColorHover":"#28362f","productCardInfoBoxBgColor":"rgba(0,0,0,0)","productCardInfoBoxBgColorHover":"rgba(0,0,0,0)","productCardBorderColor":"rgba(0,0,0,0)","productCardBorderColorHover":"#f0f0f0","productCardBorderThickness":1,"productCardAlignement":"start","productCardPadding":8,"productCardBorderRadius":0,"productCardInfoPadding":8,"productCardTitleColor":"#28362f","productCardTitleFontFamily":"second","productCardTitleFontSize":26,"productCardCoffeeInfosColor":"#6e6c6c","productCardCoffeeInfosFontFamily":"main","productCardCoffeeInfosFontWeight":400,"productCardCoffeeInfosFontSize":16,"productCardPriceFontSize":24,"scrollAnimation":true,"favicon16":"shopify:\/\/shop_images\/Cortado_favicon_favicon16.png","favicon32":"shopify:\/\/shop_images\/Cortado_favicon_favicon32.png","favicon180":"shopify:\/\/shop_images\/Cortado_favicon_favicon180.png","devOutline":false,"sections":{"header":{"type":"header","blocks":{"7d41b39c-2d21-418d-96ad-2422abfc24ad":{"type":"languageSelector","disabled":true,"settings":{}},"header-0":{"type":"searchWidget","settings":{"placeholder":"Trouvez ce que vous cherchez","borderRadius":0}},"header-1":{"type":"cartWidget","settings":{"borderRadius":0,"buttonStyle":"1","itemNumberColor":"#2d4036"}},"header-2":{"type":"accountWidget","settings":{"buttonStyle1":"1","buttonStyle2":"2"}}},"block_order":["7d41b39c-2d21-418d-96ad-2422abfc24ad","header-0","header-1","header-2"],"settings":{"bg":"#2d4036","bgGradient":"","paddingTop":16,"paddingBottom":16,"sectionType":"container","containerWidth":1400,"containerPadding":0,"borderRadius":0,"containerBg":"rgba(0,0,0,0)","containerBgGradient":"","layout":"logoCenter","menu":"main-menu","textColor":"#ffffff","fontFamily":"main","capitalize":false,"textSize":18,"logoWidth":128,"logoWidthMobile":68,"stickyHeader":"home","stickyBg":"#2d4036","stickyBgGradient":"","stickyHeaderCompensation":true,"mobileMenuBg":"linear-gradient(180deg, rgba(33, 37, 34, 1), rgba(45, 64, 54, 1) 100%)"}},"footer":{"type":"footer","blocks":{"footer-0":{"type":"menu","settings":{"alignment":"start","menu":"footer"}},"footer-1":{"type":"logo","settings":{"alignment":"center","logoWidth":150}},"footer-2":{"type":"map","settings":{"mapSRC":"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d2801.3361577706023!2d-71.89390702356911!3d45.402560471073016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb7b333691a6f45%3A0x967b7b6cd807d4bd!2s22%20Agence%20Cr%C3%A9ative!5e0!3m2!1sen!2sca!4v1681399896557!5m2!1sen!2sca","borderRadius":0}}},"block_order":["footer-0","footer-1","footer-2"],"settings":{"bg":"#f7f7f7","bgGradient":"","paddingTop":25,"paddingBottom":25,"sectionType":"container","containerWidth":1400,"containerPadding":0,"borderRadius":0,"containerBg":"#f7f7f7","containerBgGradient":"","textColor":"#2d4036","fontFamily":"main"}}},"content_for_index":[]},"platform_customizations":{"custom_css":[]}}
+{
+  "current": {
+    "mainFontFamilyFile": "https:\/\/fonts.googleapis.com\/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap",
+    "headersWeight": 700,
+    "textSize": 20,
+    "btnFontFamily": "second",
+    "btnFontWeight": 700,
+    "btnTextSize": 17,
+    "btnTextSizeMobile": 15,
+    "btn1BgColor": "#2d4036",
+    "btn1BgColorHover": "#28362f",
+    "btn1Border": false,
+    "btn1BorderColor": "rgba(0,0,0,0)",
+    "btn1BorderColorHover": "rgba(0,0,0,0)",
+    "btn1BorderThickness": 0,
+    "btn1BorderRadius": 0,
+    "btn1Padding": "1em 2em",
+    "btn1Uppercase": false,
+    "btn1Arrow": false,
+    "btn2Padding": "1em 2em",
+    "btn3BgColorHover": "#28362f",
+    "btn3BorderRadius": 8,
+    "btn3Padding": "0.5em 1em",
+    "btn3Arrow": true,
+    "btn4BorderThickness": 0,
+    "btn4BorderRadius": 8,
+    "btn4Padding": "0.5em 1em",
+    "btn4Arrow": true,
+    "productCardBgColor": "rgba(0,0,0,0)",
+    "productCardBgColorHover": "rgba(0,0,0,0)",
+    "productCardImageBoxBgColor": "#2d4036",
+    "productCardImageBoxBgColorHover": "#28362f",
+    "productCardInfoBoxBgColor": "rgba(0,0,0,0)",
+    "productCardInfoBoxBgColorHover": "rgba(0,0,0,0)",
+    "productCardBorderColor": "rgba(0,0,0,0)",
+    "productCardBorderColorHover": "#f0f0f0",
+    "productCardBorderThickness": 1,
+    "productCardAlignement": "start",
+    "productCardPadding": 8,
+    "productCardBorderRadius": 0,
+    "productCardInfoPadding": 8,
+    "productCardTitleColor": "#28362f",
+    "productCardTitleFontFamily": "second",
+    "productCardTitleFontSize": 26,
+    "productCardCoffeeInfosColor": "#6e6c6c",
+    "productCardCoffeeInfosFontFamily": "main",
+    "productCardCoffeeInfosFontWeight": 400,
+    "productCardCoffeeInfosFontSize": 16,
+    "productCardPriceFontSize": 24,
+    "scrollAnimation": true,
+    "useGeoPopup": true,
+    "favicon16": "shopify:\/\/shop_images\/Cortado_favicon_favicon16.png",
+    "favicon32": "shopify:\/\/shop_images\/Cortado_favicon_favicon32.png",
+    "favicon180": "shopify:\/\/shop_images\/Cortado_favicon_favicon180.png",
+    "devOutline": false,
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "7d41b39c-2d21-418d-96ad-2422abfc24ad": {
+            "type": "languageSelector",
+            "disabled": true,
+            "settings": {
+            }
+          },
+          "header-0": {
+            "type": "searchWidget",
+            "settings": {
+              "placeholder": "Trouvez ce que vous cherchez",
+              "borderRadius": 0
+            }
+          },
+          "header-1": {
+            "type": "cartWidget",
+            "settings": {
+              "borderRadius": 0,
+              "buttonStyle": "1",
+              "itemNumberColor": "#2d4036"
+            }
+          },
+          "header-2": {
+            "type": "accountWidget",
+            "settings": {
+              "buttonStyle1": "1",
+              "buttonStyle2": "2"
+            }
+          }
+        },
+        "block_order": [
+          "7d41b39c-2d21-418d-96ad-2422abfc24ad",
+          "header-0",
+          "header-1",
+          "header-2"
+        ],
+        "settings": {
+          "bg": "#2d4036",
+          "bgGradient": "",
+          "paddingTop": 16,
+          "paddingBottom": 16,
+          "sectionType": "container",
+          "containerWidth": 1400,
+          "containerPadding": 0,
+          "borderRadius": 0,
+          "containerBg": "rgba(0,0,0,0)",
+          "containerBgGradient": "",
+          "layout": "logoCenter",
+          "menu": "main-menu",
+          "textColor": "#ffffff",
+          "fontFamily": "main",
+          "capitalize": false,
+          "textSize": 18,
+          "logoWidth": 128,
+          "logoWidthMobile": 68,
+          "stickyHeader": "home",
+          "stickyBg": "#2d4036",
+          "stickyBgGradient": "",
+          "stickyHeaderCompensation": true,
+          "mobileMenuBg": "linear-gradient(180deg, rgba(33, 37, 34, 1), rgba(45, 64, 54, 1) 100%)"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "menu",
+            "settings": {
+              "alignment": "start",
+              "menu": "footer"
+            }
+          },
+          "footer-1": {
+            "type": "logo",
+            "settings": {
+              "alignment": "center",
+              "logoWidth": 150
+            }
+          },
+          "footer-2": {
+            "type": "map",
+            "settings": {
+              "mapSRC": "https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d2801.3361577706023!2d-71.89390702356911!3d45.402560471073016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb7b333691a6f45%3A0x967b7b6cd807d4bd!2s22%20Agence%20Cr%C3%A9ative!5e0!3m2!1sen!2sca!4v1681399896557!5m2!1sen!2sca",
+              "borderRadius": 0
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1",
+          "footer-2"
+        ],
+        "settings": {
+          "bg": "#f7f7f7",
+          "bgGradient": "",
+          "paddingTop": 25,
+          "paddingBottom": 25,
+          "sectionType": "container",
+          "containerWidth": 1400,
+          "containerPadding": 0,
+          "borderRadius": 0,
+          "containerBg": "#f7f7f7",
+          "containerBgGradient": "",
+          "textColor": "#2d4036",
+          "fontFamily": "main"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  },
+  "platform_customizations": {
+    "custom_css": [
+
+    ]
+  }
+}
