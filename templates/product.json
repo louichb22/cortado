@@ -96,7 +96,7 @@
         "align": "start",
         "gap": 32,
         "infoSectionBg": "#f7f7f7",
-        "infoSectionPadding": 50,
+        "infoSectionPadding": 32,
         "infoSectionBorderRadius": 0
       }
     },
