@@ -1,4 +1,4 @@
-{% assign set = section.settings %}
+{% assign set = set %}
 
 {% assign short = product.description | split: '[main]' | first | split: '[short]'| last | html %}
 
@@ -146,15 +146,15 @@
     display: block;
   }
   .productInfo {
-    background-color: {{ section.settings.infoSectionBg }};
-    padding: {{ section.settings.infoSectionPadding }}px;
-    {% if section.settings.infoSectionBorderRadius > 0 %}
-    border-radius: {{ section.settings.infoSectionBorderRadius }}px;
+    background-color: {{ set.infoSectionBg }};
+    padding: {{ set.infoSectionPadding }}px;
+    {% if set.infoSectionBorderRadius > 0 %}
+    border-radius: {{ set.infoSectionBorderRadius }}px;
     overflow: hidden;
     {% endif %}
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: {{ set.gap | divided_by: 2 }}px;
     align-items: start;
   }
   .productInfo .title {
@@ -273,7 +273,7 @@
     }
     {% endif %}
     .productInfo {
-      padding: {{ section.settings.infoSectionPadding | divided_by: 2.0 }}px;
+      padding: {{ set.infoSectionPadding | divided_by: 2.0 }}px;
     }
   }
 </style>
