@@ -90,7 +90,7 @@
         "paddingTop": 32,
         "paddingBottom": 32,
         "innerPadding": 0,
-        "type": true,
+        "type": false,
         "maxWidth": 1400,
         "borderRadius": 0,
         "align": "start",
