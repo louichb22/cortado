@@ -105,7 +105,7 @@
   }
   #productHead_container {
     background: {% if set.innerAltBg != blank %}{{ set.innerAltBg }}{% else %}{{ set.innerBg }}{% endif %};
-    {% if set.type %}
+    {% if set.type == true %}
     max-width: {{ set.maxWidth }}px;
     margin: 0 auto;
     {% endif %}
