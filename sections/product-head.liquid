@@ -115,11 +115,13 @@
     grid-template-columns: repeat(2,minmax(0,1fr));
     gap: {{ set.gap }}px;
   }
+  {% if product.images.size > 1 %}
   #productImageBox {
     display: grid;
-    grid-template-columns: 75px 1fr;
-    gap: 15px;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
   }
+  {% endif %}
   #productImageBox .thumbnails {
     display: flex;
     flex-direction: column;
