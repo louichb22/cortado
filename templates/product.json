@@ -131,28 +131,10 @@
         "h6Size": 20,
         "pSize": 16
       }
-    },
-    "30b0d3d9-51b0-4b5c-ab23-96ff27d338e6": {
-      "type": "breadcrumb",
-      "settings": {
-        "bg": "#ffffff",
-        "altBg": "",
-        "innerBg": "",
-        "innerAltBg": "",
-        "paddingTop": 128,
-        "paddingBottom": 128,
-        "innerPadding": 0,
-        "type": true,
-        "maxWidth": 1400,
-        "borderRadius": 0,
-        "align": "start",
-        "gap": 16
-      }
     }
   },
   "order": [
     "product-head",
-    "product-content",
-    "30b0d3d9-51b0-4b5c-ab23-96ff27d338e6"
+    "product-content"
   ]
 }
