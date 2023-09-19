@@ -157,6 +157,9 @@
     gap: 25px;
     align-items: start;
   }
+  .productInfo .title {
+    font-size: clamp(24px, 4vw, 32px);
+  }
   {% for block in section.blocks %}
   {% if block.type == "coffeeInfos" %}
   .productInfo > .coffeeInfos {
