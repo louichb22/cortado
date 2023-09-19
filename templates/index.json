@@ -332,6 +332,7 @@
         "template--18620814491967__98437a91-08ad-417f-97aa-06855ba7e536-168200439844228dbe-2": {
           "type": "products",
           "settings": {
+            "gap": true,
             "products": [
               "brulerie-du-quai-bad-boy-espresso",
               "cool-funky-beans"
