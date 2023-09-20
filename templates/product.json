@@ -22,7 +22,7 @@
           "settings": {
             "color": "#2d4036",
             "fontFamily": "second",
-            "bold": true
+            "bold": false
           }
         },
         "2a62b39f-1d38-4fb8-b368-558f6a7092b3": {
@@ -77,7 +77,7 @@
       "settings": {
         "bg": "#ffffff",
         "altBg": "",
-        "innerBg": "",
+        "innerBg": "rgba(0,0,0,0)",
         "innerAltBg": "",
         "paddingTop": 32,
         "paddingBottom": 32,
