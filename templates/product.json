@@ -95,7 +95,7 @@
     "product-content": {
       "type": "product-content",
       "blocks": {
-        "07b1c63b-2863-4473-a8dd-e307698779b6": {
+        "5fc2bbc7-563f-4130-94a0-6eef1d90f690": {
           "type": "shipping",
           "settings": {
             "shippingText": "<p><strong>Shipping<\/strong>: Free shipping for orders over 75$ in Canada and USA. Shipping rates calculated at checkout. Cortado is not responsible for any applicable import fees. International Orders are shipped at the risk of the buyer - Cortado will not be responsible for lost\/damaged items<\/p><p><strong>Returns<\/strong>: Any item you're not completely satisfied with can be returned up to 30 days after you receive it. The cost of the item, minus initial shipping costs will be refunded.<\/p>"
@@ -103,7 +103,7 @@
         }
       },
       "block_order": [
-        "07b1c63b-2863-4473-a8dd-e307698779b6"
+        "5fc2bbc7-563f-4130-94a0-6eef1d90f690"
       ],
       "settings": {
         "bg": "#ffffff",
