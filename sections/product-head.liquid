@@ -18,11 +18,19 @@
     {% form 'product', product %}
     <div class="productInfo">
       {% for block in section.blocks %}
+        {% unless block.type == 'coffeeInfos' or block.type == 'price' %}
+        <style>
+          #productHead_{{ forloop.index0 }}{% if block.type == 'shortDescription' %} *{% endif %} {
+            color: {{ block.settings.color }};
+            font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+          }
+        </style>
+        {% endunless %}
         {% case block.type %}
           {% when "title" %}
-            <h1 class="title" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" title="{{ product.title }}">{{ product.title }}</h1>
+            <h1 id="productHead_{{ forloop.index0 }}" title="{{ product.title }}">{{ product.title }}</h1>
           {% when "vendor" %}
-            <span class="vendor" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" title="{{ product.vendor }}">{{ product.vendor }}</span>
+            <span id="productHead_{{ forloop.index0 }}" title="{{ product.vendor }}">{{ product.vendor }}</span>
           {% when "coffeeInfos" %}
             <style>
               .productMetafields > span {
@@ -32,11 +40,18 @@
             </style>
             {% include 'product-metafields' %}
           {% when "price" %}
+            <style>
+              .productHead_price {
+                color: {{ block.settings.color }};
+                font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+                {% if block.settings.bold %}font-weight: bold;{% endif %}
+              }
+            </style>
             {% for variant in product.variants %}
-              <span class="price" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }}; {% if block.settings.bold %}font-weight: bold;{% endif %}{% unless variant == product.selected_or_first_available_variant %}display: none;{% endunless %}" id="price{% increment priceOrder %}">{% if variant.available %}{{ variant.price | money }}{% else %}Out of stock{% endif %}</span>
+              <span class="productHead_price" style="{% unless variant == product.selected_or_first_available_variant %}display: none;{% endunless %}" id="price{% increment priceOrder %}">{% if variant.available %}{{ variant.price | money }}{% else %}Out of stock{% endif %}</span>
             {% endfor %}
           {% when "shortDescription" %}
-            {% if product.description contains '[short]' %}<p class="shortDescription" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" >{{ short | strip_html }}</p>{% endif %}
+            {% if product.description contains '[short]' %}<div id="productHead_{{ forloop.index0 }}">{{ short | strip_html }}</div>{% endif %}
           {% when "options" %}
             {% if product.has_only_default_variant %}
               <select style="display:none;" name="id">
