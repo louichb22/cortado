@@ -24,13 +24,13 @@
           {% when "vendor" %}
             <span class="vendor" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }};" title="{{ product.vendor }}">{{ product.vendor }}</span>
           {% when "coffeeInfos" %}
-            {% if product.metafields.coffee.origin != blank or product.metafields.coffee.process != blank or product.metafields.coffee.altitude != blank %}
-              <div class="coffeeInfos">
-                {% if product.metafields.coffee.origin %}<span class="origin"><i class="mi-location"></i>{{ product.metafields.coffee.origin }}</span>{% endif %}
-                {% if product.metafields.coffee.process %}<span class="process"><i class="mi-sun"></i>{{ product.metafields.coffee.process }}</span>{% endif %}
-                {% if product.metafields.coffee.altitude %}<span class="altitude"><i class="mi-circle-arrow-up"></i>{{ product.metafields.coffee.altitude }}</span>{% endif %}
-              </div>
-            {% endif %}
+            <style>
+              .productMetafields > span {
+                color: {{ block.settings.color }};
+                font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+              }
+            </style>
+            {% include 'product-metafields' %}
           {% when "price" %}
             {% for variant in product.variants %}
               <span class="price" style="font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %}; color: {{ block.settings.color }}; {% if block.settings.bold %}font-weight: bold;{% endif %}{% unless variant == product.selected_or_first_available_variant %}display: none;{% endunless %}" id="price{% increment priceOrder %}">{% if variant.available %}{{ variant.price | money }}{% else %}Out of stock{% endif %}</span>
@@ -160,25 +160,6 @@
   .productInfo .title {
     font-size: clamp(24px, 4vw, 32px);
   }
-  {% for block in section.blocks %}
-  {% if block.type == "coffeeInfos" %}
-  .productInfo > .coffeeInfos {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .productInfo > .coffeeInfos span {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    color: {{ block.settings.color }};
-    font-family: {% if block.settings.fontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
-  }
-  {% endif %}
-  {% endfor %}
   .productInfo > .price{
     font-size: clamp(24px, 4vw, 32px);
     animation-name: fadeIn;
