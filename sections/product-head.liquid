@@ -237,7 +237,7 @@
     pointer-events: none;
   }
   .productInfo > .addToCart {
-    margin-top: {{ set.gap | divided_by: 4 }}px;
+    margin-top: {{ set.gap | divided_by: 2 }}px;
   }
   .productInfo > .addToCart > input, 
   .productInfo > .addToCart {
@@ -277,6 +277,10 @@
     {% endif %}
     .productInfo {
       padding: {{ set.infoSectionPadding | divided_by: 2.0 }}px;
+      gap: {{ set.gap | divided_by: 4 }}px;
+    }
+    .productInfo > .addToCart {
+      margin-top: {{ set.gap | divided_by: 4 }}px;
     }
   }
 </style>
