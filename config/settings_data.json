@@ -55,7 +55,7 @@
     "favicon16": "shopify:\/\/shop_images\/Cortado_favicon_favicon16.png",
     "favicon32": "shopify:\/\/shop_images\/Cortado_favicon_favicon32.png",
     "favicon180": "shopify:\/\/shop_images\/Cortado_favicon_favicon180.png",
-    "devOutline": true,
+    "devOutline": false,
     "textSize": 20,
     "sections": {
       "header": {
