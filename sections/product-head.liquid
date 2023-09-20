@@ -180,13 +180,10 @@
     animation-name: fadeIn;
     animation-duration: 0.3s;
   }
-  .productInfo > .shortDescription {
-    line-height: 2;
-  }
   .productInfo > .options {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: {{ set.gap | divided_by: 2 }}px;
   }
   .productInfo > .options > label {
     padding: 0.4rem 1.2rem;
