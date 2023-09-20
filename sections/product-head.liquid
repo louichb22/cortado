@@ -51,7 +51,7 @@
               <span class="productHead_price" style="{% unless variant == product.selected_or_first_available_variant %}display: none;{% endunless %}" id="price{% increment priceOrder %}">{% if variant.available %}{{ variant.price | money }}{% else %}Out of stock{% endif %}</span>
             {% endfor %}
           {% when "shortDescription" %}
-            {% if product.description contains '[short]' %}<div id="productHead_{{ forloop.index0 }}">{{ short | strip_html }}</div>{% endif %}
+            {% if product.description contains '[short]' %}<div id="productHead_{{ forloop.index0 }}">{{ short }}</div>{% endif %}
           {% when "options" %}
             {% if product.has_only_default_variant %}
               <select style="display:none;" name="id">
