@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <a href="{{ routes.root_url }}"><img class="headerLogo" src="{% if set.logo != blank %}{{ set.logo | image_url }}{% else %}{{ 'Cortado_logo_white.svg' | asset_url }}{% endif %}" alt="{{ shop.name }} Logo"></a>
+    <a href="{{ routes.root_url }}"><img class="headerLogo" src="{% if set.logo != blank %}{{ set.logo | image_url }}{% else %}{{ 'Cortado_logo_white.svg' | asset_url }}{% endif %}" alt="{{ shop.name }} Logo" width="{{ set.logoWidth }}px"></a>
     <div class="headerIcons">
       {% for block in section.blocks %}
         {% case block.type %}
