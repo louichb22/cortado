@@ -28,7 +28,7 @@
         {% endunless %}
         {% case block.type %}
           {% when "title" %}
-            <h1 id="productHead_{{ forloop.index0 }}" title="{{ product.title }}">{{ product.title }}</h1>
+            <h1 class="title" id="productHead_{{ forloop.index0 }}" title="{{ product.title }}">{{ product.title }}</h1>
           {% when "vendor" %}
             <span id="productHead_{{ forloop.index0 }}" title="{{ product.vendor }}">{{ product.vendor }}</span>
           {% when "coffeeInfos" %}
