@@ -10,13 +10,6 @@
             "fontFamily": "second"
           }
         },
-        "6f9cf444-3b5b-48f4-bc2c-1e1cd6bbe55a": {
-          "type": "vendor",
-          "settings": {
-            "color": "#000000",
-            "fontFamily": "second"
-          }
-        },
         "45e806ba-94e2-4325-b3e7-66d1b8a31c42": {
           "type": "coffeeInfos",
           "settings": {
@@ -74,7 +67,6 @@
       },
       "block_order": [
         "e37dcfba-7422-4c21-9097-dc53de563c43",
-        "6f9cf444-3b5b-48f4-bc2c-1e1cd6bbe55a",
         "45e806ba-94e2-4325-b3e7-66d1b8a31c42",
         "d719a9da-bb40-4306-b1ea-98691271f03b",
         "2a62b39f-1d38-4fb8-b368-558f6a7092b3",
