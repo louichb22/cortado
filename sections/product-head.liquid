@@ -124,7 +124,7 @@
   #productImageBox .thumbnails {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: {{ set.gap | divided_by: 2 }}px;
     max-height: 640px;
     overflow: scroll;
   }
@@ -270,6 +270,7 @@
     }
     #productImageBox > .thumbnails {
       max-height: 320px;
+      gap: {{ set.gap | divided_by: 4 }}px;
     }
     #productImageBox > .thumbnails > img {
       width: 48px;
