@@ -180,7 +180,7 @@
   {% endif %}
   {% endfor %}
   .productInfo > .price{
-    font-size: 32px;
+    font-size: clamp(24px, 4vw, 32px);
     animation-name: fadeIn;
     animation-duration: 0.3s;
   }
@@ -190,7 +190,7 @@
   .productInfo > .options {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 16px;
   }
   .productInfo > .options > label {
     padding: 0.4rem 1.2rem;
