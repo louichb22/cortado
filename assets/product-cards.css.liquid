@@ -1,0 +1,104 @@
+/*-- Product cards --*/
+
+.productCard {
+  border-radius: {{ settings.productCardBorderRadius }}px;
+  padding: {{ settings.productCardPadding }}px;
+  background: {{ settings.productCardBgColor }};
+  {% if settings.productCardBorderThickness > 0 %}border: solid {{ settings.productCardBorderThickness }}px {{ settings.productCardBorderColor }};{% endif %}
+}
+.productCard:hover {
+  background: {{ settings.productCardBgColorHover }};
+  {% if settings.productCardBorderThickness > 0 %}border: solid {{ settings.productCardBorderThickness }}px {{ settings.productCardBorderColorHover }};{% endif %}
+}
+.productCard > .image {
+  border-radius: {{ settings.productCardBorderRadius | divided_by: 2 }}px;
+  overflow: hidden;
+  background: {{ settings.productCardImageBoxBgColor }};
+  display: grid;
+  margin-bottom: 16px;
+}
+.productCard:hover > .image {
+  transform: scale(101%);
+}
+.productCard > .image:hover {
+  background: {{ settings.productCardImageBoxBgColorHover }};
+}
+.productCard > .image > img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  grid-column: 1;
+  grid-row: 1;
+}
+.productCard > .image > img:last-child {
+  opacity: 0;
+}
+.productCard > .image:hover > img:last-child {
+  opacity: 1;
+}
+.productCard > .info {
+  border-radius: {{ settings.productCardBorderRadius | divided_by: 2 }}px;
+  display: flex;
+  flex-direction: column;
+  align-items: {{ settings.productCardAlignement }};
+  text-align: {{ settings.productCardAlignement }};
+  gap: 16px;
+  padding: {{ settings.productCardInfoPadding }}px;
+  background: {{ settings.productCardInfoBoxBgColor }};
+}
+.productCard > .info:hover {
+  background: {{ settings.productCardInfoBoxBgColorHover }};
+}
+.productCard > .info > .title {
+  color: {{ settings.productCardTitleColor }};
+  font-family: {% if settings.productCardTitleFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.productCardTitleFontWeight }};
+  font-size: {{ settings.productCardTitleFontSize }}px;
+  line-height: 1.2;
+}
+.productCard > .info > .title:hover {
+  opacity: 0.75;
+}
+.productCard > .info > .productMetafields {
+  justify-content: {{ settings.productCardAlignement }};
+}
+.productCard > .info > .productMetafields * {
+  color: {{ settings.productCardCoffeeInfosColor }};
+  font-family: {% if settings.productCardCoffeeInfosFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.productCardCoffeeInfosFontWeight }};
+  font-size: {{ settings.productCardCoffeeInfosFontSize }}px;
+}
+.productCard > .info > .price {
+  color: {{ settings.productCardPriceColor }};
+  font-family: {% if settings.productCardPriceFontFamily == "main" %}{{ settings.mainFontFamily }}{% else %}{{ settings.secondFontFamily }}{% endif %};
+  font-weight: {{ settings.productCardPriceFontWeight }};
+  font-size: {{ settings.productCardPriceFontSize }}px;
+  line-height: 1.2;
+}
+@media (max-width: 800px) {
+  .productCard {
+    border-radius: {{ settings.productCardBorderRadius | divided_by: 2 }}px;
+    padding: {{ settings.productCardPadding | divided_by: 2 }}px;
+  }
+  .productCard > .image {
+    border-radius: {{ settings.productCardBorderRadius | divided_by: 4 }}px;
+  }
+  .productCard > .info {
+    border-radius: {{ settings.productCardBorderRadius | divided_by: 4 }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ settings.productCardAlignement }};
+    text-align: {{ settings.productCardAlignement }};
+    gap: 8px;
+    padding: {{ settings.productCardInfoPadding | divided_by: 2 }}px;
+  }
+  .productCard > .info > .title {
+    font-size: 20px;
+  }
+  .productCard > .info > .productMetafields * {
+    font-size: 14px;
+  }
+  .productCard > .info > .price {
+    font-size: 24px;
+  }
+}
