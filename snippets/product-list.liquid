@@ -1,5 +1,5 @@
 <div class="products">
   {% for product in products %}
-    {% include 'product-card' %}
+    {% render 'product-card' with product as product %}
   {% endfor %}
 </div>
