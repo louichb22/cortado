@@ -177,7 +177,7 @@
             }
           </style>
           {% paginate collection.products by 24 %}
-          {% render 'product-list' with collection.products as products %}
+          {% render 'product-list', products: collection.products %}
           <div class="foot">
             {{ paginate | default_pagination }}
           </div>
