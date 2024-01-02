@@ -56,17 +56,7 @@
         {% when 'paragraph' %}<div id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.text }}</div>
         {% when 'button' %}<a id="{{ id }}_{{ forloop.index0 }}" title="{{ block.settings.text }}" href="{{ block.settings.link }}" class="btn{{ block.settings.type }}">{{ block.settings.text }}</a>
         {% when "products" %}
-        <div id="{{ id }}_{{ forloop.index0 }}">
-          {% if block.settings.products == blank %}
-            <img width="100%" src="{{ 'Cortado_empty.svg' | asset_url }}">
-            <img width="100%" src="{{ 'Cortado_empty.svg' | asset_url }}">
-            <img width="100%" src="{{ 'Cortado_empty.svg' | asset_url }}">
-            <img width="100%" src="{{ 'Cortado_empty.svg' | asset_url }}">
-          {% endif %}
-          {% for product in block.settings.products %}
-            {% include "product-card" %}
-          {% endfor %}
-        </div>
+        {% render 'product-list', products: collection.products, product-limit: 3 %}
       {% endcase %}
     {% endfor %}
   </div>
