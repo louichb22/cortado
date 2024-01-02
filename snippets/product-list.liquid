@@ -3,6 +3,6 @@
 
 <div class="products">
   {% for product in products %}
-    {% render 'product-card' with product as product %}
+    {% render 'product-card', product: product  %}
   {% endfor %}
 </div>
