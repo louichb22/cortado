@@ -177,11 +177,7 @@
             }
           </style>
           {% paginate collection.products by 24 %}
-          <div class="products">
-            {% for product in collection.products %}
-              {% include 'product-card' %}
-            {% endfor %}
-          </div>
+          {% render 'product-list' with collection.products as products %}
           <div class="foot">
             {{ paginate | default_pagination }}
           </div>
