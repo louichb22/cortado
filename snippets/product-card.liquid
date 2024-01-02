@@ -25,7 +25,7 @@
     <div class="info">
       <span class="title">{{ product.title }}</span>
       {% if product.metafields.coffee.origin != blank or product.metafields.coffee.process != blank or product.metafields.coffee.altitude != blank %}
-        {% render 'product-metafields' with product as product %}
+        {% render 'product-metafields', product: product  %}
       {% endif %}
       <span class="price">{{ product.price_min | money }}</span>
     </div>
