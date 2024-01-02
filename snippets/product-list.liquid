@@ -1,3 +1,5 @@
+{{ 'product-cards.css' | asset_url | stylesheet_tag }}
+
 <div class="products">
   {% for product in products %}
     {% render 'product-card' with product as product %}
