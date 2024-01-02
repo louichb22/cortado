@@ -2,7 +2,7 @@
 {{ 'product-metafields.css' | asset_url | stylesheet_tag }}
 
 <div class="products">
-  {% for product in products %}
+  {% for product in products, limit: product-limit %}
     {% render 'product-card', product: product  %}
   {% endfor %}
 </div>
