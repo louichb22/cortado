@@ -56,7 +56,7 @@
         {% when 'paragraph' %}<div id="{{ id }}_{{ forloop.index0 }}">{{ block.settings.text }}</div>
         {% when 'button' %}<a id="{{ id }}_{{ forloop.index0 }}" title="{{ block.settings.text }}" href="{{ block.settings.link }}" class="btn{{ block.settings.type }}">{{ block.settings.text }}</a>
         {% when "products" %}
-        {% render 'product-list', products: collection.products, product-limit: 2 %}
+          {% render 'product-list', products: block.settings.products, product-limit: 1 %}
       {% endcase %}
     {% endfor %}
   </div>
